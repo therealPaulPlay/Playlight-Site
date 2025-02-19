@@ -9,7 +9,7 @@
 <!-- Nav bar -->
 <nav class="flex w-full items-center justify-between bg-black px-6 py-4">
 	<a href="/">
-		<img src="/images/logo_white_small.png" alt="logo" class="w-42 md:w-72" />
+		<img src="/images/logo_white_small.png" alt="logo" class="w-42 md:w-72 select-none" />
 	</a>
 	<div class="flex justify-evenly gap-5 md:mr-5 items-center text-nowrap mt-2">
 		<a href="/signup" class="hover:underline"> Log in </a>

@@ -1,4 +1,5 @@
 <script>
+	import Spotlight from "$lib/components/Spotlight.svelte";
 	import Button from "$lib/components/ui/button/button.svelte";
 	import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "$lib/components/ui/card";
 	import { blur, fade, fly } from "svelte/transition";
@@ -10,17 +11,14 @@
 
 <main class="flex min-h-screen w-full flex-col">
 	<!-- Hero -->
-	<section class="flex w-full flex-col items-center px-6 py-12 text-center">
+	<section class="relative flex min-h-96 w-full items-center overflow-hidden px-6 py-12 text-center">
+		<Spotlight />
 		<div class="mx-auto max-w-2xl">
 			<h1 class="mb-4 text-4xl font-extrabold md:text-5xl" in:blur={{ duration: 500 }}>Get your game seen.</h1>
 			<p class="text-muted-foreground mb-8 text-lg" in:blur={{ duration: 700 }}>
 				A discovery network, built right into your own site.
 			</p>
-		</div>
-
-		<!-- CTA Button -->
-		<div class="mb-4" in:blur={{ duration: 600 }}>
-			<Button class="px-6 py-3 font-semibold">Join Playlight</Button>
+			<Button class="mb-4 px-6 py-3 font-semibold">Join Playlight</Button>
 		</div>
 	</section>
 
