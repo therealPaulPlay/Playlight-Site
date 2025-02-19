@@ -1,6 +1,5 @@
-# Playlight-Site
+# Playlight (Website)
 Indies, unite. Playlight is the best way to get your game seen.
-```
 
 ## Developing
 
