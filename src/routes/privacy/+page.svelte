@@ -2,7 +2,7 @@
 	<title>Privacy</title>
 </svelte:head>
 
-<div class="mx-auto min-h-screen max-w-screen-xl p-4 py-8">
+<div class="mx-auto min-h-screen max-w-(--breakpoint-xl) p-4 py-8">
 	<div class="mx-auto max-w-3xl">
 		<h1 class="mb-8 text-4xl font-bold">Privacy Policy</h1>
 

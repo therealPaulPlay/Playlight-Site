@@ -1,5 +1,5 @@
 <footer class="mt-5 border-t">
-	<div class="mx-auto max-w-screen-xl px-4 py-8">
+	<div class="mx-auto max-w-(--breakpoint-xl) px-4 py-8">
 		<div class="flex flex-col items-center justify-between gap-4 md:flex-row">
 			<div class="flex items-center space-x-1">
 				<span class="text-muted-foreground text-sm">© {new Date().getFullYear()}</span>
