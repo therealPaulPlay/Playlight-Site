@@ -1,12 +1,12 @@
 <script>
 	import { spring } from "svelte/motion";
 
-	// Spring-based position for smooth movement
+	// Spring-based position for smooth movement - reduced movement range
 	const position = spring(
 		{ x: 50, y: 50 },
 		{
-			stiffness: 0.1,
-			damping: 0.8,
+			stiffness: 0.08, // Reduced stiffness for smoother movement
+			damping: 0.9, // Increased damping for less oscillation
 		},
 	);
 
@@ -16,22 +16,27 @@
 		const x = ((e.clientX - rect.left) / rect.width) * 100;
 		const y = ((e.clientY - rect.top) / rect.height) * 100;
 
-		// Clamp values between 20% and 80% of container
+		// More constrained movement range (35-65% instead of 20-80%)
 		position.set({
-			x: Math.max(20, Math.min(80, x)),
-			y: Math.max(20, Math.min(80, y)),
+			x: Math.max(35, Math.min(65, x)),
+			y: Math.max(35, Math.min(65, y)),
 		});
+	}
+
+	// Return to center when mouse leaves
+	function handleMouseLeave() {
+		position.set({ x: 50, y: 50 });
 	}
 </script>
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
-<div class="absolute inset-0" onmousemove={handleMouseMove}>
+<div class="absolute inset-0" onmousemove={handleMouseMove} onmouseleave={handleMouseLeave}>
 	<div
-		class="bg-muted/10 absolute h-96 w-96 rounded-full -z-1"
+		class="bg-muted/10 absolute -z-1 h-96 w-96 rounded-full"
 		style="left: {$position.x}%; top: {$position.y}%; transform: translate(-50%, -50%)"
 	>
 		<!-- Inner glow effect -->
-		<!-- svelte-ignore element_invalid_self_closing_tag -->
+		<!-- svelte-ignore element-invalid-self-closing-tag -->
 		<div class="bg-gradient-radial from-muted/20 absolute inset-0 rounded-full to-transparent" />
 	</div>
 </div>
