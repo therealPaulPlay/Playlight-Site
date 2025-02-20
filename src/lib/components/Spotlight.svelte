@@ -32,7 +32,7 @@
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div class="absolute inset-0" onmousemove={handleMouseMove} onmouseleave={handleMouseLeave}>
 	<div
-		class="bg-muted/10 absolute -z-1 h-96 w-96 rounded-full"
+		class="bg-muted/10 absolute h-96 w-96 rounded-full"
 		style="left: {$position.x}%; top: {$position.y}%; transform: translate(-50%, -50%)"
 	>
 		<!-- Inner glow effect -->
