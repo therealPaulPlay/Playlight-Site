@@ -3,7 +3,7 @@
 	import Spotlight from "$lib/components/Spotlight.svelte";
 	import Button from "$lib/components/ui/button/button.svelte";
 	import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "$lib/components/ui/card";
-	import { CircleCheck, CircleX } from "lucide-svelte";
+	import { CircleCheck, CircleX, Search } from "lucide-svelte";
 	import { blur, fly } from "svelte/transition";
 </script>
 
@@ -25,7 +25,7 @@
 	<section class="w-full px-4 py-16">
 		<div class="mx-auto flex max-w-7xl flex-wrap gap-8">
 			<!-- Left Box -->
-			<div class="flex min-w-[320px] flex-1 flex-wrap gap-8">
+			<div class="flex flex-1 flex-wrap gap-8">
 				<!-- Centralized Platform Side -->
 				<div class="bg-card relative min-w-42 flex-1 rounded-lg p-6">
 					<div class="absolute top-6 right-6">
@@ -126,12 +126,80 @@
 			<div class="bg-card min-w-[320px] flex-1 rounded-lg p-8 shadow-lg">
 				<h2 class="mb-6 text-3xl font-bold">Indie Devs, unite.</h2>
 				<p class="text-muted-foreground mb-4 text-lg">
-					Build your audience directly through interconnected games. Playlight is a network that grows your games
-					organically, keeping you in control while fostering a community of passionate players and developers.
+					Build your audience directly through interconnected games. Playlight is a network that <span
+						class="text-foreground">grows your games organically</span
+					>, keeping you in control while
+					<span class="text-foreground">fostering a community</span> of passionate players and developers.
 				</p>
 				<p class="text-muted-foreground text-lg">
 					You decide where you highlight exciting indie titles that your players will love, and a smart algorithm
 					promotes your experience across sites.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="w-full px-4 py-16">
+		<div class="mx-auto flex max-w-7xl flex-wrap gap-8">
+			<!-- Left Box: Browser Mockup -->
+			<div class="bg-card min-w-[320px] flex-1 rounded-lg p-6 shadow-lg">
+				<!-- Browser Chrome -->
+				<div class="relative -rotate-3 transform">
+					<div class="bg-muted rounded-t-lg p-2">
+						<!-- Address Bar -->
+						<div class="bg-background flex items-center gap-2 rounded px-3 py-2">
+							<Search class="text-muted-foreground h-4 w-4" />
+							<span class="text-muted-foreground text-sm">yourgame.com</span>
+						</div>
+					</div>
+
+					<!-- Browser Content -->
+					<div class="bg-background min-h-70 rounded-b-lg p-6">
+						<!-- Game Options -->
+						<div class="relative grid grid-cols-3 gap-6 text-center">
+							<!-- Game 1 -->
+							<div
+								class="bg-card hover:bg-muted/50 flex aspect-[2/3] items-center justify-center rounded-lg p-4 transition-colors"
+							>
+								<span class="text-lg font-medium">Game 1</span>
+							</div>
+
+							<!-- Game 2 -->
+							<div
+								class="bg-card hover:bg-muted/50 flex aspect-[2/3] items-center justify-center rounded-lg p-4 transition-colors"
+							>
+								<span class="text-lg font-medium">Game 2</span>
+							</div>
+
+							<!-- Game 3 (Highlighted) -->
+							<div
+								class="bg-card border-primary hover:bg-muted/50 relative flex aspect-[2/3] items-center justify-center rounded-lg border-2 p-4 transition-colors"
+							>
+								<span class="text-primary text-lg font-medium">Game 3</span>
+								<div
+									class="shine pointer-events-none absolute absolute inset-0 top-0 left-0 h-full w-full bg-linear-[120deg,rgba(255,255,255,0.25),transparent_90%]"
+								></div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Cursor -->
+					<div class="pointer-events-none absolute top-8 left-24">
+						<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M4,4 L20,12 L12,14 L10,22 L4,4" fill="black" stroke="white"></path>
+						</svg>
+					</div>
+				</div>
+			</div>
+
+			<!-- Right Box: Text Content -->
+			<div class="bg-card min-w-[320px] flex-1 rounded-lg p-8 shadow-lg">
+				<h2 class="mb-6 text-3xl font-bold">Smart Recommendations.</h2>
+				<p class="text-muted-foreground text-lg leading-relaxed">
+					Keep players engaged with intelligent game suggestions. The <span class="text-foreground">algorithm</span>
+					identifies <span class="text-foreground">key moments</span> when players are most receptive to new
+					experiences, like when they're <span class="text-foreground">about to leave</span>, and presents them with
+					<span class="text-foreground">carefully curated options</span> that match their interests and playing style.
 				</p>
 			</div>
 		</div>
