@@ -15,8 +15,8 @@
 	<section class="relative flex min-h-96 w-full items-center overflow-hidden px-6 py-12 text-center">
 		<Spotlight />
 		<div class="mx-auto max-w-2xl z-1 pointer-events-none">
-			<h1 class="mb-4 text-4xl font-extrabold md:text-5xl uppercase" in:blur={{ duration: 500 }}>Get your game seen.</h1>
-			<p class="text-muted-foreground mb-8 text-lg" in:blur={{ duration: 700 }}>
+			<h1 class="mb-4 text-4xl font-extrabold md:text-5xl uppercase" in:blur>Get your game seen.</h1>
+			<p class="text-muted-foreground mb-8 text-lg" in:blur>
 				A discovery platform, built right into your own site.
 			</p>
 			<Button class="mb-4 px-6 py-3 font-semibold pointer-events-auto" href="/join">Join Playlight</Button>
