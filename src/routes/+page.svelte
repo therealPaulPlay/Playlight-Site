@@ -39,6 +39,63 @@
 				.to({}, { duration: 2 }); // Pause between transitions
 		});
 	});
+
+	let statsSection;
+	let hasAnimated = false;
+
+	const stats = [
+		{ value: 1000000, label: "Monthly Players", prefix: "", suffix: "+" },
+		{ value: 10, label: "Avg. Playtime", prefix: ">", suffix: " min" },
+		{ value: 90, label: "Player Satisfaction", prefix: ">", suffix: "%" },
+	];
+
+	function animateValue(obj, start, end, duration) {
+		gsap.to(
+			{
+				value: start,
+			},
+			{
+				value: end,
+				duration: duration,
+				ease: "power1.out",
+				onUpdate: function () {
+					const value = Math.round(this.targets()[0].value);
+					obj.textContent = `${obj.dataset.prefix || ""}${value.toLocaleString()}${obj.dataset.suffix || ""}`;
+				},
+			},
+		);
+	}
+
+	onMount(() => {
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting && !hasAnimated) {
+						hasAnimated = true;
+
+						// Animate each stat
+						entry.target.querySelectorAll(".stat-value").forEach((stat) => {
+							const endValue = parseInt(stat.dataset.value);
+							const startValue = 0;
+							animateValue(stat, startValue, endValue, 1.2);
+						});
+
+						// Fade in animation
+						gsap.from(".stat-item", {
+							opacity: 0,
+							y: 20,
+							duration: 0.4,
+							stagger: 0.1,
+							ease: "power2.out",
+						});
+					}
+				});
+			},
+			{ threshold: 0.2 },
+		);
+
+		observer.observe(statsSection);
+	});
 </script>
 
 <svelte:head>
@@ -52,11 +109,9 @@
 		<div class="pointer-events-none z-1 mx-auto max-w-2xl">
 			<h1 class="mb-4 text-4xl font-extrabold uppercase md:text-5xl" in:blur>Get your game seen.</h1>
 			<p class="text-muted-foreground mb-8 text-lg" in:blur>A discovery platform, built right into your own site.</p>
-			<div class="flex flex-col justify-center align-center max-w-40 mx-auto">
+			<div class="align-center mx-auto flex max-w-40 flex-col justify-center">
 				<Button class="pointer-events-auto mb-4 px-6 py-3 font-semibold" href="/join">Join Playlight</Button>
-				<Button class="pointer-events-auto mb-4 px-6 py-3 font-semibold" variant="outline"
-					>Launch Demo</Button
-				>
+				<Button class="pointer-events-auto mb-4 px-6 py-3 font-semibold" variant="outline">Launch Demo</Button>
 			</div>
 		</div>
 	</section>
@@ -347,6 +402,27 @@
 				We believe in <span class="text-foreground">freedom and flexibility</span>. There's no lock-in period, no
 				complicated terms - your success is what keeps us together, not legal bindings.
 			</p>
+		</div>
+	</section>
+
+	<!-- Stats (Statistical Proof)-->
+	<section bind:this={statsSection} class="w-full border-t">
+		<div class="mx-auto flex max-w-7xl flex-wrap items-center justify-around gap-8 px-4 py-8">
+			{#each stats as stat}
+				<div class="stat-item text-center min-w-1/4">
+					<div
+						class="stat-value mb-2 text-4xl font-bold"
+						data-value={stat.value}
+						data-prefix={stat.prefix}
+						data-suffix={stat.suffix}
+					>
+						{stat.prefix}{0}{stat.suffix}
+					</div>
+					<div class="text-muted-foreground text-sm tracking-wider uppercase">
+						{stat.label}
+					</div>
+				</div>
+			{/each}
 		</div>
 	</section>
 
