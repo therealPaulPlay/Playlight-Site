@@ -42,9 +42,7 @@
 	<title>Join Playlight - Get Your Game Discovered</title>
 </svelte:head>
 
-<main
-	class="from-background to-background/50 flex min-h-screen w-full flex-col items-center justify-center bg-gradient-to-b px-4 py-16"
->
+<main class="flex min-h-screen w-full items-center justify-center px-4 py-16">
 	<div in:blur={{ duration: 400 }} class="w-full max-w-xl">
 		<Card class="border-2">
 			<CardHeader>
