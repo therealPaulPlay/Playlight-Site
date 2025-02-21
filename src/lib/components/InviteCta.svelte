@@ -19,7 +19,7 @@
 <!-- Final CTA banner -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <section
-	class="h-120 sm:h-100 w-full border-t px-6 py-12 text-center"
+	class="h-120 w-full border-t px-6 py-12 text-center sm:h-100"
 	onmouseenter={handleFlip}
 	onmouseleave={handleFlip}
 	ontouchstart={handleFlip}
@@ -28,7 +28,9 @@
 		<!-- Card container with fixed height and 3D transform -->
 		<div bind:this={cardContainer} class="preserve-3d relative h-full">
 			<!-- Front face -->
-			<div class="bg-background absolute h-full w-full rounded-lg border p-8 backdrop-blur-sm backface-hidden">
+			<div
+				class="absolute h-full w-full rounded-lg border bg-linear-[310deg,hsl(20_14.3%_5%),transparent] p-8 backface-hidden"
+			>
 				<div class="h-full content-center text-center">
 					<h2 class="mb-2 text-3xl font-bold uppercase">This is your invitation.</h2>
 					<p class="text-muted-foreground">Hover to learn more.</p>
@@ -39,15 +41,13 @@
 			</div>
 
 			<!-- Back face -->
-			<div
-				class="bg-background absolute h-full w-full rotate-y-180 rounded-lg border p-8 backdrop-blur-sm backface-hidden"
-			>
+			<div class="bg-background absolute h-full w-full rotate-y-180 rounded-lg border p-8 backface-hidden bg-linear-[310deg,hsl(20_14.3%_2%),transparent]">
 				<!-- Decorative circles -->
 				<div class="bg-background absolute top-1/2 -left-2 h-4 w-4 -translate-y-1/2 rounded-full border"></div>
 				<div class="bg-background absolute top-1/2 -right-2 h-4 w-4 -translate-y-1/2 rounded-full border"></div>
 
 				<h2 class="mb-2 text-xl font-bold line-through opacity-50 md:text-2xl">Boost their platform, not your game.</h2>
-				<h2 class="mb-4 text-2xl font-bold md:text-3xl uppercase">Grow independently.</h2>
+				<h2 class="mb-4 text-2xl font-bold uppercase md:text-3xl">Grow independently.</h2>
 
 				<div class="my-6 border-t border-dashed"></div>
 

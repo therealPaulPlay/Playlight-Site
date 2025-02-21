@@ -60,13 +60,16 @@
 			</p>
 			<ul class="mb-4 list-disc pl-6">
 				<li>
-					If you use our platform, make purchases or subscribe to services through our integration, the data you provide
-					may be processed using third-party payment processors such as <a
+					If you use our platform and make purchases or subscribe to services through our integration, the data you
+					provide may be processed using third-party payment processors such as <a
 						href="https://stripe.com/privacy"
 						target="_blank"
 						class="hover:underline">Stripe</a
-					>
-					and analytics software including
+					>.
+				</li>
+				<li>
+					If you interact with our platform, certain information will be collected and
+					analyzed using analytics software such as
 					<a href="https://policies.google.com/privacy" target="_blank" class="hover:underline">Google Analytics</a>.
 				</li>
 			</ul>
