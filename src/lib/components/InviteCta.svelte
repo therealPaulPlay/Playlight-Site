@@ -41,7 +41,7 @@
 			</div>
 
 			<!-- Back face -->
-			<div class="bg-background absolute h-full w-full rotate-y-180 rounded-lg border p-8 backface-hidden bg-linear-[310deg,hsl(20_14.3%_2%),transparent]">
+			<div class="bg-background absolute h-full w-full rotate-y-180 rounded-lg border p-8 backface-hidden">
 				<!-- Decorative circles -->
 				<div class="bg-background absolute top-1/2 -left-2 h-4 w-4 -translate-y-1/2 rounded-full border"></div>
 				<div class="bg-background absolute top-1/2 -right-2 h-4 w-4 -translate-y-1/2 rounded-full border"></div>

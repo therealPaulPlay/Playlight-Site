@@ -99,7 +99,7 @@
 </script>
 
 <svelte:head>
-	<title>Playlight - A discovery network, built into your game</title>
+	<title>Playlight - A discovery platform, built into your game</title>
 </svelte:head>
 
 <main class="flex min-h-screen w-full flex-col">
@@ -222,7 +222,7 @@
 		<div class="bg-card min-w-70 flex-3 p-8">
 			<h2 class="mb-6 text-3xl font-bold">Indie Devs, unite.</h2>
 			<p class="text-muted-foreground mb-4 text-lg">
-				Playlight is an <span class="text-foreground">integrable discovery network</span> that grows your games
+				Playlight is an <span class="text-foreground">integrable discovery network</span> that grows your browser games
 				organically, keeping you in control while
 				<span class="text-foreground">fostering a community of passionate players</span> and developers.
 			</p>
