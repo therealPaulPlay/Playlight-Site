@@ -36,7 +36,7 @@
 					},
 					ease: "power2.inOut",
 				})
-				.to({}, { duration: 2 }); // Pause between transitions
+				.to({}, { duration: 1.5 }); // Pause between transitions
 		});
 	});
 
@@ -124,7 +124,7 @@
 				<div class="absolute top-6 right-6">
 					<CircleX />
 				</div>
-				<h3 class="mb-4 text-lg font-semibold">Centralized</h3>
+				<h3 class="mb-4 max-w-3/4 truncate text-lg font-semibold">Centralized</h3>
 				<div class="relative mt-8 flex h-50 items-center justify-center">
 					<!-- Platform Mockup 1 -->
 					<div class="bg-background absolute w-full max-w-[280px] translate-x-2 translate-y-3 -rotate-3 p-4 shadow-md">
@@ -160,7 +160,7 @@
 				<div class="absolute top-6 right-6">
 					<CircleCheck />
 				</div>
-				<h3 class="mb-4 text-lg font-semibold">Decentralized</h3>
+				<h3 class="mb-4 max-w-3/4 truncate text-lg font-semibold">Decentralized</h3>
 				<svg class="h-4/5 w-full" viewBox="0 0 210 210">
 					<circle cx="105" cy="105" r="105" filter="url(#shadow)"></circle>
 					<filter id="shadow" filterUnits="userSpaceOnUse" x="-20" y="-20" width="250" height="250">
@@ -219,7 +219,7 @@
 		</div>
 
 		<!-- Right Box -->
-		<div class="bg-card flex-3 p-8">
+		<div class="bg-card min-w-70 flex-3 p-8">
 			<h2 class="mb-6 text-3xl font-bold">Indie Devs, unite.</h2>
 			<p class="text-muted-foreground mb-4 text-lg">
 				Playlight is an <span class="text-foreground">integrable discovery network</span> that grows your games
@@ -227,9 +227,8 @@
 				<span class="text-foreground">fostering a community of passionate players</span> and developers.
 			</p>
 			<p class="text-muted-foreground text-lg">
-				You decide where you highlight exciting indie titles that your players will love, and a smart algorithm <span
-					class="text-foreground">promotes your experiences</span
-				> across sites.
+				You decide where you highlight exciting indie titles that your players will love, and a smart open-source
+				algorithm <span class="text-foreground">promotes your experiences</span> across sites.
 			</p>
 		</div>
 	</section>
@@ -274,7 +273,7 @@
 				</div>
 
 				<!-- Cursor -->
-				<div class="pointer-events-none absolute top-8 left-24">
+				<div class="cursor-hover-animation pointer-events-none absolute top-8 left-24">
 					<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 						<path d="M4,4 L20,12 L12,14 L10,22 L4,4" fill="black" stroke="white"></path>
 					</svg>
@@ -327,7 +326,7 @@
 
 		<!-- Right Box: Text Content -->
 		<div class="bg-card min-w-[320px] flex-1 p-8">
-			<h2 class="mb-6 text-3xl font-bold">Boost your SEO naturally.</h2>
+			<h2 class="mb-6 text-3xl font-bold">Boost your SEO, naturally.</h2>
 			<p class="text-muted-foreground text-lg leading-relaxed">
 				Playlight creates a <span class="text-foreground">natural network of backlinks</span> through game suggestions.
 				As players discover new games through participating games, they build
@@ -351,9 +350,9 @@
 						</div>
 						<span class="text-muted-foreground text-sm">index.html</span>
 					</div>
-					<pre class="text-muted-foreground text-sm"><code class="language-html">
-{"<!-- Add Playlight to your game -->"}
-{'<script src="https://cdn.playlight.dev/v1"><\/script>'}
+					<pre class="text-muted-foreground max-w-3/4 truncate text-sm text-wrap"><code class="language-html">
+{"<!-- Add Playlight -->"}
+{'<script src="https://cdn.com"><\/script>'}
 {"<!-- And done! -->"}
                     </code></pre>
 				</div>
@@ -406,10 +405,10 @@
 	</section>
 
 	<!-- Stats (Statistical Proof)-->
-	<section bind:this={statsSection} class="w-full border-t">
+	<section bind:this={statsSection} class="mt-16 mb-5 w-full border-y">
 		<div class="mx-auto flex max-w-7xl flex-wrap items-center justify-around gap-8 px-4 py-8">
 			{#each stats as stat}
-				<div class="stat-item text-center min-w-1/4">
+				<div class="stat-item min-w-50 text-center">
 					<div
 						class="stat-value mb-2 text-4xl font-bold"
 						data-value={stat.value}
@@ -439,5 +438,27 @@
 
 	g:hover {
 		transform: scale(1.1);
+	}
+
+	@keyframes hover {
+		0% {
+			transform: translate(0, 0);
+		}
+		25% {
+			transform: translate(3px, -3px);
+		}
+		50% {
+			transform: translate(0, 5px);
+		}
+		75% {
+			transform: translate(-3px, 0);
+		}
+		100% {
+			transform: translate(0, 0);
+		}
+	}
+
+	.cursor-hover-animation {
+		animation: hover 4s ease-in-out infinite;
 	}
 </style>

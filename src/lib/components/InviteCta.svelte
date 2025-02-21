@@ -19,7 +19,7 @@
 <!-- Final CTA banner -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <section
-	class="h-120 w-full border-t px-6 py-12 text-center sm:h-100"
+	class="h-120 w-full px-6 py-12 text-center sm:h-100"
 	onmouseenter={handleFlip}
 	onmouseleave={handleFlip}
 	ontouchstart={handleFlip}

@@ -16,6 +16,13 @@
 				>
 					Imprint
 				</a>
+				<a
+					href="https://github.com/therealPaulPlay/Playlight-Site"
+					target="_blank"
+					class="text-muted-foreground hover:text-primary text-sm"
+				>
+					Github
+				</a>
 			</nav>
 		</div>
 	</div>
