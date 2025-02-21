@@ -247,7 +247,7 @@
 				</div>
 
 				<!-- Browser Content -->
-				<div class="bg-background min-h-70 rounded-b-lg p-6">
+				<div class="bg-background md:min-h-70 rounded-b-lg p-6">
 					<!-- Game Options -->
 					<div class="relative grid grid-cols-3 gap-6 text-center">
 						<!-- Game 1 -->
@@ -337,7 +337,7 @@
 	<section class="mx-auto flex w-full max-w-7xl flex-wrap gap-8 px-4 py-16">
 		<!-- Left Box: Overlapping Documents -->
 		<div class="bg-card min-w-[320px] flex-1 p-6">
-			<div class="relative h-60 w-full">
+			<div class="relative h-60 max-w-9/10 mx-auto">
 				<!-- Code Document -->
 				<div
 					class="bg-background/75 absolute top-4 left-4 w-full max-w-[320px] -rotate-3 rounded-lg p-6 shadow-lg transition-transform duration-300 hover:scale-105"
