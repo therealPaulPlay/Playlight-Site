@@ -45,7 +45,7 @@
 
 	const stats = [
 		{ value: 1000000, label: "Monthly Players", prefix: "", suffix: "+" },
-		{ value: 10, label: "Avg. Playtime", prefix: ">", suffix: " min" },
+		{ value: 10, label: "Avg. Playtime / Game", prefix: ">", suffix: " min" },
 		{ value: 90, label: "Player Satisfaction", prefix: ">", suffix: "%" },
 	];
 
@@ -127,10 +127,10 @@
 				<h3 class="mb-4 max-w-3/4 truncate text-lg font-semibold">Centralized</h3>
 				<div class="relative mt-8 flex h-50 items-center justify-center">
 					<!-- Platform Mockup 1 -->
-					<div class="bg-background absolute w-full max-w-[280px] translate-x-2 translate-y-3 -rotate-3 p-4 shadow-md">
-						<div class="text-muted-foreground absolute top-2 right-2 max-w-2/3 truncate text-sm font-bold">
-							SuperGames.com
-						</div>
+					<div
+						class="bg-background/90 absolute w-full max-w-[280px] translate-x-1.5 translate-y-2 -rotate-3 p-4 shadow-md"
+					>
+						<div class="text-muted absolute top-2 right-2 max-w-2/3 truncate text-sm font-bold">SuperGames.com</div>
 						<div class="mt-4 grid grid-cols-4 gap-2">
 							{#each Array(8) as _}
 								<div class="bg-muted aspect-square rounded"></div>
@@ -140,7 +140,7 @@
 
 					<!-- Platform Mockup 2 -->
 					<div
-						class="bg-background absolute w-full max-w-[280px] -translate-x-2 -translate-y-3 rotate-3 p-4 shadow-md transition-transform duration-300 hover:scale-105"
+						class="bg-background absolute w-full max-w-[280px] -translate-x-1 -translate-y-3 p-4 shadow-md transition-transform duration-300 hover:scale-105"
 					>
 						<div class="text-muted-foreground absolute top-2 right-2 max-w-2/3 truncate text-sm font-bold">
 							MonsterPlay.com
@@ -227,7 +227,9 @@
 				<span class="text-foreground">fostering a community of passionate players</span> and developers.
 			</p>
 			<p class="text-muted-foreground text-lg">
-				You decide where you highlight exciting indie titles that your players will love, and a smart open-source
+				You decide where you highlight exciting indie titles that your players will love, and a smart <span
+					class="text-foreground">open-source</span
+				>
 				algorithm <span class="text-foreground">promotes your experiences</span> across sites.
 			</p>
 		</div>
@@ -247,7 +249,7 @@
 				</div>
 
 				<!-- Browser Content -->
-				<div class="bg-background md:min-h-70 rounded-b-lg p-6">
+				<div class="bg-background rounded-b-lg p-6 md:min-h-70">
 					<!-- Game Options -->
 					<div class="relative grid grid-cols-3 gap-6 text-center">
 						<!-- Game 1 -->
@@ -337,7 +339,7 @@
 	<section class="mx-auto flex w-full max-w-7xl flex-wrap gap-8 px-4 py-16">
 		<!-- Left Box: Overlapping Documents -->
 		<div class="bg-card min-w-[320px] flex-1 p-6">
-			<div class="relative h-60 max-w-9/10 mx-auto">
+			<div class="relative mx-auto h-60 max-w-9/10">
 				<!-- Code Document -->
 				<div
 					class="bg-background/75 absolute top-4 left-4 w-full max-w-[320px] -rotate-3 rounded-lg p-6 shadow-lg transition-transform duration-300 hover:scale-105"
@@ -405,7 +407,7 @@
 	</section>
 
 	<!-- Stats (Statistical Proof)-->
-	<section bind:this={statsSection} class="mt-16 mb-5 w-full border-y">
+	<section bind:this={statsSection} class="mt-16 w-full border-y">
 		<div class="mx-auto flex max-w-7xl flex-wrap items-center justify-around gap-8 px-4 py-8">
 			{#each stats as stat}
 				<div class="stat-item min-w-50 text-center">

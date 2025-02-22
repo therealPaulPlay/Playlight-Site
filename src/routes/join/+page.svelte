@@ -5,7 +5,7 @@
 	import { Input } from "$lib/components/ui/input";
 	import { Textarea } from "$lib/components/ui/textarea";
 	import { Label } from "$lib/components/ui/label";
-	import { Loader2 } from "lucide-svelte";
+	import { Loader2, Rocket } from "lucide-svelte";
 	import { enhance } from "$app/forms";
 
 	let isSubmitting = $state(false);
@@ -39,16 +39,17 @@
 </script>
 
 <svelte:head>
-	<title>Join Playlight - Get Your Game Discovered</title>
+	<title>Join Playlight</title>
 </svelte:head>
 
 <main class="flex min-h-screen w-full items-center justify-center px-4 py-16">
 	<div in:blur={{ duration: 400 }} class="w-full max-w-xl">
 		<Card class="border-2">
 			<CardHeader>
-				<CardTitle class="text-3xl font-bold uppercase">Join Playlight</CardTitle>
+				<CardTitle class="text-3xl font-bold uppercase">Join Playlight.</CardTitle>
 				<CardDescription>
 					Take the first step towards better game discovery. Fill out the form below and we'll get back to you shortly.
+					Let's connect!
 				</CardDescription>
 			</CardHeader>
 
@@ -82,7 +83,7 @@
 							<Loader2 class="mr-2 h-4 w-4 animate-spin" />
 							Sending...
 						{:else}
-							Join Playlight
+							Submit<Rocket />
 						{/if}
 					</Button>
 				</CardFooter>
