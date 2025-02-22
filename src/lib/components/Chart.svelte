@@ -1,30 +1,68 @@
 <script>
 	import { onMount, onDestroy } from "svelte";
 	import Chart from "chart.js/auto";
+
 	let { chartOptions, series, type = "line" } = $props();
+	let canvas;
+	let chartInstance;
 
-	let canvas = $state();
-	let chartInstance = $state();
+	function setupChart() {
+		if (!canvas) return;
 
-	// Dynamically import Chart.js on mount to avoid SSR issues
-	onMount(async () => {
-		// Construct the Chart.js data structure using your passed-in options and series
-		const opts = chartOptions.value || {};
-		const labels = opts?.xaxis?.categories || [];
-		const data = {
-			labels,
-			datasets: series?.value?.map((dataset) => ({
-				label: dataset.name,
-				data: dataset.data,
-				fill: false,
-				borderColor: "rgba(75, 192, 192, 1)",
-			})),
-		};
-		chartInstance = new Chart(canvas, {
+		// Destroy existing chart if it exists
+		if (chartInstance) chartInstance.destroy();
+
+		// Create datasets from series data
+		const datasets = series?.map((dataset, index) => ({
+			label: dataset.name,
+			data: dataset.data,
+			borderColor: index === 0 ? "rgb(75, 192, 192)" : "rgb(255, 99, 132)",
+			tension: 0.1,
+		}));
+
+		// Create chart configuration
+		const config = {
 			type,
-			data,
-			options: opts,
-		});
+			data: {
+				labels: chartOptions?.xaxis?.categories || [],
+				datasets,
+			},
+			options: {
+				responsive: true,
+				maintainAspectRatio: false,
+				plugins: {
+					legend: {
+						display: true,
+						position: "bottom",
+					},
+				},
+				scales: {
+					x: {
+						display: true,
+					},
+					y: {
+						display: true,
+						grid: {
+							color: "rgba(0, 0, 0, 0.1)",
+						},
+					},
+				},
+			},
+		};
+
+		// Create new chart instance
+		chartInstance = new Chart(canvas, config);
+	}
+
+	onMount(() => {
+		setupChart();
+	});
+
+	// Watch for changes in props
+	$effect(() => {
+		if (series && chartOptions) {
+			setupChart();
+		}
 	});
 
 	onDestroy(() => {
@@ -32,4 +70,6 @@
 	});
 </script>
 
-<canvas class="w-full h-full" bind:this={canvas}></canvas>
+<div class="h-[400px] w-full">
+	<canvas bind:this={canvas}></canvas>
+</div>

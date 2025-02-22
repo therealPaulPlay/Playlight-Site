@@ -6,7 +6,7 @@
 				<span class="text-muted-foreground text-sm"><a href="https://paulplay.studio" target="_blank">PaulPlay</a></span
 				>
 			</div>
-			<nav class="flex gap-6">
+			<nav class="flex gap-6 nowrap flex-wrap">
 				<a href="/terms" class="text-muted-foreground hover:text-primary text-sm"> Terms of Use </a>
 				<a href="/privacy" class="text-muted-foreground hover:text-primary text-sm"> Privacy Policy </a>
 				<a
