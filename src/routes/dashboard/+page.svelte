@@ -146,8 +146,8 @@
 	});
 </script>
 
-<div class="bg-background flex h-screen">
-	<!-- Sidebar remains unchanged -->
+<main class="bg-background flex h-screen">
+	<!-- Sidebar -->
 	<div class="bg-card w-64 border-t border-r p-4">
 		<div class="mb-8 flex items-center justify-between">
 			<h2 class="max-w-full truncate text-lg font-semibold">Hey, {$username}!</h2>
@@ -171,7 +171,7 @@
 		</div>
 	</div>
 
-	<!-- Main Content -->
+	<!-- Center View -->
 	<div class="flex-1 overflow-auto p-8">
 		{#if selectedSite}
 			<div class="mb-8 flex items-center justify-between">
@@ -232,45 +232,45 @@
 					</div>
 				</CardContent>
 			</Card>
-
-			<Dialog bind:open={showDeleteDialog}>
-				<DialogContent>
-					<DialogHeader>
-						<DialogTitle class="flex items-center gap-2">
-							<AlertTriangle class="text-destructive h-5 w-5" />
-							Remove Site
-						</DialogTitle>
-						<DialogDescription>
-							This will immediately remove all recommendations for your game from Playlight. You'll need to remove the
-							Playlight script from your site manually. This action cannot be undone.
-						</DialogDescription>
-					</DialogHeader>
-					<DialogFooter>
-						<Button variant="outline" class="cursor-pointer" onclick={() => (showDeleteDialog = false)}>Cancel</Button>
-						<Button variant="destructive" onclick={handleDelete}>Remove Site</Button>
-					</DialogFooter>
-				</DialogContent>
-			</Dialog>
-
-			<Dialog bind:open={showDomainDialog}>
-				<DialogContent>
-					<DialogHeader>
-						<DialogTitle>Update Domain</DialogTitle>
-						<DialogDescription>
-							Enter the new domain for your site. Make sure to update your implementation accordingly.
-						</DialogDescription>
-					</DialogHeader>
-					<Input type="text" placeholder="https://newdomain.com" bind:value={newDomain} />
-					<DialogFooter>
-						<Button variant="outline" class="cursor-pointer" onclick={() => (showDomainDialog = false)}>Cancel</Button>
-						<Button onclick={handleDomainUpdate}>Update Domain</Button>
-					</DialogFooter>
-				</DialogContent>
-			</Dialog>
 		{:else}
 			<div class="flex h-full items-center justify-center">
 				<p class="text-muted-foreground">No sites connected yet.</p>
 			</div>
 		{/if}
 	</div>
-</div>
+</main>
+
+<Dialog bind:open={showDeleteDialog}>
+	<DialogContent>
+		<DialogHeader>
+			<DialogTitle class="flex items-center gap-2">
+				<AlertTriangle class="text-destructive h-5 w-5" />
+				Remove Site
+			</DialogTitle>
+			<DialogDescription>
+				This will immediately remove all recommendations for your game from Playlight. You'll need to remove the
+				Playlight script from your site manually. This action cannot be undone.
+			</DialogDescription>
+		</DialogHeader>
+		<DialogFooter>
+			<Button variant="outline" class="cursor-pointer" onclick={() => (showDeleteDialog = false)}>Cancel</Button>
+			<Button variant="destructive" onclick={handleDelete}>Remove Site</Button>
+		</DialogFooter>
+	</DialogContent>
+</Dialog>
+
+<Dialog bind:open={showDomainDialog}>
+	<DialogContent>
+		<DialogHeader>
+			<DialogTitle>Update Domain</DialogTitle>
+			<DialogDescription>
+				Enter the new domain for your site. Make sure to update your implementation accordingly.
+			</DialogDescription>
+		</DialogHeader>
+		<Input type="text" placeholder="https://newdomain.com" bind:value={newDomain} />
+		<DialogFooter>
+			<Button variant="outline" class="cursor-pointer" onclick={() => (showDomainDialog = false)}>Cancel</Button>
+			<Button onclick={handleDomainUpdate}>Update Domain</Button>
+		</DialogFooter>
+	</DialogContent>
+</Dialog>
