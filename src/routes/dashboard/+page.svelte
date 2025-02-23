@@ -33,13 +33,13 @@
 	onMount(() => {
 		// Uncomment the following block to use demo data during development
 		stats.value = [
-			{ date: "2025-02-16", playersGained: 15, gamesRecommended: 3 },
-			{ date: "2025-02-17", playersGained: 20, gamesRecommended: 5 },
-			{ date: "2025-02-18", playersGained: 18, gamesRecommended: 4 },
-			{ date: "2025-02-19", playersGained: 22, gamesRecommended: 6 },
-			{ date: "2025-02-20", playersGained: 19, gamesRecommended: 3 },
-			{ date: "2025-02-21", playersGained: 25, gamesRecommended: 7 },
-			{ date: "2025-02-22", playersGained: 30, gamesRecommended: 8 },
+			{ date: "2025-02-16", playersGained: 15, gamesReferred: 3 },
+			{ date: "2025-02-17", playersGained: 20, gamesReferred: 5 },
+			{ date: "2025-02-18", playersGained: 18, gamesReferred: 4 },
+			{ date: "2025-02-19", playersGained: 22, gamesReferred: 6 },
+			{ date: "2025-02-20", playersGained: 19, gamesReferred: 3 },
+			{ date: "2025-02-21", playersGained: 25, gamesReferred: 7 },
+			{ date: "2025-02-22", playersGained: 30, gamesReferred: 8 },
 		];
 	});
 
@@ -218,7 +218,7 @@
 								},
 								{
 									name: "Games recommended",
-									data: stats?.value?.map((item) => item.gamesRecommended),
+									data: stats?.value?.map((item) => item.gamesReferred),
 								},
 							]}
 							type="line"
