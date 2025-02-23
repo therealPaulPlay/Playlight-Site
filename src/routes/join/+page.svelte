@@ -2,11 +2,15 @@
 	import { blur } from "svelte/transition";
 	import { Button } from "$lib/components/ui/button";
 	import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "$lib/components/ui/card";
+	import { toast } from "svelte-sonner";
+	import { BASE_API_URL } from "$lib/stores/configStore";
 	import { Input } from "$lib/components/ui/input";
 	import { Textarea } from "$lib/components/ui/textarea";
 	import { Label } from "$lib/components/ui/label";
 	import { Loader2, Rocket } from "lucide-svelte";
 	import { enhance } from "$app/forms";
+	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
+	import { goto } from "$app/navigation";
 
 	let isSubmitting = $state(false);
 	let formData = $state({
@@ -22,19 +26,26 @@
 	async function handleSubmit(event) {
 		if (!isValid) return;
 		event.preventDefault();
-
 		isSubmitting = true;
 
-		// You can add your form submission logic here
-		// Example:
-		// await fetch('/api/submit', {
-		//   method: 'POST',
-		//   body: JSON.stringify(formData)
-		// });
-
-		// Simulate submission delay
-		await new Promise((resolve) => setTimeout(resolve, 1000));
+		try {
+			const response = await fetchWithErrorHandling(`${$BASE_API_URL}/contact/submit`, {
+				headers: {
+					"Content-Type": "application/json",
+				},
+				method: "POST",
+				body: JSON.stringify({
+					email: formData?.email,
+					message: formData?.message,
+					website: formData?.website,
+				}),
+			});
+		} catch (error) {
+			toast.error("Failed to submit form: " + error);
+		}
+		toast.error("Thanks for your submission! We'll get back to you shortly!");
 		isSubmitting = false;
+		goto("/");
 	}
 </script>
 

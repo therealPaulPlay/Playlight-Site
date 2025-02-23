@@ -34,6 +34,8 @@
 					width="1280"
 					height="720"
 					class="h-full w-full object-cover blur-xl brightness-[60%]"
+					playsinline
+					webkit-playsinline
 					autoplay
 					muted
 					loop
@@ -60,18 +62,14 @@
 		position: relative;
 		width: 100%;
 		height: 100%;
-		mask: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, black 10%, black 90%, rgba(0, 0, 0, 0.5)  100%);
+		mask: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, black 10%, black 90%, rgba(0, 0, 0, 0.5) 100%);
 	}
 
 	.overlay {
 		position: absolute;
 		inset: 0;
 		background-color: black;
-		mask: radial-gradient(
-			circle 20rem at var(--spotlight-x) var(--spotlight-y),
-			transparent,
-			black 75%
-		);
+		mask: radial-gradient(circle 20rem at var(--spotlight-x) var(--spotlight-y), transparent, black 75%);
 	}
 
 	.video-container {

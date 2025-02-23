@@ -3,7 +3,13 @@
 	import { Toaster } from "$lib/components/ui/sonner";
 	import Footer from "$lib/components/Footer.svelte";
 	import Button from "$lib/components/ui/button/button.svelte";
+	import { onMount } from "svelte";
+	import { checkAuthenticationStatus } from "$lib/utils/checkAuthentication";
 	let { children } = $props();
+
+	onMount(() => {
+		checkAuthenticationStatus();
+	});
 </script>
 
 <!-- Nav bar -->

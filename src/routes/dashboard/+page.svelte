@@ -14,11 +14,14 @@
 	import { Input } from "$lib/components/ui/input";
 	import { Select, SelectContent, SelectItem, SelectTrigger } from "$lib/components/ui/select";
 	import { toast } from "svelte-sonner";
-	import { username } from "$lib/stores/accountStore";
+	import { isAdmin, username } from "$lib/stores/accountStore";
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
 	import { BASE_API_URL } from "$lib/stores/configStore";
-	import { AlertTriangle, LogOut, Settings, Menu } from "lucide-svelte";
+	import { AlertTriangle, LogOut, Settings, Menu, Plus } from "lucide-svelte";
 	import Chart from "$lib/components/Chart.svelte";
+	import { signOut } from "$lib/utils/checkAuthentication";
+	import { goto } from "$app/navigation";
+	import WhitelistDialog from "$lib/components/WhitelistDialog.svelte";
 
 	// State management
 	let selectedTimeframe = $state(30);
@@ -55,7 +58,7 @@
 				await fetchStats();
 			}
 		} catch (error) {
-			toast.error("Failed to load sites");
+			toast.error("Failed to load sites: " + error);
 		}
 	});
 
@@ -70,7 +73,7 @@
 			);
 			stats.value = await response.json();
 		} catch (error) {
-			toast.error("Failed to load statistics");
+			toast.error("Failed to load statistics: " + error);
 		} finally {
 			loading = false;
 		}
@@ -80,14 +83,14 @@
 		try {
 			await fetchWithErrorHandling(`${$BASE_API_URL}/sites/${selectedSite.id}`, {
 				method: "DELETE",
-				headers: { Authorization: `Bearer ${localStorage.getItem("bearer")}` },
+				headers: { "Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem("bearer")}` },
 			});
 			sites = sites.filter((site) => site.id !== selectedSite.id);
 			selectedSite = sites[0];
 			showDeleteDialog = false;
 			toast.success("Site removed successfully");
 		} catch (error) {
-			toast.error("Failed to remove site");
+			toast.error("Failed to remove site: " + error);
 		}
 	}
 
@@ -105,7 +108,7 @@
 			showDomainDialog = false;
 			toast.success("Domain updated successfully");
 		} catch (error) {
-			toast.error("Failed to update domain");
+			toast.error("Failed to update domain: " + error);
 		}
 	}
 
@@ -151,26 +154,46 @@
 		<div class="flex flex-col border-t border-r p-4">
 			<div class="mb-8 flex items-center justify-between">
 				<h2 class="max-w-full truncate text-lg font-semibold">Hey, {$username}!</h2>
-				<Button variant="ghost"><LogOut /></Button>
+				<Button
+					variant="ghost"
+					onclick={() => {
+						signOut();
+						goto("/");
+					}}><LogOut /></Button
+				>
 			</div>
-			<h3 class="text-muted-foreground mb-4 text-sm font-medium">Your Sites</h3>
-			<div class="space-y-2 overflow-y-auto max-h-[calc(100dvh-250px)]">
-				{#if sites.length}
-					{#each sites as site}
-						<Button
-							variant={selectedSite?.id === site.id ? "secondary" : "outline"}
-							class="w-full justify-start"
-							onclick={() => {
-								selectedSite = site;
-								if (window.innerWidth < 768) showSidebar = false;
-							}}
-						>
-							{site.domain}
-						</Button>
-					{/each}
+			<!-- Sidebar scroll container -->
+			<div class="max-h-[calc(100dvh-250px)] overflow-y-auto">
+				<h3 class="text-muted-foreground mb-4 text-sm font-medium">Admin tools</h3>
+				{#if $isAdmin}
+					<div class="space-y-2">
+						<Button>Add Game <Plus /></Button>
+						<WhitelistDialog />
+					</div>
 				{:else}
-					<Button variant="outline" class="w-full justify-start">No site connected.</Button>
+					<p class="text-muted-foreground bg-muted p-2 text-sm italic">
+						Please reach out via <a href="mailto:paulplaystudio@gmail.com" class="underline">email</a>.
+					</p>
 				{/if}
+				<h3 class="text-muted-foreground mt-4 mb-4 text-sm font-medium">Your Sites</h3>
+				<div class="space-y-2">
+					{#if sites.length}
+						{#each sites as site}
+							<Button
+								variant={selectedSite?.id === site.id ? "secondary" : "outline"}
+								class="w-full justify-start"
+								onclick={() => {
+									selectedSite = site;
+									if (window.innerWidth < 768) showSidebar = false;
+								}}
+							>
+								{site.domain}
+							</Button>
+						{/each}
+					{:else}
+						<Button variant="outline" class="w-full justify-start">No site connected.</Button>
+					{/if}
+				</div>
 			</div>
 		</div>
 	</div>
@@ -217,7 +240,7 @@
 									data: stats?.value?.map((item) => item.playersGained),
 								},
 								{
-									name: "Games recommended",
+									name: "Games referred",
 									data: stats?.value?.map((item) => item.gamesReferred),
 								},
 							]}

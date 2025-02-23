@@ -1,4 +1,4 @@
-import { isAuthenticated, username } from "$lib/stores/accountStore";
+import { isAdmin, isAuthenticated, username } from "$lib/stores/accountStore";
 import { fetchWithErrorHandling } from "./fetchWithErrorHandling";
 import { BASE_API_URL } from "$lib/stores/configStore";
 import { get } from "svelte/store";
@@ -19,6 +19,7 @@ export async function getUser() {
 
         if (data) {
             username.set(data.user?.user_name);
+            isAdmin.set(data.user?.is_admin);
         }
 
         return data;

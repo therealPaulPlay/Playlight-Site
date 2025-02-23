@@ -40,7 +40,7 @@
 		if (loading) return;
 
 		if (currentView === "signup" && !acceptedTerms) {
-			toast.error("Please accept the terms and privacy policy");
+			toast.error("Please accept the terms and privacy policy.");
 			return;
 		}
 
