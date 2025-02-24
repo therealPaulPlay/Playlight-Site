@@ -17,7 +17,7 @@
 	import { isAdmin, username } from "$lib/stores/accountStore";
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
 	import { BASE_API_URL } from "$lib/stores/configStore";
-	import { AlertTriangle, LogOut, Settings, Menu, Plus } from "lucide-svelte";
+	import { AlertTriangle, LogOut, Settings, Menu, Plus, ArrowDown } from "lucide-svelte";
 	import Chart from "$lib/components/Chart.svelte";
 	import { signOut } from "$lib/utils/checkAuthentication";
 	import { goto } from "$app/navigation";
@@ -40,6 +40,10 @@
 
 	// Fetch sites and initial stats
 	onMount(async () => {
+		fetchGames();
+	});
+
+	async function fetchGames() {
 		try {
 			const response = await fetchWithErrorHandling(
 				`${$BASE_API_URL}/game/${localStorage.getItem("id")}?page=${page}`,
@@ -48,7 +52,7 @@
 				},
 			);
 			const data = await response.json();
-			games = data?.games;
+			games = [...games, ...data?.games];
 			if (games.length > 0) {
 				selectedGame = games[0];
 				await fetchStats();
@@ -56,7 +60,7 @@
 		} catch (error) {
 			toast.error("Failed to load games: " + error);
 		}
-	});
+	}
 
 	async function fetchStats() {
 		if (!selectedGame) return;
@@ -87,7 +91,7 @@
 				body: JSON.stringify({ id: localStorage.getItem("id"), password: passwordInput }),
 			});
 			games = games.filter((site) => site.id !== selectedGame.id);
-			selectedGame = games[0];
+			if (selectedGame == null) selectedGame = games[0];
 			showDeleteDialog = false;
 			passwordInput = "";
 			toast.success("Site removed successfully");
@@ -195,6 +199,16 @@
 						{/each}
 					{:else}
 						<Button variant="outline" class="w-full justify-start">No games connected.</Button>
+					{/if}
+					{#if games?.length > 50 && games?.length % 50 == 0}
+						<Button
+							variant="ghost"
+							class="w-full"
+							onclick={() => {
+								page++;
+								fetchGames();
+							}}>Load more <ArrowDown /></Button
+						>
 					{/if}
 				</div>
 			</div>
