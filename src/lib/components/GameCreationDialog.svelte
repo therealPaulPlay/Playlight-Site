@@ -181,12 +181,12 @@
 
 <Dialog.Root bind:open={dialogOpen}>
 	<Dialog.Trigger class={buttonVariants({ variant: "outline" })}>
-		Create Game <Gamepad2 class="ml-2" />
+		Add Game <Gamepad2 class="ml-2" />
 	</Dialog.Trigger>
 
 	<Dialog.Content class="max-h-[75dvh] max-w-2xl overflow-y-auto">
 		<Dialog.Header>
-			<Dialog.Title>Create game</Dialog.Title>
+			<Dialog.Title>Add game</Dialog.Title>
 			<Dialog.Description>Add a new game to the platform.</Dialog.Description>
 		</Dialog.Header>
 
@@ -325,7 +325,7 @@
 					Creating...
 				{:else}
 					<Upload class="mr-2 h-4 w-4" />
-					Create Game
+					Add Game
 				{/if}
 			</Button>
 		</Dialog.Footer>

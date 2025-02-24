@@ -182,7 +182,7 @@
 						Please reach out via <a href="mailto:paulplaystudio@gmail.com" class="underline">email</a>.
 					</p>
 				{/if}
-				<h3 class="text-muted-foreground mt-4 mb-4 text-sm font-medium">Your Games</h3>
+				<h3 class="text-muted-foreground mt-4 mb-4 text-sm font-medium">{$isAdmin ? "All Games" : "Your Games"}</h3>
 				<div class="space-y-2">
 					{#if games.length}
 						{#each games as game}
