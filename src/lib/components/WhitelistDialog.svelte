@@ -65,13 +65,15 @@
 			});
 			await response.json();
 			fetchWhitelist();
-			toast("Added entry successfully!");
+			toast.success("Added entry successfully!");
 		} catch (error) {
 			toast.error("Failed to remove entry from whitelist: " + error);
 		}
 	}
 
-	onMount(fetchWhitelist);
+	$effect(() => {
+		if (dialogOpen) fetchWhitelist();
+	});
 </script>
 
 <Dialog.Root bind:open={dialogOpen}>

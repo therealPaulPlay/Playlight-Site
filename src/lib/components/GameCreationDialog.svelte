@@ -11,6 +11,7 @@
 	import { toast } from "svelte-sonner";
 	import { createUploader } from "$lib/utils/uploadthing.js";
 	import { UploadDropzone } from "@uploadthing/svelte";
+	import { formatDomain } from "$lib/utils/formatDomain";
 
 	let dialogOpen = $state(false);
 	let isCreating = $state(false);
@@ -101,7 +102,7 @@
 					ownerEmail,
 					category,
 					description,
-					domain,
+					domain: formatDomain(domain),
 					logoUrl,
 					coverImageUrl,
 					coverVideoUrl,
@@ -166,9 +167,9 @@
 					coverVideoUrl = "";
 					coverVideoKey = "";
 				}
-				toast.success(`${type.charAt(0).toUpperCase() + type.slice(1)} deleted successfully`);
+				toast.success(`${type.charAt(0).toUpperCase() + type.slice(1)} deleted successfully.`);
 			} else {
-				throw new Error(result.error || "Failed to delete file");
+				throw new Error(result.error || "Failed to delete file.");
 			}
 		} catch (error) {
 			toast.error(`Failed to delete file: ${error.message}`);
@@ -237,7 +238,7 @@
 
 				<div class="grid gap-2">
 					<div class="flex items-center justify-between">
-						<Label class="text-sm">Logo (500x500, JPEG)</Label>
+						<Label class="text-sm">Logo (500x500, JPEG, max. 100KB)</Label>
 						{#if logoUrl}
 							<Button variant="ghost" size="sm" onclick={() => resetFile("logo")} disabled={isDeleting}>
 								<X class="h-4 w-4" />
@@ -248,7 +249,7 @@
 						<!-- For logo -->
 						<UploadDropzone uploader={logoUploader}>
 							<ImageIcon slot="upload-icon" class="mt-4 h-6 w-6" />
-							<span slot="label">Drop or click to upload logo (500x500, JPEG only)</span>
+							<span slot="label">Drop or click to upload logo</span>
 						</UploadDropzone>
 					{:else}
 						<div class="flex items-center gap-2 rounded border p-2">
@@ -260,7 +261,7 @@
 
 				<div class="grid gap-2">
 					<div class="flex items-center justify-between">
-						<Label class="text-sm">Cover Image (800x1200, JPEG)</Label>
+						<Label class="text-sm">Cover Image (800x1200, JPEG, max. 250KB)</Label>
 						{#if coverImageUrl}
 							<Button variant="ghost" size="sm" onclick={() => resetFile("cover")} disabled={isDeleting}>
 								<X class="h-4 w-4" />
@@ -271,7 +272,7 @@
 						<!-- For cover image -->
 						<UploadDropzone uploader={coverImageUploader}>
 							<ImageIcon slot="upload-icon" class="mt-4 h-6 w-6" />
-							<span slot="label">Drop or click to upload cover image (800x1200, JPEG only)</span>
+							<span slot="label">Drop or click to upload cover image</span>
 						</UploadDropzone>
 					{:else}
 						<div class="flex items-center gap-2 rounded border p-2">
@@ -283,7 +284,7 @@
 
 				<div class="grid gap-2">
 					<div class="flex items-center justify-between">
-						<Label class="text-sm">Cover Video (MP4, 2:3 ratio)</Label>
+						<Label class="text-sm">Cover Video (MP4, 2:3 aspect ratio, max. 3MB)</Label>
 						{#if coverVideoUrl}
 							<Button variant="ghost" size="sm" onclick={() => resetFile("video")} disabled={isDeleting}>
 								<X class="h-4 w-4" />
@@ -294,11 +295,10 @@
 						<!-- For video -->
 						<UploadDropzone uploader={coverVideoUploader}>
 							<Video slot="upload-icon" class="mt-4 h-6 w-6" />
-							<span slot="label">Drop or click to upload cover video (MP4, 2:3 aspect ratio)</span>
+							<span slot="label">Drop or click to upload cover video</span>
 						</UploadDropzone>
 					{:else}
 						<div class="flex items-center gap-2 rounded border p-2">
-							<Video class="h-6 w-6" />
 							<span class="truncate text-sm">{coverVideoUrl}</span>
 						</div>
 					{/if}
@@ -310,7 +310,15 @@
 			<Button variant="outline" onclick={() => (dialogOpen = false)}>Cancel</Button>
 			<Button
 				onclick={createGame}
-				disabled={isCreating || !name || !category || !description || !domain || !ownerEmail}
+				disabled={isCreating ||
+					!name ||
+					!category ||
+					!description ||
+					!domain ||
+					!ownerEmail ||
+					!logoUrl ||
+					!coverImageUrl ||
+					!coverVideoUrl}
 			>
 				{#if isCreating}
 					<Loader2 class="mr-2 h-4 w-4 animate-spin" />

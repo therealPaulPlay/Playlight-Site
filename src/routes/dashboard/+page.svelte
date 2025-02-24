@@ -23,54 +23,53 @@
 	import { goto } from "$app/navigation";
 	import WhitelistDialog from "$lib/components/WhitelistDialog.svelte";
 	import GameCreationDialog from "$lib/components/GameCreationDialog.svelte";
+	import Label from "$lib/components/ui/label/label.svelte";
 
 	// State management
-	let selectedTimeframe = $state(30);
-	let selectedSite = $state(1);
-	let sites = $state([]);
+	let statTimeframe = $state(7);
+	let selectedGame = $state();
+	let games = $state([]);
 	let stats = $state([]);
 	let loading = $state(false);
 	let showDeleteDialog = $state(false);
 	let showDomainDialog = $state(false);
 	let newDomain = $state("");
 
-	onMount(() => {
-		// Uncomment the following block to use demo data during development
-		stats.value = [
-			{ date: "2025-02-16", playersGained: 15, gamesReferred: 3 },
-			{ date: "2025-02-17", playersGained: 20, gamesReferred: 5 },
-			{ date: "2025-02-18", playersGained: 18, gamesReferred: 4 },
-			{ date: "2025-02-19", playersGained: 22, gamesReferred: 6 },
-			{ date: "2025-02-20", playersGained: 19, gamesReferred: 3 },
-			{ date: "2025-02-21", playersGained: 25, gamesReferred: 7 },
-			{ date: "2025-02-22", playersGained: 30, gamesReferred: 8 },
-		];
-	});
+	let page = $state(1);
+	let passwordInput = $state("");
 
 	// Fetch sites and initial stats
 	onMount(async () => {
 		try {
-			const sitesResponse = await fetchWithErrorHandling(`${$BASE_API_URL}/sites`, {
-				headers: { Authorization: `Bearer ${localStorage.getItem("bearer")}` },
-			});
-			sites.value = await sitesResponse.json();
-			if (sites.value.length > 0) {
-				selectedSite.value = sites.value[0];
+			const response = await fetchWithErrorHandling(
+				`${$BASE_API_URL}/game/${localStorage.getItem("id")}?page=${page}`,
+				{
+					headers: { Authorization: `Bearer ${localStorage.getItem("bearer")}` },
+				},
+			);
+			const data = await response.json();
+			games = data?.games;
+			if (games.length > 0) {
+				selectedGame = games[0];
 				await fetchStats();
 			}
 		} catch (error) {
-			toast.error("Failed to load sites: " + error);
+			toast.error("Failed to load games: " + error);
 		}
 	});
 
 	async function fetchStats() {
-		if (!selectedSite) return;
+		if (!selectedGame) return;
 
 		loading = true;
 		try {
 			const response = await fetchWithErrorHandling(
-				`${$BASE_API_URL}/stats/${selectedSite.id}?timeframe=${selectedTimeframe}`,
-				{ headers: { Authorization: `Bearer ${localStorage.getItem("bearer")}` } },
+				`${$BASE_API_URL}/game/${selectedGame.id}/statistics?days=${statTimeframe}`,
+				{
+					method: "PUT",
+					headers: { "Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem("bearer")}` },
+					body: JSON.stringify({ id: localStorage.getItem("id") }),
+				},
 			);
 			stats.value = await response.json();
 		} catch (error) {
@@ -82,13 +81,15 @@
 
 	async function handleDelete() {
 		try {
-			await fetchWithErrorHandling(`${$BASE_API_URL}/sites/${selectedSite.id}`, {
+			await fetchWithErrorHandling(`${$BASE_API_URL}/game/${selectedGame.id}`, {
 				method: "DELETE",
 				headers: { "Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem("bearer")}` },
+				body: JSON.stringify({ id: localStorage.getItem("id"), password: passwordInput }),
 			});
-			sites = sites.filter((site) => site.id !== selectedSite.id);
-			selectedSite = sites[0];
+			games = games.filter((site) => site.id !== selectedGame.id);
+			selectedGame = games[0];
 			showDeleteDialog = false;
+			passwordInput = "";
 			toast.success("Site removed successfully");
 		} catch (error) {
 			toast.error("Failed to remove site: " + error);
@@ -97,17 +98,20 @@
 
 	async function handleDomainUpdate() {
 		try {
-			await fetchWithErrorHandling(`${$BASE_API_URL}/sites/${selectedSite.id}/domain`, {
+			const game = selectedGame;
+			game.domain = newDomain;
+			await fetchWithErrorHandling(`${$BASE_API_URL}/game/${selectedGame.id}`, {
 				method: "PUT",
 				headers: {
 					"Content-Type": "application/json",
 					Authorization: `Bearer ${localStorage.getItem("bearer")}`,
 				},
-				body: JSON.stringify({ domain: newDomain }),
+				body: JSON.stringify({ ...game, password: passwordInput }),
 			});
-			selectedSite.domain = newDomain;
+			selectedGame.domain = newDomain;
 			showDomainDialog = false;
-			toast.success("Domain updated successfully");
+			passwordInput = "";
+			toast.success("Domain updated successfully!");
 		} catch (error) {
 			toast.error("Failed to update domain: " + error);
 		}
@@ -117,9 +121,7 @@
 	let series = $state([]);
 
 	$effect(() => {
-		if (selectedTimeframe && selectedSite) {
-			fetchStats();
-		}
+		if (statTimeframe && selectedGame) fetchStats();
 	});
 
 	let showSidebar = $state(false);
@@ -176,23 +178,23 @@
 						Please reach out via <a href="mailto:paulplaystudio@gmail.com" class="underline">email</a>.
 					</p>
 				{/if}
-				<h3 class="text-muted-foreground mt-4 mb-4 text-sm font-medium">Your Sites</h3>
+				<h3 class="text-muted-foreground mt-4 mb-4 text-sm font-medium">Your Games</h3>
 				<div class="space-y-2">
-					{#if sites.length}
-						{#each sites as site}
+					{#if games.length}
+						{#each games as game}
 							<Button
-								variant={selectedSite?.id === site.id ? "secondary" : "outline"}
+								variant={selectedGame?.id === game.id ? "secondary" : "outline"}
 								class="w-full justify-start"
 								onclick={() => {
-									selectedSite = site;
+									selectedGame = game;
 									if (window.innerWidth < 768) showSidebar = false;
 								}}
 							>
-								{site.domain}
+								{game.domain}
 							</Button>
 						{/each}
 					{:else}
-						<Button variant="outline" class="w-full justify-start">No site connected.</Button>
+						<Button variant="outline" class="w-full justify-start">No games connected.</Button>
 					{/if}
 				</div>
 			</div>
@@ -208,16 +210,20 @@
 
 	<!-- Center View -->
 	<div class="w-full overflow-x-hidden overflow-y-auto p-8">
-		{#if selectedSite}
+		{#if selectedGame}
 			<div class="mb-8 flex items-center justify-between gap-4">
-				<h1 class="truncate text-3xl font-bold">{selectedSite.domain || "Example.com"}</h1>
-				<Select type="single" bind:value={selectedTimeframe}>
+				<div class="flex max-w-2/3 gap-4">
+					<img src={selectedGame?.logo_url} alt="game logo" class="h-10 w-10 rounded object-cover" />
+					<h1 class="truncate text-3xl font-bold">{selectedGame.domain || "Example.com"}</h1>
+				</div>
+				<Select type="single" bind:value={statTimeframe}>
 					<SelectTrigger class="w-32">
-						{selectedTimeframe} Days
+						{statTimeframe} Days
 					</SelectTrigger>
 					<SelectContent>
 						<SelectItem value={7}>7 Days</SelectItem>
 						<SelectItem value={30}>30 Days</SelectItem>
+						<SelectItem value={90}>90 Days</SelectItem>
 					</SelectContent>
 				</Select>
 			</div>
@@ -260,7 +266,7 @@
 					<div class="flex items-center justify-between gap-2">
 						<div>
 							<h3 class="font-medium">Update Domain</h3>
-							<p class="text-muted-foreground text-sm">Change the main domain for this site.</p>
+							<p class="text-muted-foreground text-sm">Change the main domain for this game.</p>
 						</div>
 						<Button variant="outline" class="cursor-pointer" onclick={() => (showDomainDialog = true)}>
 							<Settings class="mr-2 h-4 w-4" />
@@ -270,7 +276,7 @@
 					<div class="flex items-center justify-between gap-2">
 						<div>
 							<h3 class="font-medium">Remove Site</h3>
-							<p class="text-muted-foreground text-sm">Remove this site from Playlight.</p>
+							<p class="text-muted-foreground text-sm">Remove this game from the platform.</p>
 						</div>
 						<Button variant="destructive" class="cursor-pointer" onclick={() => (showDeleteDialog = true)}
 							>Remove Site</Button
@@ -298,6 +304,8 @@
 				Playlight script from your site manually. This action cannot be undone.
 			</DialogDescription>
 		</DialogHeader>
+		<Label for="password" class="-mb-2">Password</Label>
+		<Input type="password" placeholder="password" bind:value={passwordInput} />
 		<DialogFooter>
 			<Button variant="outline" class="cursor-pointer" onclick={() => (showDeleteDialog = false)}>Cancel</Button>
 			<Button variant="destructive" onclick={handleDelete}>Remove Site</Button>
@@ -313,7 +321,10 @@
 				Enter the new domain for your site. Make sure to update your implementation accordingly.
 			</DialogDescription>
 		</DialogHeader>
-		<Input type="text" placeholder="https://newdomain.com" bind:value={newDomain} />
+		<Label for="password" class="-mb-2">Password</Label>
+		<Input type="password" placeholder="password" id="password" bind:value={passwordInput} />
+		<Label for="domain" class="mt-2 -mb-2">Domain</Label>
+		<Input type="text" id="domain" placeholder="new-domain.com" bind:value={newDomain} />
 		<DialogFooter>
 			<Button variant="outline" class="cursor-pointer" onclick={() => (showDomainDialog = false)}>Cancel</Button>
 			<Button onclick={handleDomainUpdate}>Update Domain</Button>
