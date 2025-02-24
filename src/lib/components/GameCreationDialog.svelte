@@ -1,0 +1,265 @@
+<script>
+	import { Button, buttonVariants } from "$lib/components/ui/button/index.js";
+	import * as Dialog from "$lib/components/ui/dialog/index.js";
+	import { Input } from "$lib/components/ui/input/index.js";
+	import { Label } from "$lib/components/ui/label/index.js";
+	import { Textarea } from "$lib/components/ui/textarea/index.js";
+	import { Select, SelectContent, SelectItem, SelectTrigger } from "$lib/components/ui/select/index.js";
+	import { Gamepad2, Upload, Loader2, Image as ImageIcon, Video, X } from "lucide-svelte";
+	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
+	import { BASE_API_URL } from "$lib/stores/configStore";
+	import { toast } from "svelte-sonner";
+	import { createUploader } from "$lib/utils/uploadthing.js";
+	import { UploadDropzone } from "@uploadthing/svelte";
+
+	let dialogOpen = $state(false);
+	let isCreating = $state(false);
+
+	// Form data
+	let name = $state("");
+	let ownerEmail = $state("");
+	let category = $state("");
+	let description = $state("");
+	let domain = $state("");
+	let logoUrl = $state("");
+	let coverImageUrl = $state("");
+	let coverVideoUrl = $state("");
+
+	// Create uploaders for each file type
+	const logoUploader = createUploader("logoUploader", {
+		url: `${$BASE_API_URL}/uploads/uploadthing`,
+		onClientUploadComplete: (res) => {
+			logoUrl = res[0].url;
+			toast.success("Logo uploaded successfully!");
+		},
+		onUploadError: (error) => {
+			toast.error(`Error uploading logo: ${error.message}`);
+		},
+	});
+
+	const coverImageUploader = createUploader("coverImageUploader", {
+		url: `${$BASE_API_URL}/uploads/uploadthing`,
+		onClientUploadComplete: (res) => {
+			coverImageUrl = res[0].url;
+			toast.success("Cover image uploaded successfully!");
+		},
+		onUploadError: (error) => {
+			toast.error(`Error uploading cover image: ${error.message}`);
+		},
+	});
+
+	const coverVideoUploader = createUploader("coverVideoUploader", {
+		url: `${$BASE_API_URL}/uploads/uploadthing`,
+		onClientUploadComplete: (res) => {
+			coverVideoUrl = res[0].url;
+			toast.success("Cover video uploaded successfully!");
+		},
+		onUploadError: (error) => {
+			toast.error(`Error uploading cover video: ${error.message}`);
+		},
+	});
+
+	// Game categories
+	const categories = ["Action", "Adventure", "RPG", "Strategy", "Sports", "Quiz", "FPS", "Other"];
+
+	async function createGame() {
+		if (!name || !category || !description || !domain || !ownerEmail) {
+			toast.error("Please fill in all required fields.");
+			return;
+		}
+
+		isCreating = true;
+		try {
+			const response = await fetchWithErrorHandling(`${$BASE_API_URL}/game`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${localStorage.getItem("bearer")}`,
+				},
+				body: JSON.stringify({
+					id: localStorage.getItem("id"),
+					name,
+					ownerEmail,
+					category,
+					description,
+					domain,
+					logoUrl,
+					coverImageUrl,
+					coverVideoUrl,
+				}),
+			});
+
+			await response.json();
+			toast.success("Game created successfully!");
+			dialogOpen = false;
+			resetForm();
+		} catch (error) {
+			toast.error("Failed to create game: " + error);
+		} finally {
+			isCreating = false;
+		}
+	}
+
+	function resetForm() {
+		name = "";
+		ownerEmail = "";
+		category = "";
+		description = "";
+		domain = "";
+		logoUrl = "";
+		coverImageUrl = "";
+		coverVideoUrl = "";
+	}
+
+	function resetFile(type) {
+		if (type === "logo") logoUrl = "";
+		if (type === "cover") coverImageUrl = "";
+		if (type === "video") coverVideoUrl = "";
+	}
+</script>
+
+<Dialog.Root bind:open={dialogOpen}>
+	<Dialog.Trigger class={buttonVariants({ variant: "outline" })}>
+		Create Game <Gamepad2 class="ml-2" />
+	</Dialog.Trigger>
+
+	<Dialog.Content class="max-h-[75dvh] max-w-2xl overflow-y-auto">
+		<Dialog.Header>
+			<Dialog.Title>Create game</Dialog.Title>
+			<Dialog.Description>Add a new game to the platform.</Dialog.Description>
+		</Dialog.Header>
+
+		<div class="grid gap-4 py-4">
+			<div class="grid grid-cols-2 gap-4">
+				<div class="grid gap-2">
+					<Label for="name">Game Name</Label>
+					<Input id="name" bind:value={name} placeholder="My Awesome Game" />
+				</div>
+
+				<div class="grid gap-2">
+					<Label for="owner">Owner Email</Label>
+					<Input id="owner" bind:value={ownerEmail} placeholder="owner@example.com" type="email" />
+				</div>
+			</div>
+
+			<div class="grid gap-2">
+				<Label for="category">Category</Label>
+				<Select type="single" bind:value={category}>
+					<SelectTrigger>
+						<span>{category || "Select a category"}</span>
+					</SelectTrigger>
+					<SelectContent>
+						{#each categories as cat}
+							<SelectItem value={cat}>{cat}</SelectItem>
+						{/each}
+					</SelectContent>
+				</Select>
+			</div>
+
+			<div class="grid gap-2">
+				<Label for="domain">Domain</Label>
+				<Input id="domain" bind:value={domain} placeholder="my-game.com" />
+			</div>
+
+			<div class="grid gap-2">
+				<Label for="description">Description</Label>
+				<Textarea
+					id="description"
+					bind:value={description}
+					placeholder="Describe your game (max 500 characters)"
+					maxlength="500"
+				/>
+				<p class="text-sm text-gray-500">{description.length}/500</p>
+			</div>
+
+			<div class="grid gap-4">
+				<Label>Media Files</Label>
+
+				<div class="grid gap-2">
+					<div class="flex items-center justify-between">
+						<Label class="text-sm">Logo (500x500, JPEG)</Label>
+						{#if logoUrl}
+							<Button variant="ghost" size="sm" onclick={() => resetFile("logo")}>
+								<X class="h-4 w-4" />
+							</Button>
+						{/if}
+					</div>
+					{#if !logoUrl}
+						<!-- For logo -->
+						<UploadDropzone uploader={logoUploader}>
+							<ImageIcon slot="upload-icon" class="mt-4 h-6 w-6" />
+							<span slot="label">Drop or click to upload logo</span>
+						</UploadDropzone>
+					{:else}
+						<div class="flex items-center gap-2 rounded border p-2">
+							<img src={logoUrl} alt="Logo preview" class="h-10 w-10 rounded object-cover" />
+							<span class="truncate text-sm">{logoUrl}</span>
+						</div>
+					{/if}
+				</div>
+
+				<div class="grid gap-2">
+					<div class="flex items-center justify-between">
+						<Label class="text-sm">Cover Image (800x1200, JPEG)</Label>
+						{#if coverImageUrl}
+							<Button variant="ghost" size="sm" onclick={() => resetFile("cover")}>
+								<X class="h-4 w-4" />
+							</Button>
+						{/if}
+					</div>
+					{#if !coverImageUrl}
+						<!-- For cover image -->
+						<UploadDropzone uploader={coverImageUploader}>
+							<ImageIcon slot="upload-icon" class="mt-4 h-6 w-6" />
+							<span slot="label">Drop or click to upload cover image</span>
+						</UploadDropzone>
+					{:else}
+						<div class="flex items-center gap-2 rounded border p-2">
+							<img src={coverImageUrl} alt="Cover preview" class="h-10 w-10 rounded object-cover" />
+							<span class="truncate text-sm">{coverImageUrl}</span>
+						</div>
+					{/if}
+				</div>
+
+				<div class="grid gap-2">
+					<div class="flex items-center justify-between">
+						<Label class="text-sm">Cover Video (MP4, 2:1 ratio)</Label>
+						{#if coverVideoUrl}
+							<Button variant="ghost" size="sm" onclick={() => resetFile("video")}>
+								<X class="h-4 w-4" />
+							</Button>
+						{/if}
+					</div>
+					{#if !coverVideoUrl}
+						<!-- For video -->
+						<UploadDropzone uploader={coverVideoUploader}>
+							<Video slot="upload-icon" class="mt-4 h-6 w-6" />
+							<span slot="label">Drop or click to upload cover video</span>
+						</UploadDropzone>
+					{:else}
+						<div class="flex items-center gap-2 rounded border p-2">
+							<Video class="h-6 w-6" />
+							<span class="truncate text-sm">{coverVideoUrl}</span>
+						</div>
+					{/if}
+				</div>
+			</div>
+		</div>
+
+		<Dialog.Footer>
+			<Button variant="outline" onclick={() => (dialogOpen = false)}>Cancel</Button>
+			<Button
+				onclick={createGame}
+				disabled={isCreating || !name || !category || !description || !domain || !ownerEmail}
+			>
+				{#if isCreating}
+					<Loader2 class="mr-2 h-4 w-4 animate-spin" />
+					Creating...
+				{:else}
+					<Upload class="mr-2 h-4 w-4" />
+					Create Game
+				{/if}
+			</Button>
+		</Dialog.Footer>
+	</Dialog.Content>
+</Dialog.Root>

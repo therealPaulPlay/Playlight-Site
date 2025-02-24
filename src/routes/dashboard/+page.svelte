@@ -22,6 +22,7 @@
 	import { signOut } from "$lib/utils/checkAuthentication";
 	import { goto } from "$app/navigation";
 	import WhitelistDialog from "$lib/components/WhitelistDialog.svelte";
+	import GameCreationDialog from "$lib/components/GameCreationDialog.svelte";
 
 	// State management
 	let selectedTimeframe = $state(30);
@@ -164,10 +165,10 @@
 			</div>
 			<!-- Sidebar scroll container -->
 			<div class="max-h-[calc(100dvh-250px)] overflow-y-auto">
-				<h3 class="text-muted-foreground mb-4 text-sm font-medium">Admin tools</h3>
+				<h3 class="text-muted-foreground mb-4 text-sm font-medium">Admin Tools</h3>
 				{#if $isAdmin}
 					<div class="space-y-2">
-						<Button>Add Game <Plus /></Button>
+						<GameCreationDialog />
 						<WhitelistDialog />
 					</div>
 				{:else}

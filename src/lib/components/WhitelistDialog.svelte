@@ -65,6 +65,7 @@
 			});
 			await response.json();
 			fetchWhitelist();
+			toast("Added entry successfully!");
 		} catch (error) {
 			toast.error("Failed to remove entry from whitelist: " + error);
 		}
@@ -74,7 +75,7 @@
 </script>
 
 <Dialog.Root bind:open={dialogOpen}>
-	<Dialog.Trigger class={buttonVariants({ variant: 'outline' })}>Whitelist <UserCog /></Dialog.Trigger>
+	<Dialog.Trigger class={buttonVariants({ variant: "outline" })}>Whitelist <UserCog /></Dialog.Trigger>
 	<Dialog.Content>
 		<Dialog.Header>
 			<Dialog.Title>Manage Whitelist</Dialog.Title>
@@ -95,11 +96,11 @@
 			</div>
 		</div>
 		<Label>Whitelist</Label>
-		<div class="flex flex-wrap gap-4 py-2 overflow-y-auto overflow-x-visible max-w-full max-h-[30dvh]">
+		<div class="flex max-h-[30dvh] max-w-full flex-wrap gap-4 overflow-x-visible overflow-y-auto py-2">
 			{#if whitelistEntries?.length}
 				{#each whitelistEntries as entry}
 					<div class="flex w-full max-w-full items-center justify-between border">
-						<p class="text-sm px-2 truncate max-w-2/3">{entry.email}</p>
+						<p class="max-w-2/3 truncate px-2 text-sm">{entry.email}</p>
 						<Button variant="outline" onclick={() => removeFromWhitelist(entry.email)}><Trash2 /></Button>
 					</div>
 				{/each}

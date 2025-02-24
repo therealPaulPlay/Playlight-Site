@@ -31,6 +31,7 @@
 		"vite": "^6.0.0"
 	},
 	"dependencies": {
+		"@uploadthing/svelte": "^7.3.0",
 		"chart.js": "^4.4.8",
 		"gsap": "^3.12.7"
 	}

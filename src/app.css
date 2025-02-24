@@ -48,3 +48,7 @@
   font-family: Geist;
   src: url("/fonts/Geist[wght].ttf");
 }
+
+.ut-uploading-state {
+  @apply flex flex-col items-center justify-center p-8 border-2 border-dashed rounded-lg gap-2 hover:bg-gray-50 cursor-pointer transition-colors;
+}
