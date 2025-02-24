@@ -5,7 +5,7 @@
 	import { Label } from "$lib/components/ui/label/index.js";
 	import { Textarea } from "$lib/components/ui/textarea/index.js";
 	import { Select, SelectContent, SelectItem, SelectTrigger } from "$lib/components/ui/select/index.js";
-	import { Gamepad2, Upload, Loader2, Image as ImageIcon, Video, X } from "lucide-svelte";
+	import { Gamepad2, Upload, Loader2, Image as ImageIcon, Video, X, AlertCircle } from "lucide-svelte";
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
 	import { BASE_API_URL } from "$lib/stores/configStore";
 	import { toast } from "svelte-sonner";
@@ -14,6 +14,7 @@
 
 	let dialogOpen = $state(false);
 	let isCreating = $state(false);
+	let isDeleting = $state(false);
 
 	// Form data
 	let name = $state("");
@@ -21,15 +22,25 @@
 	let category = $state("");
 	let description = $state("");
 	let domain = $state("");
+
 	let logoUrl = $state("");
 	let coverImageUrl = $state("");
 	let coverVideoUrl = $state("");
 
-	// Create uploaders for each file type
+	let logoKey = $state("");
+	let coverImageKey = $state("");
+	let coverVideoKey = $state("");
+
+	// Create uploaders for each file type with added validation
 	const logoUploader = createUploader("logoUploader", {
 		url: `${$BASE_API_URL}/uploads/uploadthing`,
+		allowedContent: "",
+		headers: {
+			Authorization: `Bearer ${localStorage.getItem("bearer")}`,
+		},
 		onClientUploadComplete: (res) => {
-			logoUrl = res[0].url;
+			logoUrl = res[0].ufsUrl;
+			logoKey = res[0].key;
 			toast.success("Logo uploaded successfully!");
 		},
 		onUploadError: (error) => {
@@ -39,8 +50,12 @@
 
 	const coverImageUploader = createUploader("coverImageUploader", {
 		url: `${$BASE_API_URL}/uploads/uploadthing`,
+		headers: {
+			Authorization: `Bearer ${localStorage.getItem("bearer")}`,
+		},
 		onClientUploadComplete: (res) => {
-			coverImageUrl = res[0].url;
+			coverImageUrl = res[0].ufsUrl;
+			coverImageKey = res[0].key;
 			toast.success("Cover image uploaded successfully!");
 		},
 		onUploadError: (error) => {
@@ -50,8 +65,12 @@
 
 	const coverVideoUploader = createUploader("coverVideoUploader", {
 		url: `${$BASE_API_URL}/uploads/uploadthing`,
+		headers: {
+			Authorization: `Bearer ${localStorage.getItem("bearer")}`,
+		},
 		onClientUploadComplete: (res) => {
-			coverVideoUrl = res[0].url;
+			coverVideoUrl = res[0].ufsUrl;
+			coverVideoKey = res[0].key;
 			toast.success("Cover video uploaded successfully!");
 		},
 		onUploadError: (error) => {
@@ -109,12 +128,53 @@
 		logoUrl = "";
 		coverImageUrl = "";
 		coverVideoUrl = "";
+		logoKey = "";
+		coverImageKey = "";
+		coverVideoKey = "";
 	}
 
-	function resetFile(type) {
-		if (type === "logo") logoUrl = "";
-		if (type === "cover") coverImageUrl = "";
-		if (type === "video") coverVideoUrl = "";
+	async function resetFile(type) {
+		const fileKey = type === "logo" ? logoKey : type === "cover" ? coverImageKey : coverVideoKey;
+
+		if (!fileKey) return;
+
+		isDeleting = true;
+		try {
+			// Call server endpoint to delete the file
+			const response = await fetchWithErrorHandling(`${$BASE_API_URL}/uploads/utapi/delete-file`, {
+				method: "DELETE",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${localStorage.getItem("bearer")}`,
+				},
+				body: JSON.stringify({
+					id: localStorage.getItem("id"),
+					fileKey: fileKey,
+				}),
+			});
+
+			const result = await response.json();
+
+			if (result.success) {
+				if (type === "logo") {
+					logoUrl = "";
+					logoKey = "";
+				} else if (type === "cover") {
+					coverImageUrl = "";
+					coverImageKey = "";
+				} else if (type === "video") {
+					coverVideoUrl = "";
+					coverVideoKey = "";
+				}
+				toast.success(`${type.charAt(0).toUpperCase() + type.slice(1)} deleted successfully`);
+			} else {
+				throw new Error(result.error || "Failed to delete file");
+			}
+		} catch (error) {
+			toast.error(`Failed to delete file: ${error.message}`);
+		} finally {
+			isDeleting = false;
+		}
 	}
 </script>
 
@@ -179,7 +239,7 @@
 					<div class="flex items-center justify-between">
 						<Label class="text-sm">Logo (500x500, JPEG)</Label>
 						{#if logoUrl}
-							<Button variant="ghost" size="sm" onclick={() => resetFile("logo")}>
+							<Button variant="ghost" size="sm" onclick={() => resetFile("logo")} disabled={isDeleting}>
 								<X class="h-4 w-4" />
 							</Button>
 						{/if}
@@ -188,7 +248,7 @@
 						<!-- For logo -->
 						<UploadDropzone uploader={logoUploader}>
 							<ImageIcon slot="upload-icon" class="mt-4 h-6 w-6" />
-							<span slot="label">Drop or click to upload logo</span>
+							<span slot="label">Drop or click to upload logo (500x500, JPEG only)</span>
 						</UploadDropzone>
 					{:else}
 						<div class="flex items-center gap-2 rounded border p-2">
@@ -202,7 +262,7 @@
 					<div class="flex items-center justify-between">
 						<Label class="text-sm">Cover Image (800x1200, JPEG)</Label>
 						{#if coverImageUrl}
-							<Button variant="ghost" size="sm" onclick={() => resetFile("cover")}>
+							<Button variant="ghost" size="sm" onclick={() => resetFile("cover")} disabled={isDeleting}>
 								<X class="h-4 w-4" />
 							</Button>
 						{/if}
@@ -211,7 +271,7 @@
 						<!-- For cover image -->
 						<UploadDropzone uploader={coverImageUploader}>
 							<ImageIcon slot="upload-icon" class="mt-4 h-6 w-6" />
-							<span slot="label">Drop or click to upload cover image</span>
+							<span slot="label">Drop or click to upload cover image (800x1200, JPEG only)</span>
 						</UploadDropzone>
 					{:else}
 						<div class="flex items-center gap-2 rounded border p-2">
@@ -223,9 +283,9 @@
 
 				<div class="grid gap-2">
 					<div class="flex items-center justify-between">
-						<Label class="text-sm">Cover Video (MP4, 2:1 ratio)</Label>
+						<Label class="text-sm">Cover Video (MP4, 2:3 ratio)</Label>
 						{#if coverVideoUrl}
-							<Button variant="ghost" size="sm" onclick={() => resetFile("video")}>
+							<Button variant="ghost" size="sm" onclick={() => resetFile("video")} disabled={isDeleting}>
 								<X class="h-4 w-4" />
 							</Button>
 						{/if}
@@ -234,7 +294,7 @@
 						<!-- For video -->
 						<UploadDropzone uploader={coverVideoUploader}>
 							<Video slot="upload-icon" class="mt-4 h-6 w-6" />
-							<span slot="label">Drop or click to upload cover video</span>
+							<span slot="label">Drop or click to upload cover video (MP4, 2:3 aspect ratio)</span>
 						</UploadDropzone>
 					{:else}
 						<div class="flex items-center gap-2 rounded border p-2">
@@ -263,3 +323,9 @@
 		</Dialog.Footer>
 	</Dialog.Content>
 </Dialog.Root>
+
+<style>
+	:global([data-ut-element="allowed-content"]) {
+		display: none;
+	}
+</style>
