@@ -89,6 +89,7 @@
 		}
 
 		isCreating = true;
+		const formattedDomain = formatDomain(domain);
 		try {
 			const response = await fetchWithErrorHandling(`${$BASE_API_URL}/game`, {
 				method: "POST",
@@ -102,7 +103,7 @@
 					ownerEmail,
 					category,
 					description,
-					domain: formatDomain(domain),
+					domain: formattedDomain,
 					logoUrl,
 					coverImageUrl,
 					coverVideoUrl,
@@ -307,7 +308,6 @@
 		</div>
 
 		<Dialog.Footer>
-			<Button variant="outline" onclick={() => (dialogOpen = false)}>Cancel</Button>
 			<Button
 				onclick={createGame}
 				disabled={isCreating ||

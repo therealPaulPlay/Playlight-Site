@@ -17,13 +17,14 @@
 	import { isAdmin, username } from "$lib/stores/accountStore";
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
 	import { BASE_API_URL } from "$lib/stores/configStore";
-	import { AlertTriangle, LogOut, Settings, Menu, Plus, ArrowDown } from "lucide-svelte";
+	import { AlertTriangle, LogOut, Settings, Menu, Plus, ArrowDown, Search } from "lucide-svelte";
 	import Chart from "$lib/components/Chart.svelte";
-	import { signOut } from "$lib/utils/checkAuthentication";
 	import { goto } from "$app/navigation";
 	import WhitelistDialog from "$lib/components/WhitelistDialog.svelte";
 	import GameCreationDialog from "$lib/components/GameCreationDialog.svelte";
 	import Label from "$lib/components/ui/label/label.svelte";
+	import AccountSettings from "$lib/components/AccountSettings.svelte";
+	import { formatDomain } from "$lib/utils/formatDomain";
 
 	// State management
 	let statTimeframe = $state(7);
@@ -37,6 +38,7 @@
 
 	let page = $state(1);
 	let passwordInput = $state("");
+	let gameSearchTerm = $state();
 
 	// Fetch sites and initial stats
 	onMount(async () => {
@@ -46,17 +48,14 @@
 	async function fetchGames() {
 		try {
 			const response = await fetchWithErrorHandling(
-				`${$BASE_API_URL}/game/${localStorage.getItem("id")}?page=${page}`,
+				`${$BASE_API_URL}/game/${localStorage.getItem("id")}?page=${page}${gameSearchTerm ? "&search=" + gameSearchTerm : ""}`,
 				{
 					headers: { Authorization: `Bearer ${localStorage.getItem("bearer")}` },
 				},
 			);
 			const data = await response.json();
 			games = [...games, ...data?.games];
-			if (games.length > 0) {
-				selectedGame = games[0];
-				await fetchStats();
-			}
+			if (games.length > 0) selectedGame = games[0];
 		} catch (error) {
 			toast.error("Failed to load games: " + error);
 		}
@@ -91,7 +90,7 @@
 				body: JSON.stringify({ id: localStorage.getItem("id"), password: passwordInput }),
 			});
 			games = games.filter((site) => site.id !== selectedGame.id);
-			if (selectedGame == null) selectedGame = games[0];
+			selectedGame = undefined;
 			showDeleteDialog = false;
 			passwordInput = "";
 			toast.success("Site removed successfully");
@@ -102,17 +101,18 @@
 
 	async function handleDomainUpdate() {
 		try {
-			const game = selectedGame;
-			game.domain = newDomain;
+			const game = { ...selectedGame };
+			game.domain = formatDomain(newDomain);
+			game.id = undefined;
 			await fetchWithErrorHandling(`${$BASE_API_URL}/game/${selectedGame.id}`, {
 				method: "PUT",
 				headers: {
 					"Content-Type": "application/json",
 					Authorization: `Bearer ${localStorage.getItem("bearer")}`,
 				},
-				body: JSON.stringify({ ...game, password: passwordInput }),
+				body: JSON.stringify({ ...game, password: passwordInput, id: localStorage.getItem("id") }),
 			});
-			selectedGame.domain = newDomain;
+			selectedGame.domain = game.domain;
 			showDomainDialog = false;
 			passwordInput = "";
 			toast.success("Domain updated successfully!");
@@ -125,7 +125,7 @@
 	let series = $state([]);
 
 	$effect(() => {
-		if (statTimeframe && selectedGame) fetchStats();
+		if (statTimeframe && selectedGame && games.length) fetchStats();
 	});
 
 	let showSidebar = $state(false);
@@ -161,13 +161,7 @@
 		<div class="flex flex-col border-t border-r p-4">
 			<div class="mb-8 flex items-center justify-between">
 				<h2 class="max-w-full truncate text-lg font-semibold">Hey, {$username}!</h2>
-				<Button
-					variant="ghost"
-					onclick={() => {
-						signOut();
-						goto("/");
-					}}><LogOut /></Button
-				>
+				<AccountSettings />
 			</div>
 			<!-- Sidebar scroll container -->
 			<div class="max-h-[calc(100dvh-250px)] overflow-y-auto">
@@ -184,6 +178,30 @@
 				{/if}
 				<h3 class="text-muted-foreground mt-4 mb-4 text-sm font-medium">{$isAdmin ? "All Games" : "Your Games"}</h3>
 				<div class="space-y-2">
+					<search class="flex gap-2">
+						<Input
+							type="text"
+							placeholder="Search for game..."
+							class="focus-visible:ring-0"
+							bind:value={gameSearchTerm}
+							onkeypress={(e) => {
+								if (e.key == "Enter") {
+									e.preventDefault();
+									page = 1;
+									games = [];
+									fetchGames();
+								}
+							}}
+						/>
+						<Button
+							variant="outline"
+							onclick={() => {
+								page = 1;
+								games = [];
+								fetchGames();
+							}}><Search /></Button
+						>
+					</search>
 					{#if games.length}
 						{#each games as game}
 							<Button
@@ -198,7 +216,7 @@
 							</Button>
 						{/each}
 					{:else}
-						<Button variant="outline" class="w-full justify-start">No games connected.</Button>
+						<Button variant="outline" class="w-full justify-start">No games found.</Button>
 					{/if}
 					{#if games?.length > 50 && games?.length % 50 == 0}
 						<Button
@@ -321,7 +339,6 @@
 		<Label for="password" class="-mb-2">Password</Label>
 		<Input type="password" placeholder="password" bind:value={passwordInput} />
 		<DialogFooter>
-			<Button variant="outline" class="cursor-pointer" onclick={() => (showDeleteDialog = false)}>Cancel</Button>
 			<Button variant="destructive" onclick={handleDelete}>Remove Site</Button>
 		</DialogFooter>
 	</DialogContent>
@@ -340,7 +357,6 @@
 		<Label for="domain" class="mt-2 -mb-2">Domain</Label>
 		<Input type="text" id="domain" placeholder="new-domain.com" bind:value={newDomain} />
 		<DialogFooter>
-			<Button variant="outline" class="cursor-pointer" onclick={() => (showDomainDialog = false)}>Cancel</Button>
 			<Button onclick={handleDomainUpdate}>Update Domain</Button>
 		</DialogFooter>
 	</DialogContent>

@@ -59,7 +59,6 @@
 					localStorage.setItem("id", data.id);
 					username.set(data.userName);
 					checkAuthenticationStatus();
-					toast.success("Successfully logged in!");
 					goto("/dashboard");
 					break;
 				}

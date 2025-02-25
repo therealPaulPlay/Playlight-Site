@@ -3,6 +3,7 @@ import { fetchWithErrorHandling } from "./fetchWithErrorHandling";
 import { BASE_API_URL } from "$lib/stores/configStore";
 import { get } from "svelte/store";
 import { toast } from "svelte-sonner";
+import { goto } from "$app/navigation";
 
 export async function getUser() {
     try {
@@ -67,7 +68,10 @@ function isTokenExpired(token) {
     try {
         const { exp } = JSON.parse(jsonPayload);
         const expired = Date.now() >= exp * 1000;
-        if (expired) toast.error("Your session has expired. Please log in again.");
+        if (expired) {
+            goto("/login");
+            toast.warning("Your session has expired. Please log in again.");
+        }
         return expired;
     } catch {
         return false;
