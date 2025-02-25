@@ -25,6 +25,7 @@
 	import Label from "$lib/components/ui/label/label.svelte";
 	import AccountSettings from "$lib/components/AccountSettings.svelte";
 	import { formatDomain } from "$lib/utils/formatDomain";
+	import FileCleanupDialog from "$lib/components/FileCleanupDialog.svelte";
 
 	// State management
 	let statTimeframe = $state(7);
@@ -170,6 +171,7 @@
 					<div class="space-y-2">
 						<GameCreationDialog />
 						<WhitelistDialog />
+                        <FileCleanupDialog />
 					</div>
 				{:else}
 					<p class="text-muted-foreground bg-muted p-2 text-sm italic">

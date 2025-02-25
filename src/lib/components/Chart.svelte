@@ -1,13 +1,32 @@
 <script>
 	import { onMount, onDestroy } from "svelte";
 	import Chart from "chart.js/auto";
+	import { AlertCircle } from "lucide-svelte";
 
 	let { chartOptions, series, type = "line" } = $props();
 	let canvas;
 	let chartInstance;
+	let hasData = $state(true);
+
+	function checkIfHasData() {
+		// Check if series exists and has data
+		return series && Array.isArray(series) && series.length > 0 && series.some((s) => s.data && s.data.length > 0);
+	}
 
 	function setupChart() {
 		if (!canvas) return;
+
+		// Check if we have data to display
+		hasData = checkIfHasData();
+
+		// If no data, don't create chart
+		if (!hasData) {
+			if (chartInstance) {
+				chartInstance.destroy();
+				chartInstance = null;
+			}
+			return;
+		}
 
 		// Destroy existing chart if it exists
 		if (chartInstance) chartInstance.destroy();
@@ -60,7 +79,7 @@
 
 	// Watch for changes in props
 	$effect(() => {
-		if (series && chartOptions) {
+		if (series !== undefined || chartOptions !== undefined) {
 			setupChart();
 		}
 	});
@@ -70,6 +89,13 @@
 	});
 </script>
 
-<div class="h-[400px] w-full">
-	<canvas bind:this={canvas}></canvas>
+<div class="relative h-[400px] w-full">
+	<canvas bind:this={canvas} class={!hasData ? "hidden" : ""}></canvas>
+
+	{#if !hasData}
+		<div class="absolute inset-0 flex flex-col items-center justify-center text-muted-foreground">
+			<AlertCircle size={48} />
+			<p class="mt-2 text-lg font-medium">No data available yet.</p>
+		</div>
+	{/if}
 </div>

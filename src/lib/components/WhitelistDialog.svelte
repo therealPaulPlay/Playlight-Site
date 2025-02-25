@@ -86,7 +86,7 @@
 		<div class="grid gap-4 py-4">
 			<div class="flex flex-wrap items-center gap-2">
 				<Label for="email">Add Email</Label>
-				<div class="flex w-full items-center gap-4">
+				<div class="flex w-full items-center gap-2">
 					<Input id="email" placeholder="example.user@email.com" class="grow-1" bind:value={addEmail} />
 					<Button
 						disabled={!Boolean(addEmail)}

@@ -28,6 +28,8 @@
 				}),
 			});
 			toast.success("Account deleted.");
+			signOut();
+			goto("/");
 		} catch (error) {
 			toast.error("Failed to delete account: " + error);
 		}
@@ -71,17 +73,9 @@
 		<Input class="w-full" id="password" type="password" placeholder="password" bind:value={password} />
 		<Dialog.Footer>
 			<Button
-				variant="outline"
-				onclick={() => {
-					deleteDialogOpen = false;
-				}}>Close</Button
-			>
-			<Button
 				variant="destructive"
 				onclick={async () => {
 					await deleteAccount();
-					signOut();
-					goto("/");
 				}}
 				>Delete
 			</Button>
