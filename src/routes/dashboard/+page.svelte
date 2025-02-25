@@ -318,7 +318,7 @@
 			</Card>
 		{:else}
 			<div class="flex h-full items-center justify-center">
-				<p class="text-muted-foreground">No sites connected yet.</p>
+				<p class="text-muted-foreground">No games connected yet.</p>
 			</div>
 		{/if}
 	</div>
