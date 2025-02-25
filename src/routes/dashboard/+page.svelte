@@ -154,7 +154,7 @@
 	<!-- Sidebar -->
 	<div
 		data-sidebar
-		class="bg-card fixed left-0 z-40 min-h-full w-64 transition-transform duration-200 ease-in-out md:relative md:translate-x-0 {showSidebar
+		class="bg-card fixed left-0 z-40 min-h-full w-72 max-w-72 overflow-x-hidden transition-transform duration-200 ease-in-out md:relative md:translate-x-0 {showSidebar
 			? 'translate-x-0'
 			: '-translate-x-full'}"
 	>
@@ -212,11 +212,13 @@
 									if (window.innerWidth < 768) showSidebar = false;
 								}}
 							>
-								{game.domain}
+								<p class="truncate">{game.domain}</p>
 							</Button>
 						{/each}
 					{:else}
-						<Button variant="outline" class="w-full justify-start">No games found.</Button>
+						<Button variant="outline" class="w-full max-w-full justify-start truncate"
+							><p class="truncate">No games found.</p></Button
+						>
 					{/if}
 					{#if games?.length > 50 && games?.length % 50 == 0}
 						<Button
