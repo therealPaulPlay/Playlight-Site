@@ -2,7 +2,7 @@
 Indies, unite. Playlight is the best way to get your game seen.
 
 ## Backend
-Looking for the backend code? It is available [here](https://github.com/therealPaulPlay/Playlight-Backend).
+Looking for the backend? It is available [here](https://github.com/therealPaulPlay/Playlight-Backend).
 
 ## SDK
 Looking for the SDK? It is available [here](https://github.com/therealPaulPlay/Playlight-SDK).
