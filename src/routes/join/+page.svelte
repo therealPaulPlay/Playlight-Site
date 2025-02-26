@@ -72,7 +72,7 @@
 					</div>
 
 					<div class="space-y-2">
-						<Label for="website">Game Website</Label>
+						<Label for="website">Website</Label>
 						<Input type="url" id="website" placeholder="https://yourgame.com" bind:value={formData.website} required />
 					</div>
 
