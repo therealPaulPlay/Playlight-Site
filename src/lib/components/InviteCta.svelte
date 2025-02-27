@@ -18,11 +18,16 @@
 
 <!-- Final CTA banner -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
+<!-- svelte-ignore a11y_click_events_have_key_events -->
 <section
-	class="h-120 w-full px-6 py-12 text-center my-10 sm:h-100"
+	class="my-10 h-120 w-full px-6 py-12 text-center sm:h-100"
 	onmouseenter={handleFlip}
 	onmouseleave={handleFlip}
-	ontouchstart={handleFlip}
+	onclick={(event) => {
+		if (event.pointerType === "touch") {
+			handleFlip();
+		}
+	}}
 >
 	<div class="perspective-1000 relative mx-auto h-full max-w-xl">
 		<!-- Card container with fixed height and 3D transform -->
@@ -52,7 +57,7 @@
 				<div class="my-6 border-t border-dashed"></div>
 
 				<p class="text-muted-foreground mb-6">
-					Draw your audience in with Playlight, and shine a spotlight on the best indie experiences—yours included.
+					Draw your audience in with Playlight, and shine a light on the best indie experiences—yours included.
 				</p>
 				<div>
 					<Button class="px-8 py-3 font-semibold" href="/join">Join Playlight</Button>

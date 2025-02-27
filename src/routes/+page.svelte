@@ -125,7 +125,7 @@
 					<CircleX />
 				</div>
 				<h3 class="mb-4 max-w-3/4 truncate text-lg font-semibold">Centralized</h3>
-				<div class="relative mt-8 flex h-50 items-center justify-center">
+				<div class="relative mt-8 flex h-50 items-center justify-center max-md:max-w-54 mx-auto">
 					<!-- Platform Mockup 1 -->
 					<div
 						class="bg-background/90 absolute w-full max-w-[280px] translate-x-1.5 translate-y-2 -rotate-3 p-4 shadow-md"
@@ -161,7 +161,7 @@
 					<CircleCheck />
 				</div>
 				<h3 class="mb-4 max-w-3/4 truncate text-lg font-semibold">Decentralized</h3>
-				<svg class="h-4/5 w-full" viewBox="0 0 210 210">
+				<svg class="h-4/5 w-full max-md:max-w-52 mx-auto" viewBox="0 0 210 210">
 					<circle cx="105" cy="105" r="105" filter="url(#shadow)"></circle>
 					<filter id="shadow" filterUnits="userSpaceOnUse" x="-20" y="-20" width="250" height="250">
 						<feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="black" flood-opacity="0.5" />
