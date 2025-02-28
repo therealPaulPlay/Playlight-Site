@@ -125,7 +125,7 @@
 					<CircleX />
 				</div>
 				<h3 class="mb-4 max-w-3/4 truncate text-lg font-semibold">Centralized</h3>
-				<div class="relative mt-8 flex h-50 items-center justify-center max-md:max-w-54 mx-auto">
+				<div class="relative mx-auto mt-8 flex h-50 items-center justify-center max-md:max-w-54">
 					<!-- Platform Mockup 1 -->
 					<div
 						class="bg-background/90 absolute w-full max-w-[280px] translate-x-1.5 translate-y-2 -rotate-3 p-4 shadow-md"
@@ -161,7 +161,7 @@
 					<CircleCheck />
 				</div>
 				<h3 class="mb-4 max-w-3/4 truncate text-lg font-semibold">Decentralized</h3>
-				<svg class="h-4/5 w-full max-md:max-w-52 mx-auto" viewBox="0 0 210 210">
+				<svg class="mx-auto h-4/5 w-full max-md:max-w-52" viewBox="0 0 210 210">
 					<circle cx="105" cy="105" r="105" filter="url(#shadow)"></circle>
 					<filter id="shadow" filterUnits="userSpaceOnUse" x="-20" y="-20" width="250" height="250">
 						<feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="black" flood-opacity="0.5" />
@@ -287,7 +287,7 @@
 		<div class="bg-card min-w-[320px] flex-1 p-8">
 			<h2 class="mb-6 text-3xl font-bold">Smart recommendations.</h2>
 			<p class="text-muted-foreground text-lg leading-relaxed">
-				Keep players engaged with intelligent game suggestions. The <span class="text-foreground">algorithm</span>
+				Keep players engaged with intelligent game suggestions. The <span class="text-foreground">SDK</span>
 				identifies <span class="text-foreground">key moments</span> when players are most receptive to new experiences,
 				like when they're <span class="text-foreground">about to leave</span>, and presents them with
 				<span class="text-foreground">carefully curated options</span> that match their interests and playing style.
@@ -396,12 +396,13 @@
 		<div class="bg-card min-w-[320px] flex-1 p-8">
 			<h2 class="mb-6 text-3xl font-bold">Start in seconds.</h2>
 			<p class="text-muted-foreground text-lg leading-relaxed">
-				Get up and running with just a single line of code. No complicated setup, no lengthy contracts - just
-				<span class="text-foreground">pure simplicity</span>.
+				No complicated setup, no lengthy contracts - just
+				<span class="text-foreground">pure simplicity</span>. There's no lock-in period, no complicated terms - your
+				success is what keeps us together, not legal bindings.
 			</p>
 			<p class="text-muted-foreground mt-4 text-lg leading-relaxed">
-				We believe in <span class="text-foreground">freedom and flexibility</span>. There's no lock-in period, no
-				complicated terms - your success is what keeps us together, not legal bindings.
+				We believe in <span class="text-foreground">freedom and flexibility</span>. That is why all parts of Playlight
+				are open-source and available on Github.
 			</p>
 		</div>
 	</section>
