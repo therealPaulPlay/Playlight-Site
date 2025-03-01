@@ -3,6 +3,11 @@
 	import { Tabs, TabsContent, TabsList, TabsTrigger } from "$lib/components/ui/tabs";
 	import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "$lib/components/ui/card";
 	import { Copy, Check, Code2, Sliders, Rocket, ExternalLink } from "lucide-svelte";
+	import { onMount } from "svelte";
+	import Prism from "prismjs";
+    import 'prism-themes/themes/prism-vsc-dark-plus.css';
+	import "prismjs/components/prism-markup";
+	import "prismjs/components/prism-javascript";
 
 	// Code examples stored as arrays of lines to avoid template parsing issues
 	const basicExampleLines = [
@@ -15,6 +20,7 @@
 	];
 
 	const configExampleLines = [
+		"<script>",
 		"  // Initialize the SDK with custom configuration",
 		"  window.PlaylightSDK.init({",
 		"    button: {",
@@ -25,6 +31,7 @@
 		"      enabled: true",
 		"    }",
 		"  });",
+		"<\/script>",
 	];
 
 	// Function to copy code to clipboard
@@ -46,6 +53,27 @@
 			copyIcon.classList.remove("hidden");
 		}, 2000);
 	}
+
+	// Apply syntax highlighting
+	onMount(() => {
+		// Get all code blocks and add appropriate class
+		document.querySelectorAll("pre").forEach((pre) => {
+			// Add language class
+			pre.classList.add("language-markup");
+
+			// Wrap content in code tag if not already
+			if (!pre.querySelector("code")) {
+				const code = document.createElement("code");
+				code.classList.add("language-markup");
+				code.innerHTML = pre.innerHTML;
+				pre.innerHTML = "";
+				pre.appendChild(code);
+			}
+		});
+
+		// Trigger Prism highlighting
+		Prism.highlightAll();
+	});
 </script>
 
 <svelte:head>
