@@ -104,7 +104,7 @@
 			</p>
 
 			<!-- Quick Start Card -->
-			<Card class="border-primary/20 mb-8 border">
+			<Card class="mb-8">
 				<CardHeader>
 					<CardTitle>Quick Start</CardTitle>
 					<CardDescription
