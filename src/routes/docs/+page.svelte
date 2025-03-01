@@ -104,7 +104,7 @@
 			</p>
 
 			<!-- Quick Start Card -->
-			<Card class="border-primary/20 mb-8">
+			<Card class="border-primary/20 mb-8 border">
 				<CardHeader>
 					<CardTitle>Quick Start</CardTitle>
 					<CardDescription
@@ -114,7 +114,7 @@
 				<CardContent>
 					<div class="code-block bg-muted relative overflow-hidden rounded-md">
 						<button
-							class="bg-muted/80 absolute top-2 right-2 cursor-pointer rounded-md p-1 backdrop-blur"
+							class="absolute top-2 right-2 cursor-pointer rounded-md p-1"
 							onclick={copyCode}
 						>
 							<Copy class="copy-icon text-muted-foreground hover:text-foreground h-4 w-4" />
@@ -157,7 +157,7 @@
 						<CardContent>
 							<div class="code-block bg-muted relative overflow-hidden rounded-md">
 								<button
-									class="bg-muted/80 backdrop-blu absolute top-2 right-2 cursor-pointer rounded-md p-1"
+									class="absolute top-2 right-2 cursor-pointer rounded-md p-1"
 									onclick={copyCode}
 								>
 									<Copy class="copy-icon text-muted-foreground hover:text-foreground h-4 w-4" />
@@ -260,8 +260,8 @@
 						<div>
 							<h3 class="mb-2 text-lg font-semibold">init(config)</h3>
 							<p class="text-muted-foreground mb-2">Initializes the Playlight SDK with the provided configuration.</p>
-							<Card class="border-muted">
-								<CardContent class="p-4">
+							<Card>
+								<CardContent class="p-4 border">
 									<p class="text-sm">
 										<span class="font-medium">Parameters:</span> <code class="text-primary">config</code> (optional) - Configuration
 										object
@@ -273,8 +273,8 @@
 						<div>
 							<h3 class="mb-2 text-lg font-semibold">setDiscovery(visible)</h3>
 							<p class="text-muted-foreground mb-2">Programmatically show or hide the discovery UI.</p>
-							<Card class="border-muted">
-								<CardContent class="p-4">
+							<Card>
+								<CardContent class="p-4 border">
 									<p class="text-sm">
 										<span class="font-medium">Parameters:</span> <code class="text-primary">visible</code> - Boolean to show
 										or hide the discovery UI
