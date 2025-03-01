@@ -3,7 +3,7 @@
 	import Spotlight from "$lib/components/Spotlight.svelte";
 	import Button from "$lib/components/ui/button/button.svelte";
 	import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "$lib/components/ui/card";
-	import { CircleCheck, CircleX, Search } from "lucide-svelte";
+	import { ArrowRight, CircleCheck, CircleX, Search } from "lucide-svelte";
 	import { onMount } from "svelte";
 	import { blur, fly } from "svelte/transition";
 	import gsap from "gsap";
@@ -396,14 +396,16 @@
 		<div class="bg-card min-w-[320px] flex-1 p-8">
 			<h2 class="mb-6 text-3xl font-bold">Start in seconds.</h2>
 			<p class="text-muted-foreground text-lg leading-relaxed">
-				No complicated setup, no lengthy contracts - just
-				<span class="text-foreground">pure simplicity</span>. There's no lock-in period, no complicated terms - your
-				success is what keeps us together, not legal bindings.
+				No complicated setup, no lengthy contracts - just pure simplicity. There are no lock-in terms -
+				<span class="text-foreground">your success is what keeps us together</span>, not legal bindings.
 			</p>
 			<p class="text-muted-foreground mt-4 text-lg leading-relaxed">
 				We believe in <span class="text-foreground">freedom and flexibility</span>. That is why all parts of Playlight
-				are open-source and available on Github.
+				are <span class="text-foreground">open source</span>.
 			</p>
+			<a class="text-foreground mt-4 flex w-fit items-center gap-1 text-lg hover:underline" href="/docs"
+				>Read the docs <ArrowRight size={20} style="margin-top: 1px;" /></a
+			>
 		</div>
 	</section>
 
