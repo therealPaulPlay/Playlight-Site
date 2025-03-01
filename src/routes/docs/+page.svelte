@@ -96,7 +96,7 @@
 		<section class="mb-12">
 			<div class="mb-4 flex items-center gap-2">
 				<Rocket class="text-primary h-6 w-6" />
-				<h2 class="text-2xl font-bold">Getting Started</h2>
+				<h2 class="text-2xl font-bold">Getting started</h2>
 			</div>
 			<p class="text-muted-foreground mb-6">
 				Integrating Playlight into your game is simple. Just include the SDK script and initialize it with your
@@ -106,7 +106,7 @@
 			<!-- Quick Start Card -->
 			<Card class="mb-8">
 				<CardHeader>
-					<CardTitle>Quick Start</CardTitle>
+					<CardTitle>Quick start</CardTitle>
 					<CardDescription
 						>Add this code to your HTML page to get started with the default configuration.</CardDescription
 					>
@@ -135,10 +135,10 @@
 		<section class="mb-12">
 			<div class="mb-4 flex items-center gap-2">
 				<Sliders class="text-primary h-6 w-6" />
-				<h2 class="text-2xl font-bold">Configuration Options</h2>
+				<h2 class="text-2xl font-bold">Configuration</h2>
 			</div>
 			<p class="text-muted-foreground mb-6">
-				Customize the behavior and appearance of the Playlight integration with these configuration options.
+				Customize the behavior and appearance of the Playlight integration.
 			</p>
 
 			<Tabs value="configuration" class="mb-8">
@@ -151,7 +151,7 @@
 				<TabsContent value="configuration">
 					<Card>
 						<CardHeader>
-							<CardTitle>Configuration Object</CardTitle>
+							<CardTitle>Configuration object</CardTitle>
 							<CardDescription>The SDK can be initialized with an optional configuration object.</CardDescription>
 						</CardHeader>
 						<CardContent>
@@ -183,7 +183,7 @@
 				<TabsContent value="button">
 					<Card>
 						<CardHeader>
-							<CardTitle>Button Options</CardTitle>
+							<CardTitle>Button options</CardTitle>
 							<CardDescription>Configure the position and visibility of the Playlight button.</CardDescription>
 						</CardHeader>
 						<CardContent>
@@ -214,7 +214,7 @@
 				<TabsContent value="exitIntent">
 					<Card>
 						<CardHeader>
-							<CardTitle>Exit Intent</CardTitle>
+							<CardTitle>Exit intent</CardTitle>
 							<CardDescription>
 								Configure the exit intent feature, which shows the discovery UI when users are about to leave.
 							</CardDescription>
@@ -246,7 +246,7 @@
 		<section class="mb-12">
 			<div class="mb-4 flex items-center gap-2">
 				<Code2 class="text-primary h-6 w-6" />
-				<h2 class="text-2xl font-bold">API Reference</h2>
+				<h2 class="text-2xl font-bold">API reference</h2>
 			</div>
 			<p class="text-muted-foreground mb-6">Control the Playlight discovery UI programmatically with these methods.</p>
 
@@ -289,7 +289,7 @@
 
 		<!-- Best Practices -->
 		<section class="mb-12">
-			<h2 class="mb-4 text-2xl font-bold">Best Practices</h2>
+			<h2 class="mb-4 text-2xl font-bold">Best practices</h2>
 			<div class="space-y-4">
 				<Card>
 					<CardHeader>
@@ -309,7 +309,7 @@
 
 				<Card>
 					<CardHeader>
-						<CardTitle class="text-base">Exit Intent</CardTitle>
+						<CardTitle class="text-base">Exit intent</CardTitle>
 					</CardHeader>
 					<CardContent>
 						<ul class="text-muted-foreground list-disc space-y-2 pl-5 text-sm">
@@ -322,7 +322,7 @@
 
 				<Card>
 					<CardHeader>
-						<CardTitle class="text-base">Button Placement</CardTitle>
+						<CardTitle class="text-base">Button placement</CardTitle>
 					</CardHeader>
 					<CardContent>
 						<ul class="text-muted-foreground list-disc space-y-2 pl-5 text-sm">
@@ -339,7 +339,7 @@
 		<section class="mb-12">
 			<Card class="bg-muted">
 				<CardHeader>
-					<CardTitle>Found an Issue?</CardTitle>
+					<CardTitle>Found an issue?</CardTitle>
 					<CardDescription>Report bugs or suggest improvements to the Playlight SDK.</CardDescription>
 				</CardHeader>
 				<CardContent>
