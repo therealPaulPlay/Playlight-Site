@@ -5,16 +5,16 @@
 	import { Copy, Check, Code2, Sliders, Rocket, ExternalLink } from "lucide-svelte";
 	import { onMount } from "svelte";
 	import Prism from "prismjs";
-    import 'prism-themes/themes/prism-vsc-dark-plus.css';
+	import "prism-themes/themes/prism-vsc-dark-plus.css";
 	import "prismjs/components/prism-markup";
 	import "prismjs/components/prism-javascript";
 
 	// Code examples stored as arrays of lines to avoid template parsing issues
 	const basicExampleLines = [
 		"<!-- Include the Playlight SDK -->",
-		'<script src="https://cdn.playlight.dev/sdk/latest/playlight-sdk.iife.js"><\/script>',
+		'<script src="https://sdk.playlight.dev/playlight-sdk.iife.js"><\/script>',
 		"<script>",
-		"  // Initialize the SDK",
+		"  // Initialize the SDK (async)",
 		"  window.PlaylightSDK.init();",
 		"<\/script>",
 	];
@@ -113,10 +113,7 @@
 				</CardHeader>
 				<CardContent>
 					<div class="code-block bg-muted relative overflow-hidden rounded-md">
-						<button
-							class="absolute top-2 right-2 cursor-pointer rounded-md p-1"
-							onclick={copyCode}
-						>
+						<button class="absolute top-2 right-2 cursor-pointer rounded-md p-1" onclick={copyCode}>
 							<Copy class="copy-icon text-muted-foreground hover:text-foreground h-4 w-4" />
 							<Check class="check-icon hidden h-4 w-4 text-green-500" />
 						</button>
@@ -137,9 +134,7 @@
 				<Sliders class="text-primary h-6 w-6" />
 				<h2 class="text-2xl font-bold">Configuration</h2>
 			</div>
-			<p class="text-muted-foreground mb-6">
-				Customize the behavior and appearance of the Playlight integration.
-			</p>
+			<p class="text-muted-foreground mb-6">Customize the behavior and appearance of the Playlight integration.</p>
 
 			<Tabs value="configuration" class="mb-8">
 				<TabsList class="mb-6">
@@ -156,10 +151,7 @@
 						</CardHeader>
 						<CardContent>
 							<div class="code-block bg-muted relative overflow-hidden rounded-md">
-								<button
-									class="absolute top-2 right-2 cursor-pointer rounded-md p-1"
-									onclick={copyCode}
-								>
+								<button class="absolute top-2 right-2 cursor-pointer rounded-md p-1" onclick={copyCode}>
 									<Copy class="copy-icon text-muted-foreground hover:text-foreground h-4 w-4" />
 									<Check class="check-icon hidden h-4 w-4 text-green-500" />
 								</button>
@@ -261,7 +253,7 @@
 							<h3 class="mb-2 text-lg font-semibold">init(config)</h3>
 							<p class="text-muted-foreground mb-2">Initializes the Playlight SDK with the provided configuration.</p>
 							<Card>
-								<CardContent class="p-4 border">
+								<CardContent class="border p-4">
 									<p class="text-sm">
 										<span class="font-medium">Parameters:</span> <code class="text-primary">config</code> (optional) - Configuration
 										object
@@ -274,7 +266,7 @@
 							<h3 class="mb-2 text-lg font-semibold">setDiscovery(visible)</h3>
 							<p class="text-muted-foreground mb-2">Programmatically show or hide the discovery UI.</p>
 							<Card>
-								<CardContent class="p-4 border">
+								<CardContent class="border p-4">
 									<p class="text-sm">
 										<span class="font-medium">Parameters:</span> <code class="text-primary">visible</code> - Boolean to show
 										or hide the discovery UI
