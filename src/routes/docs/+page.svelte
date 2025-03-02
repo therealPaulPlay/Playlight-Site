@@ -12,27 +12,35 @@
 	// Code examples stored as arrays of lines to avoid template parsing issues
 	const esModuleExampleLines = [
 		"<!-- ES Module Import (Modern) -->",
+		`<link rel="stylesheet" href="https://sdk.playlight.dev/playlight-sdk.css" media="print" onload="this.media='all'">`,
 		'<script type="module">',
-		'  import playlightSDK from "https://sdk.playlight.dev/playlight-sdk.es.js";',
-		"  ",
-		"  // Initialize the SDK (async)",
-		"  await playlightSDK.init();",
+		'  try {',
+		'    const module = await import("https://sdk.playlight.dev/playlight-sdk.es.js");',
+		'    const playlightSDK = module.default;',
+		'    await playlightSDK.init();',
+		'  } catch (error) {',
+		'    console.error("Error loading the Playlight SDK:", error);',
+		'  }',
 		"<\/script>",
 	];
 
 	const iifeExampleLines = [
 		"<!-- IIFE Import (Legacy) -->",
+		'<link rel="stylesheet" href="https://sdk.playlight.dev/playlight-sdk.css">',
 		'<script src="https://sdk.playlight.dev/playlight-sdk.iife.js"><\/script>',
 		"<script>",
-		"  // Initialize the SDK (async)",
-		"  window.playlightSDK.init();",
+		"  try {",
+		"    window.playlightSDK.init();",
+		"  } catch (error) {",
+		"    console.error('Error initializing the Playlight SDK:', error);", 
+		"  }",
 		"<\/script>",
 	];
 
 	const configExampleLines = [
 		"<script>",
-		"  // Initialize the SDK with custom configuration (here, the module version)",
-		"  playlightSDK.init({",
+		"  // ...Load the SDK etc.",
+		"  await playlightSDK.init({",
 		"    button: {",
 		"      position: 'bottom-right',",
 		"      visible: true",
@@ -114,7 +122,7 @@
 			</p>
 
 			<!-- Quick Start Card -->
-			<Card class="mb-8">
+			<Card>
 				<CardHeader>
 					<CardTitle>Quick start</CardTitle>
 					<CardDescription>Choose your preferred method to add Playlight to your project.</CardDescription>
@@ -137,8 +145,7 @@
 							<div class="mt-4">
 								<p class="text-muted-foreground text-sm">
 									The modern ES module approach is recommended for new projects and frameworks. This method supports
-									tree-shaking and more efficient bundling. This is all you need to add Playlight with the default
-									settings.
+									tree-shaking and more efficient bundling.
 								</p>
 							</div>
 						</TabsContent>
@@ -153,14 +160,16 @@
 							</div>
 							<div class="mt-4">
 								<p class="text-muted-foreground text-sm">
-									The IIFE approach works well for legacy projects or when broader browser compatibility is needed. This
-									is all you need to add Playlight with the default settings.
+									The IIFE approach works well for legacy projects or when broader browser compatibility is needed.
 								</p>
 							</div>
 						</TabsContent>
 					</Tabs>
 				</CardContent>
 			</Card>
+			<div class="bg-muted text-muted-foreground mb-8 p-4">
+				<p>Congrats! This is all you need to integrate Playlight with its default settings.</p>
+			</div>
 		</section>
 
 		<!-- Configuration Options -->

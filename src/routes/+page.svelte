@@ -96,10 +96,36 @@
 
 		observer.observe(statsSection);
 	});
+
+	// Load the SDK for demo
+	let playlightSDK;
+
+	onMount(async () => {
+		try {
+			const module = await import("https://sdk.playlight.dev/playlight-sdk.es.js");
+			playlightSDK = module.default;
+			await playlightSDK.init({
+				button: {
+					visible: false,
+				},
+				exitIntent: {
+					enabled: false,
+				},
+			});
+		} catch (error) {
+			console.error("Error loading the Playlight SDK:", error);
+		}
+	});
 </script>
 
 <svelte:head>
 	<title>Playlight - A discovery platform, built into your game</title>
+	<link
+		rel="stylesheet"
+		href="https://sdk.playlight.dev/playlight-sdk.css"
+		media="print"
+		onload={(e) => (e.target.media = "all")}
+	/>
 </svelte:head>
 
 <main class="flex min-h-screen w-full flex-col">
@@ -111,7 +137,13 @@
 			<p class="text-muted-foreground mb-8 text-lg" in:blur>A discovery platform, built right into your own site.</p>
 			<div class="align-center mx-auto flex max-w-40 flex-col justify-center">
 				<Button class="pointer-events-auto mb-4 px-6 py-3 font-semibold" href="/join">Join Playlight</Button>
-				<Button class="pointer-events-auto mb-4 px-6 py-3 font-semibold" variant="outline">Launch Demo</Button>
+				<Button
+					class="pointer-events-auto mb-4 px-6 py-3 font-semibold"
+					variant="outline"
+					onclick={() => {
+						playlightSDK?.setDiscovery(true);
+					}}>Launch Demo</Button
+				>
 			</div>
 		</div>
 	</section>
