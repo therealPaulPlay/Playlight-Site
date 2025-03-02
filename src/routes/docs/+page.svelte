@@ -10,19 +10,29 @@
 	import "prismjs/components/prism-javascript";
 
 	// Code examples stored as arrays of lines to avoid template parsing issues
-	const basicExampleLines = [
-		"<!-- Include the Playlight SDK -->",
+	const esModuleExampleLines = [
+		"<!-- ES Module Import (Modern) -->",
+		'<script type="module">',
+		'  import playlightSDK from "https://sdk.playlight.dev/playlight-sdk.es.js";',
+		"  ",
+		"  // Initialize the SDK (async)",
+		"  await playlightSDK.init();",
+		"<\/script>",
+	];
+
+	const iifeExampleLines = [
+		"<!-- IIFE Import (Legacy) -->",
 		'<script src="https://sdk.playlight.dev/playlight-sdk.iife.js"><\/script>',
 		"<script>",
 		"  // Initialize the SDK (async)",
-		"  window.PlaylightSDK.init();",
+		"  window.playlightSDK.init();",
 		"<\/script>",
 	];
 
 	const configExampleLines = [
 		"<script>",
-		"  // Initialize the SDK with custom configuration",
-		"  window.PlaylightSDK.init({",
+		"  // Initialize the SDK with custom configuration (here, the module version)",
+		"  playlightSDK.init({",
 		"    button: {",
 		"      position: 'bottom-right',",
 		"      visible: true",
@@ -107,24 +117,49 @@
 			<Card class="mb-8">
 				<CardHeader>
 					<CardTitle>Quick start</CardTitle>
-					<CardDescription
-						>Add this code to your HTML page to get started with the default configuration.</CardDescription
-					>
+					<CardDescription>Choose your preferred method to add Playlight to your project.</CardDescription>
 				</CardHeader>
 				<CardContent>
-					<div class="code-block bg-muted relative overflow-hidden rounded-md">
-						<button class="absolute top-2 right-2 cursor-pointer rounded-md p-1" onclick={copyCode}>
-							<Copy class="copy-icon text-muted-foreground hover:text-foreground h-4 w-4" />
-							<Check class="check-icon hidden h-4 w-4 text-green-500" />
-						</button>
-						<pre class="overflow-x-auto p-4 text-sm">{basicExampleLines.join("\n")}</pre>
-					</div>
+					<Tabs value="esmodule" class="mb-6">
+						<TabsList class="mb-6">
+							<TabsTrigger value="esmodule">ES Module (Modern)</TabsTrigger>
+							<TabsTrigger value="iife">IIFE (Legacy)</TabsTrigger>
+						</TabsList>
+
+						<TabsContent value="esmodule">
+							<div class="code-block bg-muted relative overflow-hidden rounded-md">
+								<button class="absolute top-2 right-2 cursor-pointer rounded-md p-1" onclick={copyCode}>
+									<Copy class="copy-icon text-muted-foreground hover:text-foreground h-4 w-4" />
+									<Check class="check-icon hidden h-4 w-4 text-green-500" />
+								</button>
+								<pre class="overflow-x-auto p-4 text-sm">{esModuleExampleLines.join("\n")}</pre>
+							</div>
+							<div class="mt-4">
+								<p class="text-muted-foreground text-sm">
+									The modern ES module approach is recommended for new projects and frameworks. This method supports
+									tree-shaking and more efficient bundling. This is all you need to add Playlight with the default
+									settings.
+								</p>
+							</div>
+						</TabsContent>
+
+						<TabsContent value="iife">
+							<div class="code-block bg-muted relative overflow-hidden rounded-md">
+								<button class="absolute top-2 right-2 cursor-pointer rounded-md p-1" onclick={copyCode}>
+									<Copy class="copy-icon text-muted-foreground hover:text-foreground h-4 w-4" />
+									<Check class="check-icon hidden h-4 w-4 text-green-500" />
+								</button>
+								<pre class="overflow-x-auto p-4 text-sm">{iifeExampleLines.join("\n")}</pre>
+							</div>
+							<div class="mt-4">
+								<p class="text-muted-foreground text-sm">
+									The IIFE approach works well for legacy projects or when broader browser compatibility is needed. This
+									is all you need to add Playlight with the default settings.
+								</p>
+							</div>
+						</TabsContent>
+					</Tabs>
 				</CardContent>
-				<CardFooter>
-					<p class="text-muted-foreground text-sm">
-						This is all you need to add Playlight to your game with the default settings.
-					</p>
-				</CardFooter>
 			</Card>
 		</section>
 
@@ -290,8 +325,12 @@
 					<CardContent>
 						<ul class="text-muted-foreground list-disc space-y-2 pl-5 text-sm">
 							<li>
-								Use <code class="text-primary">defer</code> instead of <code class="text-primary">async</code> if you experience
-								issues with race conditions.
+								For modern projects, the ES Module approach is recommended for better code organization and
+								tree-shaking.
+							</li>
+							<li>
+								For legacy support, use the IIFE approach with <code class="text-primary">defer</code> instead of
+								<code class="text-primary">async</code> if you experience issues with race conditions.
 							</li>
 							<li>For frameworks, consider loading the script dynamically and awaiting it.</li>
 							<li>Make sure to initialize the SDK after the script is fully loaded.</li>
