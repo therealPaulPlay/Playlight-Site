@@ -80,7 +80,7 @@
 	<Dialog.Trigger class={buttonVariants({ variant: "outline" })}>Whitelist <UserCog /></Dialog.Trigger>
 	<Dialog.Content>
 		<Dialog.Header>
-			<Dialog.Title>Manage Whitelist</Dialog.Title>
+			<Dialog.Title>Manage whitelist</Dialog.Title>
 			<Dialog.Description>Add or remove users from the signup whitelist.</Dialog.Description>
 		</Dialog.Header>
 		<div class="grid gap-4 py-4">
