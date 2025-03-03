@@ -102,7 +102,7 @@
 		</Card>
 
 		<p class="text-muted-foreground mt-4 text-center text-sm">
-			By submitting this form, you agree to our TOS and Privacy Policy.
+			By submitting this form, you agree to our Terms and Privacy Policy.
 		</p>
 	</div>
 </main>
