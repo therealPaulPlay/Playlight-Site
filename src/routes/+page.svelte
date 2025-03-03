@@ -134,7 +134,7 @@
 		<Spotlight />
 		<div class="pointer-events-none z-1 mx-auto max-w-2xl">
 			<h1 class="mb-4 text-4xl font-extrabold uppercase md:text-5xl" in:blur>Get your game seen.</h1>
-			<p class="text-muted-foreground mb-8 text-lg" in:blur>A discovery platform, built right into your own site.</p>
+			<p class="text-muted-foreground mb-8 text-lg" in:blur>A discovery platform, built right into your own game.</p>
 			<div class="align-center mx-auto flex max-w-40 flex-col justify-center">
 				<Button class="pointer-events-auto mb-4 px-6 py-3 font-semibold" href="/join">Join Playlight</Button>
 				<Button
