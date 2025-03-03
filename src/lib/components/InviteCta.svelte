@@ -34,27 +34,35 @@
 		<div bind:this={cardContainer} class="preserve-3d relative h-full">
 			<!-- Front face -->
 			<div
-				class="absolute h-full w-full rounded-lg border bg-linear-[310deg,hsl(20_14.3%_5%),transparent] p-8 backface-hidden"
+				class="border-muted! absolute h-full w-full rounded-lg border bg-linear-[310deg,hsl(20_14.3%_5%),transparent] p-8 backface-hidden"
 			>
 				<div class="h-full content-center text-center">
 					<h2 class="mb-2 text-3xl font-bold uppercase">This is your invitation.</h2>
 					<p class="text-muted-foreground">Hover to learn more.</p>
 				</div>
 				<!-- Decorative circles -->
-				<div class="bg-background absolute top-1/2 -left-2 h-4 w-4 -translate-y-1/2 rounded-full border"></div>
-				<div class="bg-background absolute top-1/2 -right-2 h-4 w-4 -translate-y-1/2 rounded-full border"></div>
+				<div
+					class="bg-background border-muted! absolute top-1/2 -left-2 h-4 w-4 -translate-y-1/2 rounded-full border"
+				></div>
+				<div class="bg-background border-muted! absolute top-1/2 -right-2 h-4 w-4 -translate-y-1/2 rounded-full border"></div>
 			</div>
 
 			<!-- Back face -->
-			<div class="bg-background absolute h-full w-full rotate-y-180 rounded-lg border p-8 backface-hidden">
+			<div
+				class="bg-background border-muted! absolute h-full w-full rotate-y-180 rounded-lg border p-8 backface-hidden"
+			>
 				<!-- Decorative circles -->
-				<div class="bg-background absolute top-1/2 -left-2 h-4 w-4 -translate-y-1/2 rounded-full border"></div>
-				<div class="bg-background absolute top-1/2 -right-2 h-4 w-4 -translate-y-1/2 rounded-full border"></div>
+				<div
+					class="bg-background border-muted! absolute top-1/2 -left-2 h-4 w-4 -translate-y-1/2 rounded-full border"
+				></div>
+				<div
+					class="bg-background border-muted! absolute top-1/2 -right-2 h-4 w-4 -translate-y-1/2 rounded-full border"
+				></div>
 
 				<h2 class="mb-2 text-xl font-bold line-through opacity-50 md:text-2xl">Boost their platform, not your game.</h2>
 				<h2 class="mb-4 text-2xl font-bold uppercase md:text-3xl">Grow independently.</h2>
 
-				<div class="my-6 border-t border-dashed"></div>
+				<div class="border-muted! my-6 border-t border-dashed"></div>
 
 				<p class="text-muted-foreground mb-6">
 					Draw your audience in with Playlight, and shine a light on the best indie experiences—yours included.

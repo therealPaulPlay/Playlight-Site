@@ -442,7 +442,7 @@
 	</section>
 
 	<!-- Stats (Statistical Proof)-->
-	<section bind:this={statsSection} class="mt-16 w-full border-y">
+	<section bind:this={statsSection} class="mt-16 w-full border-y border-muted!">
 		<div class="mx-auto flex max-w-7xl flex-wrap items-center justify-around gap-8 px-4 py-8">
 			{#each stats as stat}
 				<div class="stat-item min-w-50 text-center">

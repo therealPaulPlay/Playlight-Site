@@ -1,4 +1,4 @@
-<footer class="border-t">
+<footer class="border-t border-muted!">
 	<div class="mx-auto max-w-(--breakpoint-xl) px-4 py-8">
 		<div class="flex flex-col items-center justify-between gap-4 md:flex-row">
 			<div class="flex items-center space-x-1">
