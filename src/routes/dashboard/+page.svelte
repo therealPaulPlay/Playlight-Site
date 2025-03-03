@@ -144,6 +144,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Dashboard</title>
+</svelte:head>
+
 <svelte:document onclick={handleClickOutside} />
 
 <main class="bg-background flex h-screen">
@@ -171,7 +175,7 @@
 					<div class="space-y-2">
 						<GameCreationDialog />
 						<WhitelistDialog />
-                        <FileCleanupDialog />
+						<FileCleanupDialog />
 					</div>
 				{:else}
 					<p class="text-muted-foreground bg-muted p-2 text-sm italic">
