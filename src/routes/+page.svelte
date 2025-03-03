@@ -318,11 +318,16 @@
 		<!-- Right Box: Text Content -->
 		<div class="bg-card min-w-[320px] flex-1 p-8">
 			<h2 class="mb-6 text-3xl font-bold">Smart recommendations.</h2>
+			<p class="text-muted-foreground text-lg leading-relaxed mb-4">
+				Keep players engaged with thoughtful game recommendations. The <span class="text-foreground">Discovery</span>
+				only activates at <span class="text-foreground">intentional moments</span> - when players are
+				<span class="text-foreground">exiting your game</span> or through a
+				<span class="text-foreground">discovery button you control</span>.
+			</p>
 			<p class="text-muted-foreground text-lg leading-relaxed">
-				Keep players engaged with intelligent game suggestions. The <span class="text-foreground">SDK</span>
-				identifies <span class="text-foreground">key moments</span> when players are most receptive to new experiences,
-				like when they're <span class="text-foreground">about to leave</span>, and presents them with
-				<span class="text-foreground">carefully curated options</span> that match their interests and playing style.
+				No random popups, just
+				<span class="text-foreground">personalized suggestions</span> that respect your game's experience and bring joy to
+				players.
 			</p>
 		</div>
 	</section>
@@ -442,7 +447,7 @@
 	</section>
 
 	<!-- Stats (Statistical Proof)-->
-	<section bind:this={statsSection} class="mt-16 w-full border-y border-muted!">
+	<section bind:this={statsSection} class="border-muted! mt-16 w-full border-y">
 		<div class="mx-auto flex max-w-7xl flex-wrap items-center justify-around gap-8 px-4 py-8">
 			{#each stats as stat}
 				<div class="stat-item min-w-50 text-center">
