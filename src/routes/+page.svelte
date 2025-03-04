@@ -198,53 +198,73 @@
 					<filter id="shadow" filterUnits="userSpaceOnUse" x="-20" y="-20" width="250" height="250">
 						<feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="black" flood-opacity="0.5" />
 					</filter>
-					<!-- Circular connection paths -->
+
+					<!-- Circular connection paths between nodes -->
 					<g stroke="hsl(24 5.4% 63.9% / 1)">
-						<!-- Center to outer connections -->
-						<line x1="105" y1="105" x2="105" y2="45" stroke-width="3"></line>
-						<line x1="105" y1="105" x2="159" y2="75" stroke-width="3"></line>
-						<line x1="105" y1="105" x2="159" y2="135" stroke-width="3"></line>
-						<line x1="105" y1="105" x2="51" y2="135" stroke-width="3"></line>
-						<line x1="105" y1="105" x2="51" y2="75" stroke-width="3"></line>
-						<line x1="105" y1="105" x2="105" y2="165" stroke-width="3"></line>
+						<!-- Outer ring connections (hexagon pattern) -->
+						<line x1="105" y1="45" x2="159" y2="75" stroke-width="3"></line>
+						<line x1="159" y1="75" x2="159" y2="135" stroke-width="3"></line>
+						<line x1="159" y1="135" x2="105" y2="165" stroke-width="3"></line>
+						<line x1="105" y1="165" x2="51" y2="135" stroke-width="3"></line>
+						<line x1="51" y1="135" x2="51" y2="75" stroke-width="3"></line>
+						<line x1="51" y1="75" x2="105" y2="45" stroke-width="3"></line>
+
+						<!-- Additional mesh connections for more decentralization - all with consistent opacity -->
+						<line x1="105" y1="45" x2="159" y2="135" stroke-width="3" stroke-opacity="0.7"></line>
+						<line x1="159" y1="75" x2="105" y2="165" stroke-width="3" stroke-opacity="0.6"></line>
+						<line x1="159" y1="135" x2="51" y2="75" stroke-width="3" stroke-opacity="0.4"></line>
+						<line x1="105" y1="165" x2="51" y2="75" stroke-width="3" stroke-opacity="0.5"></line>
+						<line x1="51" y1="135" x2="105" y2="45" stroke-width="3" stroke-opacity="0.6"></line>
+						<line x1="51" y1="75" x2="159" y2="135" stroke-width="3" stroke-opacity="0.3"></line>
 					</g>
 
-					<!-- Games/Apps with solid background -->
+					<!-- Games/Apps with solid background - Original positions from your design -->
+					<!-- Top node -->
 					<g>
 						<rect x="85" y="30" width="40" height="40" rx="4" fill="hsl(12 6.5% 15.1% / 1)"></rect>
 					</g>
 					<g>
 						<rect x="85" y="25" width="40" height="40" rx="4" fill="hsl(24 5.4% 63.9% / 1)"></rect>
 					</g>
+
+					<!-- Top right node -->
 					<g>
 						<rect x="139" y="60" width="40" height="40" rx="4" fill="hsl(12 6.5% 15.1% / 1)"></rect>
 					</g>
 					<g>
 						<rect x="139" y="55" width="40" height="40" rx="4" fill="hsl(24 5.4% 63.9% / 1)"></rect>
 					</g>
+
+					<!-- Bottom right node -->
 					<g>
 						<rect x="139" y="120" width="40" height="40" rx="4" fill="hsl(12 6.5% 15.1% / 1)"></rect>
 					</g>
 					<g>
 						<rect x="139" y="115" width="40" height="40" rx="4" fill="hsl(24 5.4% 63.9% / 1)"></rect>
 					</g>
+
+					<!-- Bottom node -->
+					<g>
+						<rect x="85" y="150" width="40" height="40" rx="4" fill="hsl(12 6.5% 15.1% / 1)"></rect>
+					</g>
+					<g>
+						<rect x="85" y="145" width="40" height="40" rx="4" fill="hsl(24 5.4% 63.9% / 1)"></rect>
+					</g>
+
+					<!-- Bottom left node -->
 					<g>
 						<rect x="31" y="120" width="40" height="40" rx="4" fill="hsl(12 6.5% 15.1% / 1)"></rect>
 					</g>
 					<g>
 						<rect x="31" y="115" width="40" height="40" rx="4" fill="hsl(24 5.4% 63.9% / 1)"></rect>
 					</g>
+
+					<!-- Top left node -->
 					<g>
 						<rect x="31" y="60" width="40" height="40" rx="4" fill="hsl(12 6.5% 15.1% / 1)"></rect>
 					</g>
 					<g>
 						<rect x="31" y="55" width="40" height="40" rx="4" fill="hsl(24 5.4% 63.9% / 1)"></rect>
-					</g>
-					<g>
-						<rect x="85" y="150" width="40" height="40" rx="4" fill="hsl(12 6.5% 15.1% / 1)"></rect>
-					</g>
-					<g>
-						<rect x="85" y="145" width="40" height="40" rx="4" fill="hsl(24 5.4% 63.9% / 1)"></rect>
 					</g>
 				</svg>
 			</div>
@@ -318,7 +338,7 @@
 		<!-- Right Box: Text Content -->
 		<div class="bg-card min-w-[320px] flex-1 p-8">
 			<h2 class="mb-6 text-3xl font-bold">Smart recommendations.</h2>
-			<p class="text-muted-foreground text-lg leading-relaxed mb-4">
+			<p class="text-muted-foreground mb-4 text-lg leading-relaxed">
 				Keep players engaged with thoughtful game recommendations. The <span class="text-foreground">Discovery</span>
 				only activates at <span class="text-foreground">intentional moments</span> - when players are
 				<span class="text-foreground">exiting your game</span> or through a
