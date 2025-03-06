@@ -94,7 +94,7 @@
 			selectedGame = undefined;
 			showDeleteDialog = false;
 			passwordInput = "";
-			toast.success("Site removed successfully");
+			toast.success("Site removed successfully!");
 		} catch (error) {
 			toast.error("Failed to remove site: " + error);
 		}
