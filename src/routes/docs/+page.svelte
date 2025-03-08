@@ -165,14 +165,6 @@
 							</div>
 						</TabsContent>
 					</Tabs>
-					<div class="mt-6 space-y-3">
-						<div class="rounded-md border border-yellow-500/20 bg-yellow-500/10 p-4">
-							<h4 class="mb-1 text-sm font-medium">Note</h4>
-							<p class="text-muted-foreground text-sm">
-								For testing purposes, run your local server on <code class="text-primary">localhost:3000</code> to be able to access the API.
-							</p>
-						</div>
-					</div>
 				</CardContent>
 			</Card>
 			<div class="bg-muted text-muted-foreground mb-8 p-4">
