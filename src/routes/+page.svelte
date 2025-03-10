@@ -96,36 +96,10 @@
 
 		observer.observe(statsSection);
 	});
-
-	// Load the SDK for demo
-	let playlightSDK;
-
-	onMount(async () => {
-		try {
-			const module = await import("https://sdk.playlight.dev/playlight-sdk.es.js");
-			playlightSDK = module.default;
-			await playlightSDK.init({
-				button: {
-					visible: false,
-				},
-				exitIntent: {
-					enabled: false,
-				},
-			});
-		} catch (error) {
-			console.error("Error loading the Playlight SDK:", error);
-		}
-	});
 </script>
 
 <svelte:head>
 	<title>Playlight - A discovery platform, built into your game</title>
-	<link
-		rel="stylesheet"
-		href="https://sdk.playlight.dev/playlight-sdk.css"
-		media="print"
-		onload={(e) => (e.target.media = "all")}
-	/>
 </svelte:head>
 
 <main class="flex min-h-screen w-full flex-col">
@@ -137,12 +111,8 @@
 			<p class="text-muted-foreground mb-9 text-lg" in:blur>A discovery platform, built into your own game.</p>
 			<div class="align-center mx-auto flex max-w-40 flex-col justify-center">
 				<Button class="pointer-events-auto mb-4 px-6 py-3 font-semibold" href="/join">Join Playlight</Button>
-				<Button
-					class="pointer-events-auto mb-4 px-6 py-3 font-semibold"
-					variant="outline"
-					onclick={() => {
-						playlightSDK?.setDiscovery(true);
-					}}>Launch Demo</Button
+				<Button class="pointer-events-auto mb-4 px-6 py-3 font-semibold" variant="outline" href="/demo"
+					>Launch Demo</Button
 				>
 			</div>
 		</div>
@@ -274,15 +244,15 @@
 		<div class="bg-card min-w-70 flex-3 p-8">
 			<h2 class="mb-6 text-3xl font-bold">Indie Devs, unite.</h2>
 			<p class="text-muted-foreground mb-4 text-lg">
-				Playlight is an <span class="text-foreground">integrable discovery network</span> that grows your browser games
-				organically, keeping you in control while
-				<span class="text-foreground">fostering a community of passionate players</span> and developers.
+				Playlight is an open-source <span class="text-foreground">discovery platform</span> you
+				<span class="text-foreground">integrate into your game</span>
+				– running on your own site, so you keep full control while growing a community of
+				<span class="text-foreground">passionate players</span> and developers.
 			</p>
 			<p class="text-muted-foreground text-lg">
-				You decide where you highlight exciting indie titles that your players will love, and a smart <span
-					class="text-foreground">open-source</span
-				>
-				algorithm <span class="text-foreground">promotes your experiences</span> across sites.
+				You decide where to <span class="text-foreground">showcase</span> the best indie titles that <span class="text-foreground">match your game's genre</span>, and a smart algorithm <span
+					class="text-foreground">promotes</span
+				> your game across game sites.
 			</p>
 		</div>
 	</section>
@@ -396,10 +366,10 @@
 	<section class="mx-auto flex w-full max-w-7xl flex-wrap gap-8 px-4 py-16">
 		<!-- Left Box: Overlapping Documents -->
 		<div class="bg-card min-w-[320px] flex-1 p-6">
-			<div class="relative mx-auto h-60 max-w-9/10">
+			<div class="relative mx-auto h-60 max-w-9/10 mt-6">
 				<!-- Code Document -->
 				<div
-					class="bg-background/75 absolute top-4 left-4 w-full max-w-[320px] -rotate-3 rounded-lg p-6 shadow-lg transition-transform duration-300 hover:scale-105"
+					class="bg-background/75 absolute top-6 left-3 w-full max-w-[320px] -rotate-3 rounded-lg p-6 shadow-lg transition-transform duration-300 hover:scale-105"
 				>
 					<div class="mb-4 flex items-center justify-between">
 						<div class="flex gap-2">
@@ -409,7 +379,7 @@
 						</div>
 						<span class="text-muted-foreground text-sm">index.html</span>
 					</div>
-					<pre class="text-muted-foreground max-w-3/4 truncate text-sm text-wrap"><code class="language-html">
+					<pre class="text-muted-foreground max-w-3/4 truncate text-sm text-wrap overflow-hidden"><code class="language-html">
 {"<!-- Add Playlight -->"}
 {'<script src="https://cdn.com"><\/script>'}
 {"<!-- And done! -->"}
