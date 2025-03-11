@@ -244,15 +244,15 @@
 		<div class="bg-card min-w-70 flex-3 p-8">
 			<h2 class="mb-6 text-3xl font-bold">Indie Devs, unite.</h2>
 			<p class="text-muted-foreground mb-4 text-lg">
-				Playlight is an open-source <span class="text-foreground">discovery platform</span> you
-				<span class="text-foreground">integrate into your game</span>
-				– running on your own site, so you keep full control while growing a community of
+				Playlight is an open-source <span class="text-foreground">discovery platform</span> that you can
+				<span class="text-foreground">integrate into your own game</span>
+				– keeping you in full control while growing a community of
 				<span class="text-foreground">passionate players</span> and developers.
 			</p>
 			<p class="text-muted-foreground text-lg">
-				You decide where to <span class="text-foreground">showcase</span> the best indie titles that <span class="text-foreground">match your game's genre</span>, and a smart algorithm <span
-					class="text-foreground">promotes</span
-				> your game across game sites.
+				You decide where to <span class="text-foreground">showcase</span> the best indie titles that
+				<span class="text-foreground">match your game's genre</span>, and a smart algorithm
+				<span class="text-foreground">promotes</span> your game across other sites.
 			</p>
 		</div>
 	</section>
@@ -366,7 +366,7 @@
 	<section class="mx-auto flex w-full max-w-7xl flex-wrap gap-8 px-4 py-16">
 		<!-- Left Box: Overlapping Documents -->
 		<div class="bg-card min-w-[320px] flex-1 p-6">
-			<div class="relative mx-auto h-60 max-w-9/10 mt-6">
+			<div class="relative mx-auto mt-6 h-60 max-w-9/10">
 				<!-- Code Document -->
 				<div
 					class="bg-background/75 absolute top-6 left-3 w-full max-w-[320px] -rotate-3 rounded-lg p-6 shadow-lg transition-transform duration-300 hover:scale-105"
@@ -379,7 +379,8 @@
 						</div>
 						<span class="text-muted-foreground text-sm">index.html</span>
 					</div>
-					<pre class="text-muted-foreground max-w-3/4 truncate text-sm text-wrap overflow-hidden"><code class="language-html">
+					<pre class="text-muted-foreground max-w-3/4 truncate overflow-hidden text-sm text-wrap"><code
+							class="language-html">
 {"<!-- Add Playlight -->"}
 {'<script src="https://cdn.com"><\/script>'}
 {"<!-- And done! -->"}
