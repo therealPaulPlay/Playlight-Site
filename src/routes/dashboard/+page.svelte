@@ -67,14 +67,11 @@
 
 		loading = true;
 		try {
-			const response = await fetchWithErrorHandling(
-				`${$BASE_API_URL}/game/${selectedGame.id}/statistics?days=${statTimeframe}`,
-				{
-					method: "PUT",
-					headers: { "Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem("bearer")}` },
-					body: JSON.stringify({ id: localStorage.getItem("id") }),
-				},
-			);
+			const response = await fetchWithErrorHandling(`${$BASE_API_URL}/game/${selectedGame.id}/statistics`, {
+				method: "PUT",
+				headers: { "Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem("bearer")}` },
+				body: JSON.stringify({ id: localStorage.getItem("id"), days: statTimeframe }),
+			});
 			stats.value = await response.json();
 		} catch (error) {
 			toast.error("Failed to load statistics: " + error);
