@@ -156,11 +156,11 @@
 	<!-- Sidebar -->
 	<div
 		data-sidebar
-		class="bg-card fixed left-0 z-40 min-h-full w-72 max-w-72 overflow-x-hidden transition-transform duration-200 ease-in-out md:relative md:translate-x-0 {showSidebar
+		class="bg-card fixed left-0 z-40 min-h-full w-72 max-w-72 overflow-x-hidden border-t border-r transition-transform duration-200 ease-in-out md:relative md:translate-x-0 {showSidebar
 			? 'translate-x-0'
 			: '-translate-x-full'}"
 	>
-		<div class="flex flex-col border-t border-r p-4">
+		<div class="flex flex-col p-4">
 			<div class="mb-8 flex items-center justify-between">
 				<h2 class="max-w-full truncate text-lg font-semibold">Hey, {$username}!</h2>
 				<AccountSettings />
