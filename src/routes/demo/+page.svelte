@@ -2,7 +2,7 @@
 	import { onMount } from "svelte";
 	import { CornerLeftUp, CornerRightDown, CornerRightUp, Joystick, Play } from "lucide-svelte";
 	import Button from "$lib/components/ui/button/button.svelte";
-    
+
 	// Load the SDK for demo
 	let playlightSDK;
 
@@ -31,12 +31,7 @@
 	<div class="z-10 flex flex-col items-center justify-center">
 		<h1 class="text-5xl font-bold uppercase lg:text-8xl">[Your Game]</h1>
 		<div class="relative mt-20 flex flex-col gap-4 text-center">
-			<div class="group relative mx-auto flex h-10 w-60 cursor-not-allowed">
-				<Button
-					class="pointer-events-none w-60 cursor-not-allowed transition duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-0"
-					>Play <Play strokeWidth={3} /></Button
-				>
-			</div>
+			<Button class="pointer-events-none w-60 cursor-not-allowed bg-transparent text-primary border border-primary border-dashed"><p class="font-medium flex items-center gap-2">Play <Play strokeWidth={2} size={16} /></p></Button>
 			<Button
 				class="w-60"
 				variant="outline"
