@@ -39,7 +39,7 @@
 
 	const configExampleLines = [
 		"<script>",
-		"  // ...Load the SDK etc.",
+		"  // ...After loading the SDK and CSS",
 		"  await playlightSDK.init({",
 		"    button: {",
 		"      position: 'bottom-right',",
@@ -312,7 +312,7 @@
 							<Card>
 								<CardContent class="border p-4">
 									<p class="text-sm">
-										<span class="font-medium">Parameters:</span> <code class="text-primary">visible</code> - Boolean to show
+										<span class="font-medium">Parameters:</span> <code class="text-primary">visible</code> (optional, defaults to true) - Boolean to show
 										or hide the discovery UI
 									</p>
 								</CardContent>
