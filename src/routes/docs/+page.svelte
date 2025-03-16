@@ -12,7 +12,7 @@
 	// Code examples stored as arrays of lines to avoid template parsing issues
 	const esModuleExampleLines = [
 		"<!-- ES Module Import (Modern) -->",
-		`<link rel="stylesheet" href="https://sdk.playlight.dev/playlight-sdk.css" media="print" onload="this.media='all'">`,
+		`<link rel="stylesheet" href="https://sdk.playlight.dev/playlight-sdk.css">`,
 		'<script type="module">',
 		"  try {",
 		'    const module = await import("https://sdk.playlight.dev/playlight-sdk.es.js");',
