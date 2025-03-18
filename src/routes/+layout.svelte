@@ -5,10 +5,14 @@
 	import Button from "$lib/components/ui/button/button.svelte";
 	import { onMount } from "svelte";
 	import { checkAuthenticationStatus } from "$lib/utils/checkAuthentication";
+	import { isAuthenticated } from "$lib/stores/accountStore";
+	import { page } from "$app/state";
+	import { goto } from "$app/navigation";
 	let { children } = $props();
 
-	onMount(() => {
-		checkAuthenticationStatus();
+	onMount(async () => {
+		await checkAuthenticationStatus();
+		if (!$isAuthenticated && page.url.pathname == "/dashboard") goto("/login");
 	});
 </script>
 
