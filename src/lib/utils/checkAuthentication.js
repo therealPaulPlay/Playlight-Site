@@ -52,28 +52,28 @@ export function signOut() {
 }
 
 function isTokenExpired(token) {
-    const base64Url = token.split(".")[1];
-    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-    const jsonPayload = decodeURIComponent(
-        atob(base64)
-            .split("")
-            .map(function (c) {
-                return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-            })
-            .join(""),
-    );
-
-
-    // If the token cannot be parsed, it is invalid and will be counted as expired
+    let expired;
     try {
+        const base64Url = token.split(".")[1];
+        const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+        const jsonPayload = decodeURIComponent(
+            atob(base64)
+                .split("")
+                .map(function (c) {
+                    return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+                })
+                .join(""),
+        );
+
+        // If the token cannot be parsed, it is invalid and will be counted as expired
         const { exp } = JSON.parse(jsonPayload);
-        const expired = Date.now() >= exp * 1000;
-        if (expired) {
-            goto("/login");
-            toast.warning("Your session has expired. Please log in again.");
-        }
-        return expired;
+        expired = Date.now() >= exp * 1000;
     } catch {
-        return false;
+        expired = true;
     }
+    if (expired) {
+        goto("/login");
+        toast.warning("Your session has expired. Please log in again.");
+    }
+    return expired;
 }

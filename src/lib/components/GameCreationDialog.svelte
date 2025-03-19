@@ -80,7 +80,7 @@
 	});
 
 	// Game categories
-	const categories = ["Action", "Adventure", "Driving", "Casual", "RPG", "Strategy", "Sports", "Quiz", "FPS"];
+	const categories = ["Action", "Adventure", "Driving", "Casual", "RPG", "Strategy", "Sports", "Quiz"];
 
 	async function createGame() {
 		if (!name || !category || !description || !domain || !ownerEmail) {

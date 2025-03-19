@@ -14,7 +14,7 @@
 	import { Input } from "$lib/components/ui/input";
 	import { Select, SelectContent, SelectItem, SelectTrigger } from "$lib/components/ui/select";
 	import { toast } from "svelte-sonner";
-	import { isAdmin, username } from "$lib/stores/accountStore";
+	import { isAdmin, isAuthenticated, username } from "$lib/stores/accountStore";
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
 	import { BASE_API_URL } from "$lib/stores/configStore";
 	import { AlertTriangle, LogOut, Settings, Menu, Plus, ArrowDown, Search } from "lucide-svelte";
@@ -58,7 +58,7 @@
 			games = [...games, ...data?.games];
 			if (games.length > 0) selectedGame = games[0];
 		} catch (error) {
-			toast.error("Failed to load games: " + error);
+			if ($isAuthenticated) toast.error("Failed to load games: " + error);
 		}
 	}
 
