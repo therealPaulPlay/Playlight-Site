@@ -71,6 +71,9 @@ function isTokenExpired(token) {
     } catch {
         expired = true;
     }
-    if (expired) toast.warning("Your session has expired. Please log in again.");
+    if (expired) {
+        signOut();
+        toast.warning("Your session has expired. Please log in again.");
+    }
     return expired;
 }
