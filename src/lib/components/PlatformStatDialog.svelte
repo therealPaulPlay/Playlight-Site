@@ -90,7 +90,7 @@
 			{#if loading}
 				<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
 					{#each Array(6) as _}
-						<div class="bg-muted h-38 w-full animate-pulse rounded-lg"></div>
+						<div class="bg-muted/50 h-38 w-full animate-pulse rounded-lg"></div>
 					{/each}
 				</div>
 			{:else if statistics.length === 0}
