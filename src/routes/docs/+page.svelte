@@ -294,26 +294,35 @@
 				<CardContent>
 					<div class="space-y-6">
 						<div>
-							<h3 class="mb-2 text-lg font-semibold">init(config)</h3>
+							<h3 class="mb-2 text-lg font-semibold">init(config?)</h3>
 							<p class="text-muted-foreground mb-2">Initializes the Playlight SDK with the provided configuration.</p>
 							<Card>
 								<CardContent class="border p-4">
 									<p class="text-sm">
-										<span class="font-medium">Parameters:</span> <code class="text-primary">config</code> (optional) - Configuration
+										<span class="font-medium">Parameters:</span> <code class="text-primary">config</code> - Configuration
 										object
 									</p>
 								</CardContent>
 							</Card>
 						</div>
-
 						<div>
-							<h3 class="mb-2 text-lg font-semibold">setDiscovery(visible)</h3>
+							<h3 class="mb-2 text-lg font-semibold">setDiscovery(visible?)</h3>
 							<p class="text-muted-foreground mb-2">Programmatically show or hide the discovery UI.</p>
 							<Card>
 								<CardContent class="border p-4">
 									<p class="text-sm">
-										<span class="font-medium">Parameters:</span> <code class="text-primary">visible</code> (optional, defaults to true) - Boolean to show
-										or hide the discovery UI
+										<span class="font-medium">Parameters:</span> <code class="text-primary">visible</code> - Boolean to show or hide the discovery UI (defaults to true)
+									</p>
+								</CardContent>
+							</Card>
+						</div>
+						<div>
+							<h3 class="mb-2 text-lg font-semibold">setConfig(config?)</h3>
+							<p class="text-muted-foreground mb-2">Change the configuration at any point.</p>
+							<Card>
+								<CardContent class="border p-4">
+									<p class="text-sm">
+										<span class="font-medium">Parameters:</span> <code class="text-primary">config</code> - Configuration object
 									</p>
 								</CardContent>
 							</Card>
