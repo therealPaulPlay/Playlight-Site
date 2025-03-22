@@ -98,8 +98,8 @@
 			{:else}
 				<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
 					{#each statistics as stat}
-						<Card.Root class="overflow-hidden">
-							<Card.Header class="bg-muted">
+						<Card.Root class="bg-background overflow-hidden border">
+							<Card.Header class="bg-muted/50 border-b">
 								<Card.Title class="text-muted-foreground -mt-2 mb-4 text-lg font-semibold"
 									>{stat.monthName} {stat.year}</Card.Title
 								>
@@ -108,7 +108,7 @@
 								<div class="grid grid-cols-2 gap-2">
 									<div>
 										<p class="text-muted-foreground text-sm">Opens</p>
-										<p class="text-2xl font-bold">{formatNumber(stat.totalPlaylightOpens)}</p>
+										<p class="text-xl font-semibold">{formatNumber(stat.totalPlaylightOpens)}</p>
 
 										{#if stat.playlightChange !== 0}
 											<div class="mt-1 flex items-center gap-1">
@@ -129,7 +129,7 @@
 
 									<div>
 										<p class="text-muted-foreground text-sm">Referrals</p>
-										<p class="text-2xl font-bold">{formatNumber(stat.totalReferrals)}</p>
+										<p class="text-xl font-semibold">{formatNumber(stat.totalReferrals)}</p>
 
 										{#if stat.referralsChange !== 0}
 											<div class="mt-1 flex items-center gap-1">
