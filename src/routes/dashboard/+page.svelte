@@ -26,6 +26,7 @@
 	import AccountSettings from "$lib/components/AccountSettings.svelte";
 	import { formatDomain } from "$lib/utils/formatDomain";
 	import FileCleanupDialog from "$lib/components/FileCleanupDialog.svelte";
+	import PlatformStatDialog from "$lib/components/PlatformStatDialog.svelte";
 
 	// State management
 	let statTimeframe = $state(7);
@@ -248,21 +249,24 @@
 	<!-- Center View -->
 	<div class="w-full overflow-x-hidden overflow-y-auto p-8">
 		{#if selectedGame}
-			<div class="mb-8 flex items-center justify-between gap-4">
-				<div class="flex max-w-2/3 gap-4">
+			<div class="mb-8 flex items-center justify-between gap-4 flex-wrap">
+				<div class="flex gap-4">
 					<img src={selectedGame?.logo_url} alt="game logo" class="h-10 w-10 rounded object-cover" />
 					<h1 class="truncate text-3xl font-bold">{selectedGame.domain || "Example.com"}</h1>
 				</div>
-				<Select type="single" bind:value={statTimeframe}>
-					<SelectTrigger class="w-32">
-						{statTimeframe} Days
-					</SelectTrigger>
-					<SelectContent>
-						<SelectItem value={7}>7 Days</SelectItem>
-						<SelectItem value={30}>30 Days</SelectItem>
-						<SelectItem value={90}>90 Days</SelectItem>
-					</SelectContent>
-				</Select>
+				<div class="flex items-center justify-center gap-4">
+					<PlatformStatDialog />
+					<Select type="single" bind:value={statTimeframe}>
+						<SelectTrigger class="w-32">
+							{statTimeframe} Days
+						</SelectTrigger>
+						<SelectContent>
+							<SelectItem value={7}>7 Days</SelectItem>
+							<SelectItem value={30}>30 Days</SelectItem>
+							<SelectItem value={90}>90 Days</SelectItem>
+						</SelectContent>
+					</Select>
+				</div>
 			</div>
 
 			<!-- Stats Graph using Chart.js via our Chart.svelte component -->
