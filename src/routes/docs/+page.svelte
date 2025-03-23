@@ -289,7 +289,7 @@
 			<Card class="mb-8">
 				<CardHeader>
 					<CardTitle>Methods</CardTitle>
-					<CardDescription>Available methods to control the Playlight discovery UI.</CardDescription>
+					<CardDescription>Available methods to control Playlight.</CardDescription>
 				</CardHeader>
 				<CardContent>
 					<div class="space-y-6">
