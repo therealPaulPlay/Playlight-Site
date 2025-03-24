@@ -36,7 +36,7 @@
 	}}
 />
 
-<main class="relative mb-10 flex min-h-[calc(100vh-85px)] w-full flex-col items-center justify-center md:mt-30">
+<main class="flex md:mt-30 mb-10 min-h-[calc(100vh-85px)] w-full flex-col items-center justify-center">
 	<div class="z-10 flex flex-col items-center justify-center">
 		<h1 class="text-5xl font-bold uppercase md:text-8xl">[Your Game]</h1>
 		<div class="relative mt-20 flex flex-col gap-4 text-center">
@@ -65,7 +65,7 @@
 	<video
 		width="1280"
 		height="720"
-		class="absolute h-full w-full object-cover blur-3xl brightness-[30%]"
+		class="absolute h-full top-30 w-full object-cover blur-3xl brightness-[25%]"
 		playsinline
 		webkit-playsinline
 		autoplay
@@ -82,6 +82,6 @@
 		<CornerLeftUp size={18} /> Try leaving the page
 	</p>
 {/if}
-<p class="fixed right-10 bottom-21 z-10 flex rotate-1 gap-2">
+<p class="fixed right-10 bottom-20 z-10 flex gap-2">
 	Built-in button (optional) <CornerRightDown size={18} style="margin-top: 5px;" />
 </p>
