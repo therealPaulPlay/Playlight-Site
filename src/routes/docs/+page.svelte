@@ -2,7 +2,7 @@
 	import { Button } from "$lib/components/ui/button";
 	import { Tabs, TabsContent, TabsList, TabsTrigger } from "$lib/components/ui/tabs";
 	import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "$lib/components/ui/card";
-	import { Copy, Check, Code2, Sliders, Rocket, ExternalLink } from "lucide-svelte";
+	import { Copy, Check, Code2, Sliders, Rocket, ExternalLink, LayoutGrid } from "lucide-svelte";
 	import { onMount } from "svelte";
 	import Prism from "prismjs";
 	import "prism-themes/themes/prism-vsc-dark-plus.css";
@@ -50,6 +50,13 @@
 		"    }",
 		"  });",
 		"<\/script>",
+	];
+
+	const carouselExampleLines = [
+		"<!-- Carousel Widget, width of min. 500px is recommended -->",
+		'<div class="playlight-widget-carousel"',
+		'     style="height: 330px; width: 750px;">',
+		"<\/div>",
 	];
 
 	// Function to copy code to clipboard
@@ -311,7 +318,8 @@
 							<Card>
 								<CardContent class="border p-4">
 									<p class="text-sm">
-										<span class="font-medium">Parameters:</span> <code class="text-primary">visible</code> - Boolean to show or hide the discovery UI (defaults to true)
+										<span class="font-medium">Parameters:</span> <code class="text-primary">visible</code> - Boolean to show
+										or hide the discovery UI (defaults to true)
 									</p>
 								</CardContent>
 							</Card>
@@ -322,10 +330,49 @@
 							<Card>
 								<CardContent class="border p-4">
 									<p class="text-sm">
-										<span class="font-medium">Parameters:</span> <code class="text-primary">config</code> - Configuration object
+										<span class="font-medium">Parameters:</span> <code class="text-primary">config</code> - Configuration
+										object
 									</p>
 								</CardContent>
 							</Card>
+						</div>
+					</div>
+				</CardContent>
+			</Card>
+		</section>
+
+		<!-- Widgets Section -->
+		<section class="mb-12">
+			<div class="mb-4 flex items-center gap-2">
+				<LayoutGrid class="text-primary h-6 w-6" />
+				<h2 class="text-2xl font-bold">Widgets</h2>
+			</div>
+			<p class="text-muted-foreground mb-6">Add an interactive Playlight widget to your game UI.</p>
+
+			<Card>
+				<CardHeader>
+					<CardTitle>Carousel widget</CardTitle>
+					<CardDescription>Display a dynamic content carousel in your game.</CardDescription>
+				</CardHeader>
+				<CardContent>
+					<div class="space-y-4">
+						<div class="code-block bg-muted relative overflow-hidden rounded-md">
+							<button class="absolute top-2 right-2 cursor-pointer rounded-md p-1" onclick={copyCode}>
+								<Copy class="copy-icon text-muted-foreground hover:text-foreground h-4 w-4" />
+								<Check class="check-icon hidden h-4 w-4 text-green-500" />
+							</button>
+							<pre class="overflow-x-auto p-4 text-sm">{carouselExampleLines.join("\n")}</pre>
+						</div>
+
+						<div class="grid gap-2">
+							<p class="text-muted-foreground text-sm">
+								Add a carousel widget by creating a container with the class as seen above.
+							</p>
+							<ul class="text-muted-foreground list-disc space-y-1 pl-5 text-sm">
+								<li>Recommended dimensions: 330px height, min. 500px width</li>
+								<li>Widget is transparent – add background, padding etc. as you wish</li>
+								<li>Loads dynamically – ideal for death screens and mode selection UIs</li>
+							</ul>
 						</div>
 					</div>
 				</CardContent>
@@ -346,10 +393,6 @@
 								For modern projects, the ES Module approach is recommended for better code organization and
 								tree-shaking.
 							</li>
-							<li>
-								For legacy support, use the IIFE approach with <code class="text-primary">defer</code> instead of
-								<code class="text-primary">async</code> if you experience issues with race conditions.
-							</li>
 							<li>For frameworks, consider loading the script dynamically and awaiting it.</li>
 							<li>Make sure to initialize the SDK after the script is fully loaded.</li>
 						</ul>
@@ -362,9 +405,8 @@
 					</CardHeader>
 					<CardContent>
 						<ul class="text-muted-foreground list-disc space-y-2 pl-5 text-sm">
-							<li>Use exit intent for the best user retention.</li>
+							<li>Use exit intent for the best user experience.</li>
 							<li>Config settings will override any changes made in the discovery UI.</li>
-							<li>Test exit intent behavior with different browser configurations.</li>
 						</ul>
 					</CardContent>
 				</Card>
@@ -375,7 +417,6 @@
 					</CardHeader>
 					<CardContent>
 						<ul class="text-muted-foreground list-disc space-y-2 pl-5 text-sm">
-							<li>Consider your game's UI when choosing button position.</li>
 							<li>You can hide the button and control discovery programmatically.</li>
 							<li>Ensure the button doesn't interfere with critical game elements.</li>
 						</ul>

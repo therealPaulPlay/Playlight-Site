@@ -379,12 +379,11 @@
 						</div>
 						<span class="text-muted-foreground text-sm">index.html</span>
 					</div>
-					<pre class="text-muted-foreground max-w-3/4 truncate overflow-hidden text-sm text-wrap"><code
-							class="language-html">
+					<pre class="text-muted-foreground max-w-3/4 truncate overflow-hidden text-sm text-wrap">
 {"<!-- Add Playlight -->"}
 {'<script src="https://cdn.com"><\/script>'}
 {"<!-- And done! -->"}
-                    </code></pre>
+                    </pre>
 				</div>
 
 				<!-- Contract Document (crossed out) -->
@@ -424,7 +423,7 @@
 		<div class="bg-card min-w-[320px] flex-1 p-8">
 			<h2 class="mb-6 text-3xl font-bold">Start in seconds.</h2>
 			<p class="text-muted-foreground text-lg leading-relaxed">
-				No complicated setup, no lengthy contracts - just pure simplicity. There are no lock-in terms -
+				No complicated setup, no lengthy contracts. There aren't any lock-in terms -
 				<span class="text-foreground">your success is what keeps us together</span>, not legal bindings.
 			</p>
 			<p class="text-muted-foreground mt-4 text-lg leading-relaxed">
