@@ -98,28 +98,6 @@
 		}
 	}
 
-	async function handleDomainUpdate() {
-		try {
-			const game = { ...selectedGame };
-			game.domain = formatDomain(newDomain);
-			game.id = undefined;
-			await fetchWithErrorHandling(`${$BASE_API_URL}/game/${selectedGame.id}`, {
-				method: "PUT",
-				headers: {
-					"Content-Type": "application/json",
-					Authorization: `Bearer ${localStorage.getItem("bearer")}`,
-				},
-				body: JSON.stringify({ ...game, password: passwordInput, id: localStorage.getItem("id") }),
-			});
-			selectedGame.domain = game.domain;
-			showDomainDialog = false;
-			passwordInput = "";
-			toast.success("Domain updated successfully!");
-		} catch (error) {
-			toast.error("Failed to update domain: " + error);
-		}
-	}
-
 	let chartOptions = $state({});
 	let series = $state([]);
 
@@ -249,7 +227,7 @@
 	<!-- Center View -->
 	<div class="w-full overflow-x-hidden overflow-y-auto p-8">
 		{#if selectedGame}
-			<div class="mb-8 flex items-center justify-between gap-4 flex-wrap">
+			<div class="mb-8 flex flex-wrap items-center justify-between gap-4">
 				<div class="flex gap-4">
 					<img src={selectedGame?.logo_url} alt="game logo" class="h-10 w-10 rounded object-cover" />
 					<h1 class="truncate text-3xl font-bold">{selectedGame.domain || "Example.com"}</h1>
@@ -306,21 +284,18 @@
 				<CardContent class="space-y-4">
 					<div class="flex items-center justify-between gap-2">
 						<div>
-							<h3 class="font-medium">Update Domain</h3>
-							<p class="text-muted-foreground text-sm">Change the main domain for this game.</p>
+							<h3 class="font-medium">Update info</h3>
+							<p class="text-muted-foreground text-sm">Change information regarding this game.</p>
 						</div>
-						<Button variant="outline" class="cursor-pointer" onclick={() => (showDomainDialog = true)}>
-							<Settings class="mr-2 h-4 w-4" />
-							Domain
-						</Button>
+						<GameCreationDialog updateOnly={true} bind:selectedGame />
 					</div>
 					<div class="flex items-center justify-between gap-2">
 						<div>
-							<h3 class="font-medium">Remove Site</h3>
+							<h3 class="font-medium">Remove game</h3>
 							<p class="text-muted-foreground text-sm">Remove this game from the platform.</p>
 						</div>
 						<Button variant="destructive" class="cursor-pointer" onclick={() => (showDeleteDialog = true)}
-							>Remove Site</Button
+							>Remove</Button
 						>
 					</div>
 				</CardContent>
@@ -338,7 +313,7 @@
 		<DialogHeader>
 			<DialogTitle class="flex items-center gap-2">
 				<AlertTriangle class="text-destructive h-5 w-5" />
-				Remove Site
+				Remove "{selectedGame?.name}"
 			</DialogTitle>
 			<DialogDescription>
 				This will immediately remove all recommendations for your game from Playlight. You'll need to remove the
@@ -348,25 +323,7 @@
 		<Label for="password" class="-mb-2">Password</Label>
 		<Input type="password" placeholder="password" bind:value={passwordInput} />
 		<DialogFooter>
-			<Button variant="destructive" onclick={handleDelete}>Remove Site</Button>
-		</DialogFooter>
-	</DialogContent>
-</Dialog>
-
-<Dialog bind:open={showDomainDialog}>
-	<DialogContent>
-		<DialogHeader>
-			<DialogTitle>Update Domain</DialogTitle>
-			<DialogDescription>
-				Enter the new domain for your site. Make sure to update your implementation accordingly.
-			</DialogDescription>
-		</DialogHeader>
-		<Label for="password" class="-mb-2">Password</Label>
-		<Input type="password" placeholder="password" id="password" bind:value={passwordInput} />
-		<Label for="domain" class="mt-2 -mb-2">Domain</Label>
-		<Input type="text" id="domain" placeholder="new-domain.com" bind:value={newDomain} />
-		<DialogFooter>
-			<Button onclick={handleDomainUpdate}>Update Domain</Button>
+			<Button variant="destructive" onclick={handleDelete}>Remove</Button>
 		</DialogFooter>
 	</DialogContent>
 </Dialog>

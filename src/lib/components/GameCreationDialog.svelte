@@ -4,8 +4,9 @@
 	import { Input } from "$lib/components/ui/input/index.js";
 	import { Label } from "$lib/components/ui/label/index.js";
 	import { Textarea } from "$lib/components/ui/textarea/index.js";
+	import { Checkbox } from "$lib/components/ui/checkbox/index.js";
 	import { Select, SelectContent, SelectItem, SelectTrigger } from "$lib/components/ui/select/index.js";
-	import { Gamepad2, Upload, Loader2, Image as ImageIcon, Video, X, AlertCircle } from "lucide-svelte";
+	import { Gamepad2, Upload, Loader2, Image as ImageIcon, Video, X, AlertCircle, Settings2 } from "lucide-svelte";
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
 	import { BASE_API_URL } from "$lib/stores/configStore";
 	import { toast } from "svelte-sonner";
@@ -13,8 +14,10 @@
 	import { UploadDropzone } from "@uploadthing/svelte";
 	import { formatDomain } from "$lib/utils/formatDomain";
 
+	let { updateOnly = false, selectedGame = $bindable({}) } = $props();
+
 	let dialogOpen = $state(false);
-	let isCreating = $state(false);
+	let isLoading = $state(false);
 	let isDeleting = $state(false);
 
 	// Form data
@@ -24,13 +27,14 @@
 	let description = $state("");
 	let domain = $state("");
 
+	// Upload file urls
 	let logoUrl = $state("");
 	let coverImageUrl = $state("");
 	let coverVideoUrl = $state("");
 
-	let logoKey = $state("");
-	let coverImageKey = $state("");
-	let coverVideoKey = $state("");
+	// Update only
+	let passwordInput = $state();
+	let noteRead = $state(false);
 
 	// Create uploaders for each file type with added validation
 	const logoUploader = createUploader("logoUploader", {
@@ -41,7 +45,6 @@
 		},
 		onClientUploadComplete: (res) => {
 			logoUrl = res[0].ufsUrl;
-			logoKey = res[0].key;
 			toast.success("Logo uploaded successfully!");
 		},
 		onUploadError: (error) => {
@@ -56,7 +59,6 @@
 		},
 		onClientUploadComplete: (res) => {
 			coverImageUrl = res[0].ufsUrl;
-			coverImageKey = res[0].key;
 			toast.success("Cover image uploaded successfully!");
 		},
 		onUploadError: (error) => {
@@ -71,7 +73,6 @@
 		},
 		onClientUploadComplete: (res) => {
 			coverVideoUrl = res[0].ufsUrl;
-			coverVideoKey = res[0].key;
 			toast.success("Cover video uploaded successfully!");
 		},
 		onUploadError: (error) => {
@@ -79,16 +80,16 @@
 		},
 	});
 
+	function extractKeyFromUrl(url) {
+		const parts = url.split("/");
+		return parts[parts.length - 1]; // Get the last part after the final slash
+	}
+
 	// Game categories
 	const categories = ["Action", "Adventure", "Driving", "Casual", "RPG", "Strategy", "Sports", "Quiz"];
 
 	async function createGame() {
-		if (!name || !category || !description || !domain || !ownerEmail) {
-			toast.error("Please fill in all required fields.");
-			return;
-		}
-
-		isCreating = true;
+		isLoading = true;
 		const formattedDomain = formatDomain(domain);
 		try {
 			const response = await fetchWithErrorHandling(`${$BASE_API_URL}/game`, {
@@ -117,30 +118,68 @@
 		} catch (error) {
 			toast.error("Failed to create game: " + error);
 		} finally {
-			isCreating = false;
+			isLoading = false;
+		}
+	}
+
+	async function updateGame() {
+		try {
+			isLoading = true;
+			const formattedDomain = formatDomain(domain);
+			await fetchWithErrorHandling(`${$BASE_API_URL}/game/${selectedGame.id}`, {
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${localStorage.getItem("bearer")}`,
+				},
+				body: JSON.stringify({
+					id: localStorage.getItem("id"),
+					password: passwordInput,
+					name,
+					category,
+					description,
+					domain: formattedDomain,
+					logoUrl,
+					coverImageUrl,
+					coverVideoUrl,
+				}),
+			});
+			// Update current game for UI
+			selectedGame.description = description;
+			selectedGame.domain = formattedDomain;
+			selectedGame.logo_url = logoUrl;
+			selectedGame.cover_image_url = coverImageUrl;
+			selectedGame.cover_video_url = coverVideoUrl;
+			toast.success("Game updated successfully!");
+		} catch (error) {
+			toast.error("Failed to update game: " + error);
+		} finally {
+			isLoading = false;
 		}
 	}
 
 	function resetForm() {
-		name = "";
+		name = selectedGame.name || "";
 		ownerEmail = "";
-		category = "";
-		description = "";
-		domain = "";
-		logoUrl = "";
-		coverImageUrl = "";
-		coverVideoUrl = "";
-		logoKey = "";
-		coverImageKey = "";
-		coverVideoKey = "";
+		category = selectedGame.category || "";
+		description = selectedGame.description || "";
+		domain = selectedGame.domain || "";
+		logoUrl = selectedGame.logo_url || "";
+		coverImageUrl = selectedGame.cover_image_url || "";
+		coverVideoUrl = selectedGame.cover_video_url || "";
+		passwordInput = "";
 	}
 
-	async function resetFile(type) {
-		const fileKey = type === "logo" ? logoKey : type === "cover" ? coverImageKey : coverVideoKey;
+	$effect(() => {
+		if (dialogOpen && updateOnly) resetForm();
+	});
 
-		if (!fileKey) return;
+	async function resetFile(type) {
+		const fileUrl = type === "logo" ? logoUrl : type === "cover" ? coverImageUrl : coverVideoUrl;
+		if (!fileUrl) return;
 
 		isDeleting = true;
+
 		try {
 			// Call server endpoint to delete the file
 			const response = await fetchWithErrorHandling(`${$BASE_API_URL}/uploads/utapi/delete-file`, {
@@ -151,7 +190,7 @@
 				},
 				body: JSON.stringify({
 					id: localStorage.getItem("id"),
-					fileKey: fileKey,
+					fileKey: extractKeyFromUrl(fileUrl),
 				}),
 			});
 
@@ -160,13 +199,10 @@
 			if (result.success) {
 				if (type === "logo") {
 					logoUrl = "";
-					logoKey = "";
 				} else if (type === "cover") {
 					coverImageUrl = "";
-					coverImageKey = "";
 				} else if (type === "video") {
 					coverVideoUrl = "";
-					coverVideoKey = "";
 				}
 				toast.success(`${type.charAt(0).toUpperCase() + type.slice(1)} deleted successfully.`);
 			} else {
@@ -182,31 +218,45 @@
 
 <Dialog.Root bind:open={dialogOpen}>
 	<Dialog.Trigger class={buttonVariants({ variant: "outline" })}>
-		Add Game <Gamepad2 class="ml-2" />
+		{#if !updateOnly}
+			Add Game <Gamepad2 class="ml-2" />
+		{:else}
+			Update <Settings2 class="ml-2" />
+		{/if}
 	</Dialog.Trigger>
 
 	<Dialog.Content class="max-h-[75dvh] max-w-2xl overflow-y-auto">
 		<Dialog.Header>
-			<Dialog.Title>Add game</Dialog.Title>
-			<Dialog.Description>Add a new game to the platform.</Dialog.Description>
+			<Dialog.Title>{updateOnly ? "Update game" : "Add game"}</Dialog.Title>
+			<Dialog.Description
+				>{updateOnly
+					? "Update an existing game on the platform."
+					: "Add a new game to the platform."}</Dialog.Description
+			>
 		</Dialog.Header>
 
 		<div class="grid gap-4 py-4">
 			<div class="grid grid-cols-2 gap-4">
-				<div class="grid gap-2">
-					<Label for="name">Game Name</Label>
-					<Input id="name" bind:value={name} placeholder="My Awesome Game" />
+				<div class="grid gap-2" class:disabled={updateOnly}>
+					<Label for="name">Name</Label>
+					<Input id="name" bind:value={name} placeholder="My Awesome Game" disabled={updateOnly} />
 				</div>
 
-				<div class="grid gap-2">
-					<Label for="owner">Owner Email</Label>
-					<Input id="owner" bind:value={ownerEmail} placeholder="owner@example.com" type="email" />
+				<div class="grid gap-2" class:disabled={updateOnly}>
+					<Label for="owner">Owner email</Label>
+					<Input
+						id="owner"
+						bind:value={ownerEmail}
+						placeholder={updateOnly ? "(not required)" : "owner@example.com"}
+						type="email"
+						disabled={updateOnly}
+					/>
 				</div>
 			</div>
 
-			<div class="grid gap-2">
+			<div class="grid gap-2" class:disabled={updateOnly}>
 				<Label for="category">Category</Label>
-				<Select type="single" bind:value={category}>
+				<Select type="single" bind:value={category} disabled={updateOnly}>
 					<SelectTrigger>
 						<span>{category || "Select a category"}</span>
 					</SelectTrigger>
@@ -234,14 +284,32 @@
 				<p class="text-sm text-gray-500">{description.length}/300</p>
 			</div>
 
-			<div class="grid gap-4">
-				<Label>Media Files</Label>
-
+			<div class="mt-4 grid gap-4">
+				{#if updateOnly}
+					<div class="mt-2 space-y-3">
+						<div class="rounded-md border border-yellow-500/20 bg-yellow-500/10 p-4">
+							<h4 class="mb-1 text-sm font-medium">Note</h4>
+							<p class="text-muted-foreground text-sm">
+								Clicking on "X" removes the media from production immediately. Only do this with the intent of swiftly
+								replacing it. Your assets should meet the format & size requirements – contact an admin if you are unsure.
+							</p>
+							<div class="mt-4 flex flex-wrap items-center">
+								<Checkbox id="note" bind:checked={noteRead} aria-labelledby="note-label" />
+								<Label for="note" class="ml-2 text-sm">I understand</Label>
+							</div>
+						</div>
+					</div>
+				{/if}
 				<div class="grid gap-2">
 					<div class="flex items-center justify-between">
-						<Label class="text-sm">Logo (500x500, JPEG, max. 100KB)</Label>
+						<Label class="text-sm">Logo (500x500, JPEG, max. 75KB)</Label>
 						{#if logoUrl}
-							<Button variant="ghost" size="sm" onclick={() => resetFile("logo")} disabled={isDeleting}>
+							<Button
+								variant="ghost"
+								size="sm"
+								onclick={() => resetFile("logo")}
+								disabled={isDeleting || (updateOnly && !noteRead)}
+							>
 								<X class="h-4 w-4" />
 							</Button>
 						{/if}
@@ -262,9 +330,14 @@
 
 				<div class="grid gap-2">
 					<div class="flex items-center justify-between">
-						<Label class="text-sm">Cover Image (800x1200, JPEG, max. 250KB)</Label>
+						<Label class="text-sm">Cover Image (800x1200, JPEG, max. 150KB)</Label>
 						{#if coverImageUrl}
-							<Button variant="ghost" size="sm" onclick={() => resetFile("cover")} disabled={isDeleting}>
+							<Button
+								variant="ghost"
+								size="sm"
+								onclick={() => resetFile("cover")}
+								disabled={isDeleting || (updateOnly && !noteRead)}
+							>
 								<X class="h-4 w-4" />
 							</Button>
 						{/if}
@@ -287,7 +360,12 @@
 					<div class="flex items-center justify-between">
 						<Label class="text-sm">Cover Video (MP4, 2:3 aspect ratio, max. 3MB)</Label>
 						{#if coverVideoUrl}
-							<Button variant="ghost" size="sm" onclick={() => resetFile("video")} disabled={isDeleting}>
+							<Button
+								variant="ghost"
+								size="sm"
+								onclick={() => resetFile("video")}
+								disabled={isDeleting || (updateOnly && !noteRead)}
+							>
 								<X class="h-4 w-4" />
 							</Button>
 						{/if}
@@ -307,25 +385,33 @@
 			</div>
 		</div>
 
+		{#if updateOnly}
+			<Label for="password" class="-mb-2">Password</Label>
+			<Input type="password" placeholder="e.g. my-password-123" id="password" bind:value={passwordInput} />
+		{/if}
+
 		<Dialog.Footer>
 			<Button
-				onclick={createGame}
-				disabled={isCreating ||
+				onclick={() => {
+					updateOnly ? updateGame() : createGame();
+				}}
+				disabled={isLoading ||
 					!name ||
 					!category ||
 					!description ||
 					!domain ||
-					!ownerEmail ||
+					(!updateOnly && !ownerEmail) ||
 					!logoUrl ||
 					!coverImageUrl ||
-					!coverVideoUrl}
+					!coverVideoUrl ||
+					(updateOnly && !passwordInput)}
 			>
-				{#if isCreating}
+				{#if isLoading}
 					<Loader2 class="mr-2 h-4 w-4 animate-spin" />
-					Creating...
+					Loading...
 				{:else}
 					<Upload class="mr-2 h-4 w-4" />
-					Add Game
+					{updateOnly ? "Update" : "Add Game"}
 				{/if}
 			</Button>
 		</Dialog.Footer>
@@ -335,5 +421,10 @@
 <style>
 	:global([data-ut-element="allowed-content"]) {
 		display: none;
+	}
+
+	.disabled {
+		pointer-events: none;
+		opacity: 0.5;
 	}
 </style>
