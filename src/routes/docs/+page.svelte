@@ -142,8 +142,8 @@
 						</TabsList>
 
 						<TabsContent value="esmodule">
-							<div class="code-block bg-muted relative overflow-hidden rounded-md">
-								<button class="absolute top-2 right-2 cursor-pointer rounded-md p-1" onclick={copyCode}>
+							<div class="code-block bg-muted relative overflow-hidden">
+								<button class="absolute top-2 right-2 cursor-pointer p-1" onclick={copyCode}>
 									<Copy class="copy-icon text-muted-foreground hover:text-foreground h-4 w-4" />
 									<Check class="check-icon hidden h-4 w-4 text-green-500" />
 								</button>
@@ -158,8 +158,8 @@
 						</TabsContent>
 
 						<TabsContent value="iife">
-							<div class="code-block bg-muted relative overflow-hidden rounded-md">
-								<button class="absolute top-2 right-2 cursor-pointer rounded-md p-1" onclick={copyCode}>
+							<div class="code-block bg-muted relative overflow-hidden">
+								<button class="absolute top-2 right-2 cursor-pointer p-1" onclick={copyCode}>
 									<Copy class="copy-icon text-muted-foreground hover:text-foreground h-4 w-4" />
 									<Check class="check-icon hidden h-4 w-4 text-green-500" />
 								</button>
@@ -201,8 +201,8 @@
 							<CardDescription>The SDK can be initialized with an optional configuration object.</CardDescription>
 						</CardHeader>
 						<CardContent>
-							<div class="code-block bg-muted relative overflow-hidden rounded-md">
-								<button class="absolute top-2 right-2 cursor-pointer rounded-md p-1" onclick={copyCode}>
+							<div class="code-block bg-muted relative overflow-hidden">
+								<button class="absolute top-2 right-2 cursor-pointer p-1" onclick={copyCode}>
 									<Copy class="copy-icon text-muted-foreground hover:text-foreground h-4 w-4" />
 									<Check class="check-icon hidden h-4 w-4 text-green-500" />
 								</button>
@@ -210,7 +210,7 @@
 							</div>
 
 							<div class="mt-6 space-y-3">
-								<div class="rounded-md border border-yellow-500/20 bg-yellow-500/10 p-4">
+								<div class="border border-yellow-500/20 bg-yellow-500/10 p-4">
 									<h4 class="mb-1 text-sm font-medium">Note</h4>
 									<p class="text-muted-foreground text-sm">
 										Make sure to call <code class="text-primary">init()</code> after the script is loaded. When using
@@ -272,7 +272,7 @@
 									</p>
 								</div>
 
-								<div class="mt-4 rounded-md border border-yellow-500/20 bg-yellow-500/10 p-4">
+								<div class="mt-4 border border-yellow-500/20 bg-yellow-500/10 p-4">
 									<h4 class="mb-1 text-sm font-medium">Note</h4>
 									<p class="text-muted-foreground text-sm">
 										The exit intent setting in the config will override any settings changed in the discovery UI itself.
@@ -356,8 +356,8 @@
 				</CardHeader>
 				<CardContent>
 					<div class="space-y-4">
-						<div class="code-block bg-muted relative overflow-hidden rounded-md">
-							<button class="absolute top-2 right-2 cursor-pointer rounded-md p-1" onclick={copyCode}>
+						<div class="code-block bg-muted relative overflow-hidden">
+							<button class="absolute top-2 right-2 cursor-pointer p-1" onclick={copyCode}>
 								<Copy class="copy-icon text-muted-foreground hover:text-foreground h-4 w-4" />
 								<Check class="check-icon hidden h-4 w-4 text-green-500" />
 							</button>

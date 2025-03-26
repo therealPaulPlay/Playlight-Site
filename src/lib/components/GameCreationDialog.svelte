@@ -284,104 +284,102 @@
 				<p class="text-sm text-gray-500">{description.length}/300</p>
 			</div>
 
-			<div class="mt-4 grid gap-4">
-				{#if updateOnly}
-					<div class="mt-2 space-y-3">
-						<div class="rounded-md border border-yellow-500/20 bg-yellow-500/10 p-4">
-							<h4 class="mb-1 text-sm font-medium">Note</h4>
-							<p class="text-muted-foreground text-sm">
-								Clicking on "X" removes the media from production immediately. Only do this with the intent of swiftly
-								replacing it. Your assets should meet the format & size requirements – contact an admin if you are unsure.
-							</p>
-							<div class="mt-4 flex flex-wrap items-center">
-								<Checkbox id="note" bind:checked={noteRead} aria-labelledby="note-label" />
-								<Label for="note" class="ml-2 text-sm">I understand</Label>
-							</div>
+			{#if updateOnly}
+				<div class="mt-4 space-y-3">
+					<div class="border border-yellow-500/20 bg-yellow-500/10 p-4">
+						<h4 class="mb-1 text-sm font-medium">Note</h4>
+						<p class="text-muted-foreground text-sm">
+							Clicking on "X" removes the media from production immediately. Only do this with the intent of swiftly
+							replacing it. Your assets should meet the format & size requirements – contact an admin if you are unsure.
+						</p>
+						<div class="mt-4 flex flex-wrap items-center">
+							<Checkbox id="note" bind:checked={noteRead} aria-labelledby="note-label" />
+							<Label for="note" class="ml-2 text-sm">I understand</Label>
 						</div>
+					</div>
+				</div>
+			{/if}
+			<div class="grid gap-2 {updateOnly ? 'mt-1' : 'mt-4'}">
+				<div class="flex items-center justify-between">
+					<Label class="text-sm">Logo (500x500, JPEG, max. 75KB)</Label>
+					{#if logoUrl}
+						<Button
+							variant="ghost"
+							size="sm"
+							onclick={() => resetFile("logo")}
+							disabled={isDeleting || (updateOnly && !noteRead)}
+						>
+							<X class="h-4 w-4" />
+						</Button>
+					{/if}
+				</div>
+				{#if !logoUrl}
+					<!-- For logo -->
+					<UploadDropzone uploader={logoUploader}>
+						<ImageIcon slot="upload-icon" class="mt-4 h-6 w-6" />
+						<span slot="label">Drop or click to upload logo</span>
+					</UploadDropzone>
+				{:else}
+					<div class="flex items-center gap-2 border p-2">
+						<img src={logoUrl} alt="Logo preview" class="h-10 w-10 overflow-hidden object-cover" />
+						<span class="truncate text-sm">{logoUrl}</span>
 					</div>
 				{/if}
-				<div class="grid gap-2">
-					<div class="flex items-center justify-between">
-						<Label class="text-sm">Logo (500x500, JPEG, max. 75KB)</Label>
-						{#if logoUrl}
-							<Button
-								variant="ghost"
-								size="sm"
-								onclick={() => resetFile("logo")}
-								disabled={isDeleting || (updateOnly && !noteRead)}
-							>
-								<X class="h-4 w-4" />
-							</Button>
-						{/if}
-					</div>
-					{#if !logoUrl}
-						<!-- For logo -->
-						<UploadDropzone uploader={logoUploader}>
-							<ImageIcon slot="upload-icon" class="mt-4 h-6 w-6" />
-							<span slot="label">Drop or click to upload logo</span>
-						</UploadDropzone>
-					{:else}
-						<div class="flex items-center gap-2 rounded border p-2">
-							<img src={logoUrl} alt="Logo preview" class="h-10 w-10 rounded object-cover" />
-							<span class="truncate text-sm">{logoUrl}</span>
-						</div>
-					{/if}
-				</div>
+			</div>
 
-				<div class="grid gap-2">
-					<div class="flex items-center justify-between">
-						<Label class="text-sm">Cover Image (800x1200, JPEG, max. 150KB)</Label>
-						{#if coverImageUrl}
-							<Button
-								variant="ghost"
-								size="sm"
-								onclick={() => resetFile("cover")}
-								disabled={isDeleting || (updateOnly && !noteRead)}
-							>
-								<X class="h-4 w-4" />
-							</Button>
-						{/if}
-					</div>
-					{#if !coverImageUrl}
-						<!-- For cover image -->
-						<UploadDropzone uploader={coverImageUploader}>
-							<ImageIcon slot="upload-icon" class="mt-4 h-6 w-6" />
-							<span slot="label">Drop or click to upload cover image</span>
-						</UploadDropzone>
-					{:else}
-						<div class="flex items-center gap-2 rounded border p-2">
-							<img src={coverImageUrl} alt="Cover preview" class="h-10 w-10 rounded object-cover" />
-							<span class="truncate text-sm">{coverImageUrl}</span>
-						</div>
+			<div class="grid gap-2">
+				<div class="flex items-center justify-between">
+					<Label class="text-sm">Cover Image (800x1200, JPEG, max. 150KB)</Label>
+					{#if coverImageUrl}
+						<Button
+							variant="ghost"
+							size="sm"
+							onclick={() => resetFile("cover")}
+							disabled={isDeleting || (updateOnly && !noteRead)}
+						>
+							<X class="h-4 w-4" />
+						</Button>
 					{/if}
 				</div>
+				{#if !coverImageUrl}
+					<!-- For cover image -->
+					<UploadDropzone uploader={coverImageUploader}>
+						<ImageIcon slot="upload-icon" class="mt-4 h-6 w-6" />
+						<span slot="label">Drop or click to upload cover image</span>
+					</UploadDropzone>
+				{:else}
+					<div class="flex items-center gap-2 border p-2">
+						<img src={coverImageUrl} alt="Cover preview" class="h-10 w-10 overflow-hidden object-cover" />
+						<span class="truncate text-sm">{coverImageUrl}</span>
+					</div>
+				{/if}
+			</div>
 
-				<div class="grid gap-2">
-					<div class="flex items-center justify-between">
-						<Label class="text-sm">Cover Video (MP4, 2:3 aspect ratio, max. 3MB)</Label>
-						{#if coverVideoUrl}
-							<Button
-								variant="ghost"
-								size="sm"
-								onclick={() => resetFile("video")}
-								disabled={isDeleting || (updateOnly && !noteRead)}
-							>
-								<X class="h-4 w-4" />
-							</Button>
-						{/if}
-					</div>
-					{#if !coverVideoUrl}
-						<!-- For video -->
-						<UploadDropzone uploader={coverVideoUploader}>
-							<Video slot="upload-icon" class="mt-4 h-6 w-6" />
-							<span slot="label">Drop or click to upload cover video</span>
-						</UploadDropzone>
-					{:else}
-						<div class="flex items-center gap-2 rounded border p-2">
-							<span class="truncate text-sm">{coverVideoUrl}</span>
-						</div>
+			<div class="grid gap-2">
+				<div class="flex items-center justify-between">
+					<Label class="text-sm">Cover Video (MP4, 2:3 aspect ratio, max. 3MB)</Label>
+					{#if coverVideoUrl}
+						<Button
+							variant="ghost"
+							size="sm"
+							onclick={() => resetFile("video")}
+							disabled={isDeleting || (updateOnly && !noteRead)}
+						>
+							<X class="h-4 w-4" />
+						</Button>
 					{/if}
 				</div>
+				{#if !coverVideoUrl}
+					<!-- For video -->
+					<UploadDropzone uploader={coverVideoUploader}>
+						<Video slot="upload-icon" class="mt-4 h-6 w-6" />
+						<span slot="label">Drop or click to upload cover video</span>
+					</UploadDropzone>
+				{:else}
+					<div class="flex items-center gap-2 border p-2">
+						<span class="truncate text-sm">{coverVideoUrl}</span>
+					</div>
+				{/if}
 			</div>
 		</div>
 
