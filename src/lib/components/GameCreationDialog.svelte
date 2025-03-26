@@ -176,13 +176,11 @@
 
 	async function resetFile(type) {
 		const fileUrl = type === "logo" ? logoUrl : type === "cover" ? coverImageUrl : coverVideoUrl;
-		if (!fileUrl) return;
-
 		isDeleting = true;
 
 		try {
 			// Call server endpoint to delete the file
-			const response = await fetchWithErrorHandling(`${$BASE_API_URL}/uploads/utapi/delete-file`, {
+			const response = await fetchWithErrorHandling(`${$BASE_API_URL}/uploads/utapi/delete-file-if-unused`, {
 				method: "DELETE",
 				headers: {
 					"Content-Type": "application/json",
@@ -196,15 +194,12 @@
 
 			const result = await response.json();
 
-			if (result.success) {
-				if (type === "logo") {
-					logoUrl = "";
-				} else if (type === "cover") {
-					coverImageUrl = "";
-				} else if (type === "video") {
-					coverVideoUrl = "";
-				}
-				toast.success(`${type.charAt(0).toUpperCase() + type.slice(1)} deleted successfully.`);
+			if (result.success || result.used) {
+				resetFileUrl(type);
+				if (result.success) toast.success(`${type.charAt(0).toUpperCase() + type.slice(1)} deleted successfully.`);
+
+				if (result.used)
+					toast.info(`${type.charAt(0).toUpperCase() + type.slice(1)} wasn't deleted as it is currently being used.`);
 			} else {
 				throw new Error(result.error || "Failed to delete file.");
 			}
@@ -212,6 +207,16 @@
 			toast.error(`Failed to delete file: ${error.message}`);
 		} finally {
 			isDeleting = false;
+		}
+	}
+
+	function resetFileUrl(fileType) {
+		if (fileType === "logo") {
+			logoUrl = "";
+		} else if (fileType === "cover") {
+			coverImageUrl = "";
+		} else if (fileType === "video") {
+			coverVideoUrl = "";
 		}
 	}
 </script>
@@ -289,12 +294,12 @@
 					<div class="border border-yellow-500/20 bg-yellow-500/10 p-4">
 						<h4 class="mb-1 text-sm font-medium">Note</h4>
 						<p class="text-muted-foreground text-sm">
-							Clicking on "X" removes the media from production immediately. Only do this with the intent of swiftly
-							replacing it. Your assets should meet the format & size requirements – contact an admin if you are unsure.
+							Please confirm that your new assets meet the size and format requirements. Do not hesitate to reach out to
+							an admin if you are unsure.
 						</p>
 						<div class="mt-4 flex flex-wrap items-center">
 							<Checkbox id="note" bind:checked={noteRead} aria-labelledby="note-label" />
-							<Label for="note" class="ml-2 text-sm">I understand</Label>
+							<Label for="note" class="ml-2 text-sm">I confirm</Label>
 						</div>
 					</div>
 				</div>

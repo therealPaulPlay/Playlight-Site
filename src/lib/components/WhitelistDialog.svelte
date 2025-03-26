@@ -99,7 +99,7 @@
 			</div>
 		</div>
 		<Label>Whitelist</Label>
-		<div class="flex max-h-[30dvh] max-w-full flex-wrap gap-2 overflow-x-visible overflow-y-auto py-2">
+		<div class="flex max-h-[30dvh] max-w-full flex-wrap gap-2 overflow-x-visible overflow-y-auto">
 			{#if whitelistEntries?.length}
 				{#each whitelistEntries as entry}
 					<div class="flex w-full max-w-full items-center justify-between border">
