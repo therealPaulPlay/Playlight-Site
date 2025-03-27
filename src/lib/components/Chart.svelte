@@ -56,7 +56,7 @@
 						beginAtZero: true, // Make sure y-axis starts at zero
 						min: 0, // Explicitly set minimum to zero
 						grid: {
-							color: "rgba(0, 0, 0, 0.1)",
+							color: "hsl(12 6.5% 15.1%)",
 						},
 					},
 				},

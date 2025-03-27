@@ -27,6 +27,7 @@
 	import { formatDomain } from "$lib/utils/formatDomain";
 	import FileCleanupDialog from "$lib/components/FileCleanupDialog.svelte";
 	import PlatformStatDialog from "$lib/components/PlatformStatDialog.svelte";
+	import PerformanceWarning from "$lib/components/PerformanceWarning.svelte";
 
 	// State management
 	let statTimeframe = $state(7);
@@ -251,6 +252,7 @@
 			<Card class="mb-8">
 				<CardHeader>
 					<CardTitle>Performance</CardTitle>
+					<PerformanceWarning statistics={stats?.value} />
 				</CardHeader>
 				<CardContent>
 					{#if loading || typeof window === "undefined"}
