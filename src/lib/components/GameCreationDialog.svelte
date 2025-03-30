@@ -44,7 +44,7 @@
 			Authorization: `Bearer ${localStorage.getItem("bearer")}`,
 		},
 		onClientUploadComplete: (res) => {
-			logoUrl = res[0].ufsUrl;
+			logoUrl = res[0]?.ufsUrl;
 			toast.success("Logo uploaded successfully!");
 		},
 		onUploadError: (error) => {
@@ -58,7 +58,7 @@
 			Authorization: `Bearer ${localStorage.getItem("bearer")}`,
 		},
 		onClientUploadComplete: (res) => {
-			coverImageUrl = res[0].ufsUrl;
+			coverImageUrl = res[0]?.ufsUrl;
 			toast.success("Cover image uploaded successfully!");
 		},
 		onUploadError: (error) => {
@@ -72,7 +72,7 @@
 			Authorization: `Bearer ${localStorage.getItem("bearer")}`,
 		},
 		onClientUploadComplete: (res) => {
-			coverVideoUrl = res[0].ufsUrl;
+			coverVideoUrl = res[0]?.ufsUrl;
 			toast.success("Cover video uploaded successfully!");
 		},
 		onUploadError: (error) => {
