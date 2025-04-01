@@ -2,7 +2,19 @@
 	import { Button } from "$lib/components/ui/button";
 	import { Tabs, TabsContent, TabsList, TabsTrigger } from "$lib/components/ui/tabs";
 	import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "$lib/components/ui/card";
-	import { Copy, Check, Code2, Sliders, Rocket, ExternalLink, LayoutGrid } from "lucide-svelte";
+	import {
+		Copy,
+		Check,
+		Code2,
+		Sliders,
+		Rocket,
+		ExternalLink,
+		LayoutGrid,
+		X,
+		CircleX,
+		CircleCheck,
+		Asterisk,
+	} from "lucide-svelte";
 	import { onMount } from "svelte";
 	import Prism from "prismjs";
 	import "prism-themes/themes/prism-vsc-dark-plus.css";
@@ -119,13 +131,12 @@
 	<div class="container max-w-4xl px-4 py-8">
 		<!-- Getting Started -->
 		<section class="mb-12">
-			<div class="mb-4 flex items-center gap-2">
+			<div class="mb-2 flex items-center gap-2">
 				<Rocket class="text-primary h-6 w-6" />
 				<h2 class="text-2xl font-bold">Getting started</h2>
 			</div>
 			<p class="text-muted-foreground mb-6">
-				Integrating Playlight into your game is simple. Just include the SDK script and initialize it with your
-				configuration.
+				Integrating Playlight into your game is simple. Just include the script and initialize it with your config.
 			</p>
 
 			<!-- Quick Start Card -->
@@ -181,7 +192,7 @@
 
 		<!-- Configuration Options -->
 		<section class="mb-12">
-			<div class="mb-4 flex items-center gap-2">
+			<div class="mb-2 flex items-center gap-2">
 				<Sliders class="text-primary h-6 w-6" />
 				<h2 class="text-2xl font-bold">Configuration</h2>
 			</div>
@@ -226,7 +237,7 @@
 				<TabsContent value="button">
 					<Card>
 						<CardHeader>
-							<CardTitle>Button options</CardTitle>
+							<CardTitle>Button</CardTitle>
 							<CardDescription>Configure the position and visibility of the Playlight button.</CardDescription>
 						</CardHeader>
 						<CardContent>
@@ -287,7 +298,7 @@
 
 		<!-- API Reference -->
 		<section class="mb-12">
-			<div class="mb-4 flex items-center gap-2">
+			<div class="mb-2 flex items-center gap-2">
 				<Code2 class="text-primary h-6 w-6" />
 				<h2 class="text-2xl font-bold">API reference</h2>
 			</div>
@@ -343,7 +354,7 @@
 
 		<!-- Widgets Section -->
 		<section class="mb-12">
-			<div class="mb-4 flex items-center gap-2">
+			<div class="mb-2 flex items-center gap-2">
 				<LayoutGrid class="text-primary h-6 w-6" />
 				<h2 class="text-2xl font-bold">Widgets</h2>
 			</div>
@@ -379,55 +390,82 @@
 			</Card>
 		</section>
 
-		<!-- Best Practices -->
+		<!-- Dos and Don'ts Section -->
 		<section class="mb-12">
-			<h2 class="mb-4 text-2xl font-bold">Best practices</h2>
-			<div class="space-y-4">
-				<Card>
-					<CardHeader>
-						<CardTitle class="text-base">Loading the SDK</CardTitle>
-					</CardHeader>
-					<CardContent>
-						<ul class="text-muted-foreground list-disc space-y-2 pl-5 text-sm">
-							<li>
-								For modern projects, the ES Module approach is recommended for better code organization and
-								tree-shaking.
-							</li>
-							<li>For frameworks, consider loading the script dynamically and awaiting it.</li>
-							<li>Make sure to initialize the SDK after the script is fully loaded.</li>
-						</ul>
-					</CardContent>
-				</Card>
-
-				<Card>
-					<CardHeader>
-						<CardTitle class="text-base">Exit intent</CardTitle>
-					</CardHeader>
-					<CardContent>
-						<ul class="text-muted-foreground list-disc space-y-2 pl-5 text-sm">
-							<li>Use exit intent for the best user experience.</li>
-							<li>Config settings will override any changes made in the discovery UI.</li>
-						</ul>
-					</CardContent>
-				</Card>
-
-				<Card>
-					<CardHeader>
-						<CardTitle class="text-base">Button placement</CardTitle>
-					</CardHeader>
-					<CardContent>
-						<ul class="text-muted-foreground list-disc space-y-2 pl-5 text-sm">
-							<li>You can hide the button and control discovery programmatically.</li>
-							<li>Ensure the button doesn't interfere with critical game elements.</li>
-						</ul>
-					</CardContent>
-				</Card>
+			<div class="mb-2 flex items-center gap-2">
+				<Asterisk class="text-primary h-6 w-6" />
+				<h2 class="text-2xl font-bold">Dos and Don'ts</h2>
 			</div>
+
+			<p class="text-muted-foreground mb-6">What you should and shouldn't do when integrating Playlight.</p>
+
+			<!-- Dos Card -->
+			<Card class="mb-6">
+				<CardHeader class="border-b border-green-500/20 bg-green-500/10 py-4">
+					<CardTitle>Do</CardTitle>
+				</CardHeader>
+				<CardContent class="pt-4">
+					<ul class="space-y-3">
+						<li class="flex items-center gap-3">
+							<CircleCheck class="h-4 w-4 flex-shrink-0 text-green-500" />
+							<p class="text-sm">Use the ES module for tree shaking in modern apps and load it async</p>
+						</li>
+						<li class="flex items-center gap-3">
+							<CircleCheck class="h-4 w-4 flex-shrink-0 text-green-500" />
+							<p class="text-sm">
+								Use <code class="text-primary">.setConfig()</code> to dynamically adjust the exit intent and built-in button
+								depending on the game state
+							</p>
+						</li>
+						<li class="flex items-center gap-3">
+							<CircleCheck class="h-4 w-4 flex-shrink-0 text-green-500" />
+							<p class="text-sm">
+								Create your own custom discovery button using the <code class="text-primary">.setDiscovery()</code> method
+							</p>
+						</li>
+						<li class="flex items-center gap-3">
+							<CircleCheck class="h-4 w-4 flex-shrink-0 text-green-500" />
+							<p class="text-sm">Ensure that it nicely integrates into your game UI and behaves predictably</p>
+						</li>
+						<li class="flex items-center gap-3">
+							<CircleCheck class="h-4 w-4 flex-shrink-0 text-green-500" />
+							<p class="text-sm">Use a widget in areas where players select game modes, maps or adjust settings</p>
+						</li>
+					</ul>
+				</CardContent>
+			</Card>
+
+			<!-- Don'ts Card -->
+			<Card>
+				<CardHeader class="border-b border-red-500/20 bg-red-500/10 py-4">
+					<CardTitle>Dont</CardTitle>
+				</CardHeader>
+				<CardContent class="pt-4">
+					<ul class="space-y-3">
+						<li class="flex items-center gap-3">
+							<CircleX class="h-4 w-4 flex-shrink-0 text-red-500" />
+							<p class="text-sm">Overwrite SDK styles with custom CSS</p>
+						</li>
+						<li class="flex items-center gap-3">
+							<CircleX class="h-4 w-4 flex-shrink-0 text-red-500" />
+							<p class="text-sm">Make it difficult for players to bring up the discovery</p>
+						</li>
+						<li class="flex items-center gap-3">
+							<CircleX class="h-4 w-4 flex-shrink-0 text-red-500" />
+							<p class="text-sm">Only load the SDK on some of the site's pages</p>
+						</li>
+						<li class="flex items-center gap-3">
+							<CircleX class="h-4 w-4 flex-shrink-0 text-red-500" />
+							<p class="text-sm">Place two widgets on the same site</p>
+						</li>
+					</ul>
+				</CardContent>
+			</Card>
 		</section>
 
 		<!-- Found an Issue Section -->
 		<section class="mb-12">
-			<Card class="bg-muted">
+			<Card>
 				<CardHeader>
 					<CardTitle>Found an issue?</CardTitle>
 					<CardDescription>Report bugs or suggest improvements to the Playlight SDK.</CardDescription>

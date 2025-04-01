@@ -44,9 +44,9 @@
 	let hasAnimated = false;
 
 	const stats = [
-		{ value: 1000000, label: "Monthly Players", prefix: "", suffix: "+" },
+		{ value: 4000000, label: "Monthly Players", prefix: "", suffix: "+" },
 		{ value: 10, label: "Avg. Playtime / Game", prefix: ">", suffix: " min" },
-		{ value: 90, label: "Player Satisfaction", prefix: ">", suffix: "%" },
+		{ value: 30, label: "First 30-day growth", prefix: ">", suffix: "%" },
 	];
 
 	function animateValue(obj, start, end, duration) {
@@ -261,7 +261,7 @@
 		<!-- Left Box: Browser Mockup -->
 		<div class="bg-card min-w-[320px] flex-1 p-6 shadow-lg">
 			<!-- Browser Chrome -->
-			<div class="relative -rotate-3 transform">
+			<div class="relative transform">
 				<div class="bg-muted rounded-t-lg p-2">
 					<!-- Address Bar -->
 					<div class="bg-background flex items-center gap-2 rounded px-3 py-2">
@@ -440,7 +440,7 @@
 	<section bind:this={statsSection} class="border-muted! mt-16 w-full border-y">
 		<div class="mx-auto flex max-w-7xl flex-wrap items-center justify-around gap-8 px-4 py-8">
 			{#each stats as stat}
-				<div class="stat-item min-w-50 text-center">
+				<div class="stat-item min-w-60 text-center">
 					<div
 						class="stat-value mb-2 text-4xl font-bold"
 						data-value={stat.value}

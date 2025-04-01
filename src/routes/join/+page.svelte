@@ -60,7 +60,6 @@
 				<CardTitle class="text-3xl font-bold uppercase">Join Playlight.</CardTitle>
 				<CardDescription>
 					Take the first step towards better game discovery. Fill out the form below and we'll get back to you shortly.
-					Let's connect!
 				</CardDescription>
 			</CardHeader>
 
@@ -94,7 +93,7 @@
 							<Loader2 class="mr-2 h-4 w-4 animate-spin" />
 							Sending...
 						{:else}
-							Submit<Rocket />
+							Join<Rocket />
 						{/if}
 					</Button>
 				</CardFooter>
