@@ -46,7 +46,7 @@
 	const stats = [
 		{ value: 4000000, label: "Monthly Players", prefix: "", suffix: "+" },
 		{ value: 10, label: "Avg. Playtime / Game", prefix: ">", suffix: " min" },
-		{ value: 30, label: "First 30-day growth", prefix: ">", suffix: "%" },
+		{ value: 30, label: "Est. growth potential", prefix: ">", suffix: "%" },
 	];
 
 	function animateValue(obj, start, end, duration) {

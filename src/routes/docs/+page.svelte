@@ -408,7 +408,7 @@
 					<ul class="space-y-3">
 						<li class="flex items-center gap-3">
 							<CircleCheck class="h-4 w-4 flex-shrink-0 text-green-500" />
-							<p class="text-sm">Use the ES module for tree shaking in modern apps and load it async</p>
+							<p class="text-sm">Use the ES module to allow for tree shaking and load it async</p>
 						</li>
 						<li class="flex items-center gap-3">
 							<CircleCheck class="h-4 w-4 flex-shrink-0 text-green-500" />
@@ -456,7 +456,7 @@
 						</li>
 						<li class="flex items-center gap-3">
 							<CircleX class="h-4 w-4 flex-shrink-0 text-red-500" />
-							<p class="text-sm">Place two widgets on the same site</p>
+							<p class="text-sm">Place two widgets on the same page</p>
 						</li>
 					</ul>
 				</CardContent>
