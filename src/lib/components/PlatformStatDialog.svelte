@@ -97,7 +97,7 @@
 				<p class="text-muted-foreground text-center text-sm">No statistics available.</p>
 			{:else}
 				<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-					{#each statistics as stat}
+					{#each statistics as stat, index}
 						<Card.Root class="bg-background overflow-hidden border">
 							<Card.Header class="bg-muted/50 border-b">
 								<Card.Title class="text-muted-foreground -mt-2 mb-4 text-lg font-semibold"
@@ -110,7 +110,7 @@
 										<p class="text-muted-foreground text-sm">Opens</p>
 										<p class="text-xl font-semibold">{formatNumber(stat.totalPlaylightOpens)}</p>
 
-										{#if stat.playlightChange !== 0}
+										{#if stat.playlightChange !== 0 && index}
 											<div class="mt-1 flex items-center gap-1">
 												{#if stat.playlightChange > 0}
 													<TrendingUp class="h-4 w-4 text-green-500" />
@@ -131,7 +131,7 @@
 										<p class="text-muted-foreground text-sm">Referrals</p>
 										<p class="text-xl font-semibold">{formatNumber(stat.totalReferrals)}</p>
 
-										{#if stat.referralsChange !== 0}
+										{#if stat.referralsChange !== 0 && index}
 											<div class="mt-1 flex items-center gap-1">
 												{#if stat.referralsChange > 0}
 													<TrendingUp class="h-4 w-4 text-green-500" />
