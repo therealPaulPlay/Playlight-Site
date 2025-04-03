@@ -17,6 +17,7 @@
 	let { updateOnly = false, selectedGame = $bindable({}) } = $props();
 
 	let dialogOpen = $state(false);
+	let updateConfirmDialogOpen = $state(false);
 	let isLoading = $state(false);
 	let isDeleting = $state(false);
 
@@ -150,6 +151,7 @@
 			selectedGame.logo_url = logoUrl;
 			selectedGame.cover_image_url = coverImageUrl;
 			selectedGame.cover_video_url = coverVideoUrl;
+			updateConfirmDialogOpen = false; // Close password confirm popup
 			toast.success("Game updated successfully!");
 		} catch (error) {
 			toast.error("Failed to update game: " + error);
@@ -388,15 +390,10 @@
 			</div>
 		</div>
 
-		{#if updateOnly}
-			<Label for="password" class="-mb-2">Password</Label>
-			<Input type="password" placeholder="e.g. my-password-123" id="password" bind:value={passwordInput} />
-		{/if}
-
 		<Dialog.Footer>
 			<Button
 				onclick={() => {
-					updateOnly ? updateGame() : createGame();
+					updateOnly ? (updateConfirmDialogOpen = true) : createGame();
 				}}
 				disabled={isLoading ||
 					!name ||
@@ -406,8 +403,7 @@
 					(!updateOnly && !ownerEmail) ||
 					!logoUrl ||
 					!coverImageUrl ||
-					!coverVideoUrl ||
-					(updateOnly && !passwordInput)}
+					!coverVideoUrl}
 			>
 				{#if isLoading}
 					<Loader2 class="mr-2 h-4 w-4 animate-spin" />
@@ -415,6 +411,30 @@
 				{:else}
 					<Upload class="mr-2 h-4 w-4" />
 					{updateOnly ? "Update" : "Add Game"}
+				{/if}
+			</Button>
+		</Dialog.Footer>
+	</Dialog.Content>
+</Dialog.Root>
+
+<!-- Password and confirm popup (for game update only) -->
+<Dialog.Root bind:open={updateConfirmDialogOpen}>
+	<Dialog.Content>
+		<Dialog.Header>
+			<Dialog.Title class="flex items-center gap-2">
+				Update "{selectedGame?.name}"
+			</Dialog.Title>
+			<Dialog.Description>Please enter your password to confirm the update.</Dialog.Description>
+		</Dialog.Header>
+		<Label for="password" class="-mb-2">Password</Label>
+		<Input type="password" placeholder="e.g. my-password-123" bind:value={passwordInput} />
+		<Dialog.Footer>
+			<Button onclick={updateGame}>
+				{#if isLoading}
+					<Loader2 class="mr-2 h-4 w-4 animate-spin" />
+					Loading...
+				{:else}
+					Confirm
 				{/if}
 			</Button>
 		</Dialog.Footer>
