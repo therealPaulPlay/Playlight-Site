@@ -8,6 +8,7 @@
 	import { blur, fly } from "svelte/transition";
 	import gsap from "gsap";
 	import TextPlugin from "gsap/TextPlugin";
+	import TestimonialMarquee from "$lib/components/TestimonialMarquee.svelte";
 
 	const genres = ["trivia", "roleplay", "mmo", "strategy", "racing", "puzzle"];
 
@@ -104,7 +105,7 @@
 
 <main class="flex min-h-screen w-full flex-col">
 	<!-- Hero -->
-	<section class="relative flex min-h-120 w-full items-center overflow-hidden px-6 py-12 text-center">
+	<section class="relative flex min-h-120 w-full items-center overflow-hidden px-6 text-center">
 		<Spotlight />
 		<div class="pointer-events-none z-1 mx-auto max-w-2xl">
 			<h1 class="mb-3 text-4xl font-extrabold uppercase md:text-5xl" in:blur>Get your game seen.</h1>
@@ -118,9 +119,9 @@
 		</div>
 	</section>
 
-	<section class="mx-auto flex w-full max-w-7xl flex-wrap gap-8 px-4 py-16">
+	<section class="mx-auto flex w-full max-w-7xl flex-wrap gap-8 px-4 py-16 pt-20">
 		<!-- Left Box -->
-		<div class="flex flex-4 flex-wrap gap-8">
+		<div class="flex flex-1 flex-wrap gap-8">
 			<!-- Centralized Platform Side -->
 			<div class="bg-card relative min-w-42 flex-1 p-6">
 				<div class="absolute top-6 right-6">
@@ -241,7 +242,7 @@
 		</div>
 
 		<!-- Right Box -->
-		<div class="bg-card min-w-70 flex-3 p-8">
+		<div class="bg-card min-w-70 flex-1 p-8">
 			<h2 class="mb-6 text-3xl font-bold">Indie Devs, unite.</h2>
 			<p class="text-muted-foreground mb-4 text-lg">
 				Playlight is an open-source <span class="text-foreground">discovery platform</span> that you can
@@ -257,7 +258,9 @@
 		</div>
 	</section>
 
-	<section class="mx-auto flex w-full max-w-7xl flex-wrap gap-8 px-4 py-16">
+	<TestimonialMarquee />
+
+	<section class="mx-auto flex w-full max-w-7xl flex-wrap gap-8 px-4 pt-16 pb-8">
 		<!-- Left Box: Browser Mockup -->
 		<div class="bg-card min-w-[320px] flex-1 p-6 shadow-lg">
 			<!-- Browser Chrome -->
@@ -322,7 +325,7 @@
 		</div>
 	</section>
 
-	<section class="mx-auto flex w-full max-w-7xl flex-wrap gap-8 px-4 py-16">
+	<section class="mx-auto flex w-full max-w-7xl flex-wrap gap-8 px-4 py-8">
 		<!-- Left Box: Search Results Mockup -->
 		<div class="bg-card min-w-[320px] flex-1 p-6 shadow-lg">
 			<!-- Search Bar -->
@@ -363,7 +366,8 @@
 			</p>
 		</div>
 	</section>
-	<section class="mx-auto flex w-full max-w-7xl flex-wrap gap-8 px-4 py-16">
+
+	<section class="mx-auto flex w-full max-w-7xl flex-wrap gap-8 px-4 py-8">
 		<!-- Left Box: Overlapping Documents -->
 		<div class="bg-card min-w-[320px] flex-1 p-6">
 			<div class="relative mx-auto mt-6 h-60 max-w-9/10">
@@ -437,7 +441,7 @@
 	</section>
 
 	<!-- Stats (Statistical Proof)-->
-	<section bind:this={statsSection} class="border-muted! mt-16 w-full border-y">
+	<section bind:this={statsSection} class="border-muted! mt-8 w-full border-y">
 		<div class="mx-auto flex max-w-7xl flex-wrap items-center justify-around gap-8 px-4 py-8">
 			{#each stats as stat}
 				<div class="stat-item min-w-60 text-center">
