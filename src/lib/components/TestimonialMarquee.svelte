@@ -55,10 +55,6 @@
 			class="from-background pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l to-transparent"
 		></div>
 
-		<div class="mb-6 text-center">
-			<h3 class="text-muted-foreground text-sm font-medium tracking-wider uppercase">Connected through Playlight</h3>
-		</div>
-
 		{#if loading}
 			<div class="flex min-h-16 items-center space-x-16 py-4">
 				{#each Array(5) as _}

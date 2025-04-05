@@ -68,20 +68,17 @@
 					>.
 				</li>
 				<li>
-					If you interact with our platform, certain information will be collected and
-					analyzed using analytics software such as
+					If you interact with our platform, certain information will be collected and analyzed using analytics software
+					such as
 					<a href="https://policies.google.com/privacy" target="_blank" class="hover:underline">Google Analytics</a>.
 				</li>
 			</ul>
 
 			<h2 class="mt-8 mb-4 text-2xl font-semibold">6. Your Rights and Choices</h2>
-			<p>As the administrator of your site's integration, you have full control over:</p>
-			<ul class="mb-4 list-disc pl-6">
-				<li>What data is collected</li>
-				<li>How long data is retained</li>
-				<li>Who has access to the data</li>
-				<li>How data is processed</li>
-			</ul>
+			<p>
+				We respect your legal rights regarding the data we collect about you. As part of our operations, we share game
+				analytics, game and owner data with our third-party partners for processing purposes.
+			</p>
 
 			<h2 class="mt-8 mb-4 text-2xl font-semibold">7. Children's Privacy</h2>
 			<p>

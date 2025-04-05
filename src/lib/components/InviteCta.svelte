@@ -38,13 +38,16 @@
 			>
 				<div class="h-full content-center text-center">
 					<h2 class="mb-2 text-3xl font-bold uppercase">This is your invitation.</h2>
-					<p class="text-muted-foreground">Hover to learn more.</p>
+					<p class="text-muted-foreground max-sm:hidden sm:visible">Hover to learn more.</p>
+					<p class="text-muted-foreground sm:hidden">Tap to learn more.</p>
 				</div>
 				<!-- Decorative circles -->
 				<div
 					class="bg-background border-muted! absolute top-1/2 -left-2 h-4 w-4 -translate-y-1/2 rounded-full border"
 				></div>
-				<div class="bg-background border-muted! absolute top-1/2 -right-2 h-4 w-4 -translate-y-1/2 rounded-full border"></div>
+				<div
+					class="bg-background border-muted! absolute top-1/2 -right-2 h-4 w-4 -translate-y-1/2 rounded-full border"
+				></div>
 			</div>
 
 			<!-- Back face -->
