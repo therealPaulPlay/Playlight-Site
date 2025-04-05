@@ -101,7 +101,7 @@
 	}
 
 	.marquee-content {
-		animation: marqueeScroll 60s linear infinite;
+		animation: marqueeScroll 90s linear infinite;
 		display: inline-flex;
 	}
 
