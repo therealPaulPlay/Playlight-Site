@@ -16,7 +16,7 @@
 				totalPlayersGained += stat.playersGained || 0;
 				totalGamesReferred += stat.gamesReferred || 0;
 			});
-			gainImbalanceNote = totalPlayersGained > totalGamesReferred * 2 && totalPlayersGained > 500;
+			gainImbalanceNote = totalPlayersGained > totalGamesReferred * 3 && totalPlayersGained > 500;
 		}
 	});
 </script>
