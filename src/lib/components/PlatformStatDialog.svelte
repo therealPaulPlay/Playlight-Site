@@ -83,7 +83,7 @@
 	<Dialog.Content class="max-w-2xl">
 		<Dialog.Header>
 			<Dialog.Title>Monthly platform statistics</Dialog.Title>
-			<Dialog.Description>Monthly overview of total playlight opens and game referrals.</Dialog.Description>
+			<Dialog.Description>Monthly overview of total opens and game referrals.</Dialog.Description>
 		</Dialog.Header>
 
 		<div class="max-h-[50dvh] overflow-y-auto">
