@@ -78,7 +78,7 @@
 </main>
 
 {#if scrollY < 100}
-	<p class="fixed top-25 left-[50%] flex translate-x-[-50%] gap-2" transition:blur={{ duration: 150 }}>
+	<p class="fixed top-28 left-[50%] flex translate-x-[-50%] gap-2" transition:blur={{ duration: 150 }}>
 		<CornerLeftUp size={18} /> Try leaving the page
 	</p>
 {/if}

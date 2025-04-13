@@ -30,7 +30,7 @@
 			loading = true;
 			const response = await fetchWithErrorHandling(`${$BASE_API_URL}/platform/suggestions`);
 			const data = await response.json();
-			testimonials = data?.games || [];
+			testimonials = data?.games?.slice(0, 10) || [];
 		} catch (error) {
 			toast.error("Failed to load testimonials: " + error);
 		} finally {
@@ -57,7 +57,7 @@
 
 		{#if loading}
 			<div class="flex min-h-16 items-center space-x-16 py-4">
-				{#each Array(5) as _}
+				{#each Array(10) as _}
 					<div class="flex animate-pulse items-center space-x-3">
 						<div class="bg-muted h-10 w-10"></div>
 						<div class="bg-muted h-5 w-32"></div>

@@ -52,13 +52,15 @@
 	const configExampleLines = [
 		"<script>",
 		"  // ...After loading the SDK and CSS",
+		"  // Tip: Only include the keys with non-default values",
 		"  await playlightSDK.init({",
 		"    button: {",
 		"      position: 'bottom-right',",
 		"      visible: true",
 		"    },",
 		"    exitIntent: {",
-		"      enabled: true",
+		"      enabled: true,",
+		"      immediate: false",
 		"    }",
 		"  });",
 		"<\/script>",
@@ -202,7 +204,7 @@
 				<TabsList class="mb-6">
 					<TabsTrigger value="configuration">Object</TabsTrigger>
 					<TabsTrigger value="button">Button</TabsTrigger>
-					<TabsTrigger value="exitIntent">Exit Intent</TabsTrigger>
+					<TabsTrigger value="exitIntent">Exit intent</TabsTrigger>
 				</TabsList>
 
 				<TabsContent value="configuration">
@@ -256,8 +258,7 @@
 								<div class="grid gap-2">
 									<h4 class="text-sm font-medium">visible</h4>
 									<p class="text-muted-foreground text-sm">
-										Controls whether the button is visible. Default is <code class="text-primary">true</code>. Set to
-										<code class="text-primary">false</code> if you want to trigger the discovery UI programmatically.
+										Controls whether the button is visible. Default is <code class="text-primary">true</code>.
 									</p>
 								</div>
 							</div>
@@ -270,7 +271,7 @@
 						<CardHeader>
 							<CardTitle>Exit intent</CardTitle>
 							<CardDescription>
-								Configure the exit intent feature, which shows the discovery UI when users are about to leave.
+								Configure the exit intent feature, which shows the Discovery when users are about to leave.
 							</CardDescription>
 						</CardHeader>
 						<CardContent>
@@ -278,15 +279,26 @@
 								<div class="grid gap-2">
 									<h4 class="text-sm font-medium">enabled</h4>
 									<p class="text-muted-foreground text-sm">
-										Controls whether the discovery UI opens automatically when users move their mouse towards the
-										browser toolbar (indicating they might leave). Default is <code class="text-primary">true</code>.
+										Whether to show a notification-like bar – which prompts the user to open the Discovery – when they
+										move their mouse towards the browser toolbar (indicating they might leave). Default is <code
+											class="text-primary">true</code
+										>.
+									</p>
+								</div>
+
+								<div class="grid gap-2">
+									<h4 class="text-sm font-medium">immediate</h4>
+									<p class="text-muted-foreground text-sm">
+										Instead of showing a notification-like bar, immediately open the Discovery. Default is <code
+											class="text-primary">false</code
+										>.
 									</p>
 								</div>
 
 								<div class="mt-4 border border-yellow-500/20 bg-yellow-500/10 p-4">
 									<h4 class="mb-1 text-sm font-medium">Note</h4>
 									<p class="text-muted-foreground text-sm">
-										The exit intent setting in the config will override any settings changed in the discovery UI itself.
+										You can give the user the option to configure this via your game's settings.
 									</p>
 								</div>
 							</div>
@@ -302,7 +314,7 @@
 				<Code2 class="text-primary h-6 w-6" />
 				<h2 class="text-2xl font-bold">API reference</h2>
 			</div>
-			<p class="text-muted-foreground mb-6">Control the Playlight discovery UI programmatically with these methods.</p>
+			<p class="text-muted-foreground mb-6">Control the Playlight Discovery UI programmatically with these methods.</p>
 
 			<Card class="mb-8">
 				<CardHeader>
@@ -325,12 +337,12 @@
 						</div>
 						<div>
 							<h3 class="mb-2 text-lg font-semibold">setDiscovery(visible?)</h3>
-							<p class="text-muted-foreground mb-2">Programmatically show or hide the discovery UI.</p>
+							<p class="text-muted-foreground mb-2">Programmatically show or hide the Discovery.</p>
 							<Card>
 								<CardContent class="border p-4">
 									<p class="text-sm">
 										<span class="font-medium">Parameters:</span> <code class="text-primary">visible</code> - Boolean to show
-										or hide the discovery UI (defaults to true)
+										or hide the Discovery UI (defaults to true)
 									</p>
 								</CardContent>
 							</Card>
@@ -420,7 +432,7 @@
 						<li class="flex items-center gap-3">
 							<CircleCheck class="h-4 w-4 flex-shrink-0 text-green-500" />
 							<p class="text-sm">
-								Create your own custom discovery button using the <code class="text-primary">.setDiscovery()</code> method
+								Create your own custom Discovery button using the <code class="text-primary">.setDiscovery()</code> method
 							</p>
 						</li>
 						<li class="flex items-center gap-3">
@@ -438,7 +450,7 @@
 			<!-- Don'ts Card -->
 			<Card>
 				<CardHeader class="border-b border-red-500/20 bg-red-500/10 py-4">
-					<CardTitle>Dont</CardTitle>
+					<CardTitle>Don't</CardTitle>
 				</CardHeader>
 				<CardContent class="pt-4">
 					<ul class="space-y-3">
@@ -448,7 +460,7 @@
 						</li>
 						<li class="flex items-center gap-3">
 							<CircleX class="h-4 w-4 flex-shrink-0 text-red-500" />
-							<p class="text-sm">Make it difficult for players to bring up the discovery</p>
+							<p class="text-sm">Make it difficult for players to bring up the Discovery</p>
 						</li>
 						<li class="flex items-center gap-3">
 							<CircleX class="h-4 w-4 flex-shrink-0 text-red-500" />
