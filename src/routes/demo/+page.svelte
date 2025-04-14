@@ -5,29 +5,10 @@
 	import { blur } from "svelte/transition";
 
 	let scrollY = $state(0);
-
-	// Load the SDK for demo
-	let playlightSDK;
-
-	onMount(async () => {
-		try {
-			const module = await import("https://sdk.playlight.dev/playlight-sdk.es.js");
-			playlightSDK = module.default;
-			await playlightSDK.init();
-		} catch (error) {
-			console.error("Error loading the Playlight SDK:", error);
-		}
-	});
 </script>
 
 <svelte:head>
 	<title>Demo</title>
-	<link
-		rel="stylesheet"
-		href="https://sdk.playlight.dev/playlight-sdk.css"
-		media="print"
-		onload={(e) => (e.target.media = "all")}
-	/>
 </svelte:head>
 
 <svelte:window
@@ -36,7 +17,7 @@
 	}}
 />
 
-<main class="flex md:mt-30 mb-10 min-h-[calc(100vh-85px)] w-full flex-col items-center justify-center">
+<main class="mb-10 flex min-h-[calc(100vh-85px)] w-full flex-col items-center justify-center md:mt-30">
 	<div class="z-10 flex flex-col items-center justify-center">
 		<h1 class="text-5xl font-bold uppercase md:text-8xl">[Your Game]</h1>
 		<div class="relative mt-20 flex flex-col gap-4 text-center">
@@ -48,7 +29,7 @@
 				class="w-60"
 				variant="outline"
 				onclick={() => {
-					playlightSDK?.setDiscovery(true);
+					window.playlightSDK?.setDiscovery(true);
 				}}
 			>
 				More Games <Joystick />
@@ -65,7 +46,7 @@
 	<video
 		width="1280"
 		height="720"
-		class="absolute h-full top-30 w-full object-cover blur-3xl brightness-[25%]"
+		class="absolute top-30 h-full w-full object-cover blur-3xl brightness-[25%]"
 		playsinline
 		webkit-playsinline
 		autoplay

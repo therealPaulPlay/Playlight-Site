@@ -14,7 +14,41 @@
 		await checkAuthenticationStatus();
 		if (!$isAuthenticated && page.url.pathname == "/dashboard") goto("/login");
 	});
+
+	// Load the SDK for the demo
+	const disabledConfig = {
+		exitIntent: {
+			enabled: false,
+		},
+		button: {
+			visible: false,
+		},
+	};
+
+	onMount(async () => {
+		try {
+			const module = await import("https://sdk.playlight.dev/playlight-sdk.es.js");
+			window.playlightSDK = module.default;
+			await window.playlightSDK.init(page.url.pathname == "/demo" ? undefined : disabledConfig);
+		} catch (error) {
+			console.error("Error loading the Playlight SDK:", error);
+		}
+	});
+
+	$effect(() => {
+		if (page.url.pathname == "/demo") window.playlightSDK?.setConfig();
+		if (page.url.pathname != "/demo") window.playlightSDK?.setConfig(disabledConfig);
+	});
 </script>
+
+<svelte:head>
+	<link
+		rel="stylesheet"
+		href="https://sdk.playlight.dev/playlight-sdk.css"
+		media="print"
+		onload={(e) => (e.target.media = "all")}
+	/>
+</svelte:head>
 
 <!-- Nav bar -->
 <nav class="sticky top-0 z-90 w-full">
