@@ -226,9 +226,9 @@
 <Dialog.Root bind:open={dialogOpen}>
 	<Dialog.Trigger class={buttonVariants({ variant: "outline" })}>
 		{#if !updateOnly}
-			Add Game <Gamepad2 class="ml-2" />
+			Add Game <Gamepad2 />
 		{:else}
-			Update <Settings2 class="ml-2" />
+			Update <Settings2 />
 		{/if}
 	</Dialog.Trigger>
 
@@ -316,7 +316,7 @@
 							onclick={() => resetFile("logo")}
 							disabled={isDeleting || (updateOnly && !noteRead)}
 						>
-							<X class="h-4 w-4" />
+							<X />
 						</Button>
 					{/if}
 				</div>
@@ -344,7 +344,7 @@
 							onclick={() => resetFile("cover")}
 							disabled={isDeleting || (updateOnly && !noteRead)}
 						>
-							<X class="h-4 w-4" />
+							<X />
 						</Button>
 					{/if}
 				</div>
@@ -372,7 +372,7 @@
 							onclick={() => resetFile("video")}
 							disabled={isDeleting || (updateOnly && !noteRead)}
 						>
-							<X class="h-4 w-4" />
+							<X />
 						</Button>
 					{/if}
 				</div>
@@ -406,10 +406,10 @@
 					!coverVideoUrl}
 			>
 				{#if isLoading}
-					<Loader2 class="mr-2 h-4 w-4 animate-spin" />
+					<Loader2 class="mr-2 animate-spin" />
 					Loading...
 				{:else}
-					<Upload class="mr-2 h-4 w-4" />
+					<Upload class="mr-2" />
 					{updateOnly ? "Update" : "Add Game"}
 				{/if}
 			</Button>
@@ -431,7 +431,7 @@
 		<Dialog.Footer>
 			<Button onclick={updateGame}>
 				{#if isLoading}
-					<Loader2 class="mr-2 h-4 w-4 animate-spin" />
+					<Loader2 class="mr-2 animate-spin" />
 					Loading...
 				{:else}
 					Confirm

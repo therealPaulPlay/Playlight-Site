@@ -90,7 +90,7 @@
 				<CardFooter>
 					<Button type="submit" class="w-full" disabled={!isValid || isSubmitting} style="cursor: pointer">
 						{#if isSubmitting}
-							<Loader2 class="mr-2 h-4 w-4 animate-spin" />
+							<Loader2 class="mr-2 animate-spin" />
 							Sending...
 						{:else}
 							Join<Rocket />

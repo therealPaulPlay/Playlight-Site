@@ -28,6 +28,7 @@
 	import FileCleanupDialog from "$lib/components/FileCleanupDialog.svelte";
 	import PlatformStatDialog from "$lib/components/PlatformStatDialog.svelte";
 	import PerformanceWarning from "$lib/components/PerformanceWarning.svelte";
+	import GameFeatureDialog from "$lib/components/GameFeatureDialog.svelte";
 
 	// State management
 	let statTimeframe = $state(7);
@@ -280,10 +281,10 @@
 				</CardContent>
 			</Card>
 
-			<!-- Important Actions and dialogs remain unchanged -->
+			<!-- Actions -->
 			<Card>
 				<CardHeader>
-					<CardTitle>Site Actions</CardTitle>
+					<CardTitle>Site actions</CardTitle>
 				</CardHeader>
 				<CardContent class="space-y-4">
 					<div class="flex items-center justify-between gap-2">
@@ -292,6 +293,13 @@
 							<p class="text-muted-foreground text-sm">Change information regarding this game.</p>
 						</div>
 						<GameCreationDialog updateOnly={true} bind:selectedGame />
+					</div>
+					<div class="flex items-center justify-between gap-2">
+						<div>
+							<h3 class="font-medium">Feature a game</h3>
+							<p class="text-muted-foreground text-sm">Highlight a Playlight game on this site.</p>
+						</div>
+						<GameFeatureDialog bind:selectedGame />
 					</div>
 					<div class="flex items-center justify-between gap-2">
 						<div>
@@ -324,8 +332,10 @@
 				Playlight script from your site manually. This action cannot be undone.
 			</DialogDescription>
 		</DialogHeader>
-		<Label for="password" class="-mb-2">Password</Label>
-		<Input type="password" placeholder="password" bind:value={passwordInput} />
+		<div class="grid gap-2 py-4">
+			<Label for="password">Password</Label>
+			<Input type="password" placeholder="password" bind:value={passwordInput} />
+		</div>
 		<DialogFooter>
 			<Button variant="destructive" onclick={handleDelete}>Remove</Button>
 		</DialogFooter>
