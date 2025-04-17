@@ -65,17 +65,17 @@
 
 			<form onsubmit={handleSubmit}>
 				<CardContent class="space-y-6">
-					<div class="space-y-2">
+					<div class="grid gap-2">
 						<Label for="email">Email</Label>
 						<Input type="email" id="email" placeholder="you@yourstudio.com" bind:value={formData.email} required />
 					</div>
 
-					<div class="space-y-2">
+					<div class="grid gap-2">
 						<Label for="website">Website</Label>
 						<Input type="url" id="website" placeholder="https://yourgame.com" bind:value={formData.website} required />
 					</div>
 
-					<div class="space-y-2">
+					<div class="grid gap-2">
 						<Label for="message">Tell us about your game</Label>
 						<Textarea
 							id="message"
