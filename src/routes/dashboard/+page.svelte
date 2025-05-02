@@ -128,7 +128,7 @@
 
 <svelte:document onclick={handleClickOutside} />
 
-<main class="bg-background flex h-screen">
+<main class="bg-background flex min-h-screen">
 	<!-- Mobile Menu Button -->
 	<Button data-menu-button class="fixed top-22 left-4 z-30 md:hidden" onclick={toggleSidebar}>
 		<Menu size={20} />
@@ -229,7 +229,7 @@
 	{/if}
 
 	<!-- Center View -->
-	<div class="w-full overflow-x-hidden overflow-y-auto p-8">
+	<div class="w-full overflow-x-hidden p-8">
 		{#if selectedGame}
 			<div class="mb-8 flex flex-wrap items-center justify-between gap-4">
 				<div class="flex gap-4">
