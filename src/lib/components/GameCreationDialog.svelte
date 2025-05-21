@@ -285,10 +285,10 @@
 				<Textarea
 					id="description"
 					bind:value={description}
-					placeholder="Describe your game (max 300 characters)"
-					maxlength="300"
+					placeholder="Describe the game (max. 200 characters)"
+					maxlength="200"
 				/>
-				<p class="text-sm text-gray-500">{description.length}/300</p>
+				<p class="text-sm text-gray-500">{description.length}/200</p>
 			</div>
 
 			{#if updateOnly}
