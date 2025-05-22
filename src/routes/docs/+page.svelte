@@ -464,7 +464,7 @@
 						</li>
 						<li class="flex items-center gap-3">
 							<CircleX class="h-4 w-4 flex-shrink-0 text-red-500" />
-							<p class="text-sm">Only load the SDK on some of the site's pages</p>
+							<p class="text-sm">Only load the SDK on some of the site's pages or after interactions</p>
 						</li>
 						<li class="flex items-center gap-3">
 							<CircleX class="h-4 w-4 flex-shrink-0 text-red-500" />
