@@ -100,7 +100,7 @@
 			</form>
 		</Card>
 		<Card class="border-2">
-			<p class="text-muted-foreground bg-muted p-2 text-sm italic">
+			<p class="text-muted-foreground bg-muted p-2 text-center text-sm">
 				Prefer sending an email directly? <a href="mailto:paulplaystudio@gmail.com" class="underline">Message us here</a
 				>.
 			</p>
