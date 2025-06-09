@@ -99,8 +99,14 @@
 				</CardFooter>
 			</form>
 		</Card>
+		<Card class="border-2">
+			<p class="text-muted-foreground bg-muted p-2 text-sm italic">
+				Prefer sending an email directly? <a href="mailto:paulplaystudio@gmail.com" class="underline">Message us here</a
+				>.
+			</p>
+		</Card>
 
-		<p class="text-muted-foreground mt-4 text-center text-sm">
+		<p class="text-muted-foreground mt-4 text-center text-sm opacity-50">
 			By submitting this form, you agree to our Terms and Privacy Policy.
 		</p>
 	</div>
