@@ -148,7 +148,7 @@
 			</div>
 			<!-- Sidebar scroll container -->
 			<div class="max-h-[calc(100dvh-200px)] overflow-y-auto">
-				<h3 class="text-muted-foreground mb-4 text-sm font-medium">Admin Tools</h3>
+				<h3 class="text-muted-foreground mb-4 text-sm font-medium">Admin tools</h3>
 				{#if $isAdmin}
 					<div class="space-y-2">
 						<GameCreationDialog />
@@ -162,7 +162,7 @@
 						>.
 					</p>
 				{/if}
-				<h3 class="text-muted-foreground mt-4 mb-4 text-sm font-medium">{$isAdmin ? "All Games" : "Your Games"}</h3>
+				<h3 class="text-muted-foreground mt-4 mb-4 text-sm font-medium">{$isAdmin ? "All games" : "Your games"}</h3>
 				<div class="space-y-2">
 					<search class="flex gap-2">
 						<Input

@@ -232,7 +232,7 @@
 		{/if}
 	</Dialog.Trigger>
 
-	<Dialog.Content class="max-h-[75dvh] max-w-2xl overflow-y-auto">
+	<Dialog.Content class="max-h-[75dvh] w-2xl max-w-full overflow-y-auto">
 		<Dialog.Header>
 			<Dialog.Title>{updateOnly ? "Update game" : "Add game"}</Dialog.Title>
 			<Dialog.Description
@@ -327,7 +327,7 @@
 						<span slot="label">Drop or click to upload logo</span>
 					</UploadDropzone>
 				{:else}
-					<div class="flex items-center gap-2 border p-2">
+					<div class="flex items-center gap-2 overflow-hidden border p-2">
 						<img src={logoUrl} alt="Logo preview" class="h-10 w-10 overflow-hidden object-cover" />
 						<span class="truncate text-sm">{logoUrl}</span>
 					</div>
@@ -355,7 +355,7 @@
 						<span slot="label">Drop or click to upload cover image</span>
 					</UploadDropzone>
 				{:else}
-					<div class="flex items-center gap-2 border p-2">
+					<div class="flex items-center gap-2 overflow-hidden border p-2">
 						<img src={coverImageUrl} alt="Cover preview" class="h-10 w-10 overflow-hidden object-cover" />
 						<span class="truncate text-sm">{coverImageUrl}</span>
 					</div>
@@ -383,7 +383,7 @@
 						<span slot="label">Drop or click to upload cover video</span>
 					</UploadDropzone>
 				{:else}
-					<div class="flex items-center gap-2 border p-2">
+					<div class="flex items-center gap-2 overflow-hidden border p-2">
 						<span class="truncate text-sm">{coverVideoUrl}</span>
 					</div>
 				{/if}
