@@ -187,7 +187,7 @@
 					</Tabs>
 				</CardContent>
 			</Card>
-			<div class="bg-muted text-muted-foreground mb-8 p-4">
+			<div class="bg-muted text-muted-foreground mb-8 p-4 text-sm">
 				<p>Congrats! This is all you need to integrate Playlight with its default settings.</p>
 			</div>
 		</section>
@@ -326,7 +326,7 @@
 						<div>
 							<h3 class="mb-2 text-lg font-semibold">init(config?)</h3>
 							<p class="text-muted-foreground mb-2">Initializes the Playlight SDK with the provided configuration.</p>
-							<Card>
+							<Card class="border-0 py-0">
 								<CardContent class="border p-4">
 									<p class="text-sm">
 										<span class="font-medium">Parameters:</span> <code class="text-primary">config</code> - Configuration
@@ -338,7 +338,7 @@
 						<div>
 							<h3 class="mb-2 text-lg font-semibold">setDiscovery(visible?)</h3>
 							<p class="text-muted-foreground mb-2">Programmatically show or hide the Discovery.</p>
-							<Card>
+							<Card class="border-0 py-0">
 								<CardContent class="border p-4">
 									<p class="text-sm">
 										<span class="font-medium">Parameters:</span> <code class="text-primary">visible</code> - Boolean to show
@@ -350,7 +350,7 @@
 						<div>
 							<h3 class="mb-2 text-lg font-semibold">setConfig(config?)</h3>
 							<p class="text-muted-foreground mb-2">Change the configuration at any point.</p>
-							<Card>
+							<Card class="border-0 py-0">
 								<CardContent class="border p-4">
 									<p class="text-sm">
 										<span class="font-medium">Parameters:</span> <code class="text-primary">config</code> - Configuration
@@ -412,8 +412,8 @@
 			<p class="text-muted-foreground mb-6">What you should and shouldn't do when integrating Playlight.</p>
 
 			<!-- Dos Card -->
-			<Card class="mb-6">
-				<CardHeader class="border-b border-green-500/20 bg-green-500/10 py-4">
+			<Card class="mb-6 pt-0">
+				<CardHeader class="border-b border-green-500/20 bg-green-500/10 py-4! pt-6!">
 					<CardTitle>Do</CardTitle>
 				</CardHeader>
 				<CardContent class="pt-4">
@@ -448,8 +448,8 @@
 			</Card>
 
 			<!-- Don'ts Card -->
-			<Card>
-				<CardHeader class="border-b border-red-500/20 bg-red-500/10 py-4">
+			<Card class="pt-0">
+				<CardHeader class="border-b border-red-500/20 bg-red-500/10 py-4! pt-6!">
 					<CardTitle>Don't</CardTitle>
 				</CardHeader>
 				<CardContent class="pt-4">

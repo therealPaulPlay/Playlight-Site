@@ -109,12 +109,12 @@
 		<Spotlight />
 		<div class="pointer-events-none z-1 mx-auto max-w-2xl">
 			<h1 class="mb-3 text-4xl font-extrabold uppercase md:text-5xl" in:blur>Get your game seen.</h1>
-			<p class="text-muted-foreground mb-9 text-lg max-md:max-w-72 mx-auto" in:blur>A discovery platform, built into your own game.</p>
+			<p class="text-muted-foreground mx-auto mb-9 text-lg max-md:max-w-72" in:blur>
+				A discovery platform, built into your own game.
+			</p>
 			<div class="align-center mx-auto flex max-w-40 flex-col justify-center">
-				<Button class="pointer-events-auto mb-4 px-6 py-3 font-semibold" href="/join">Join Playlight</Button>
-				<Button class="pointer-events-auto mb-4 px-6 py-3 font-semibold" variant="outline" href="/demo"
-					>Launch Demo</Button
-				>
+				<Button class="pointer-events-auto mb-4 px-6 py-3" href="/join">Join Playlight</Button>
+				<Button class="pointer-events-auto mb-4 px-6 py-3" variant="outline" href="/demo">Launch Demo</Button>
 			</div>
 		</div>
 	</section>
@@ -269,7 +269,7 @@
 					<!-- Address Bar -->
 					<div class="bg-background flex items-center gap-2 rounded px-3 py-2">
 						<Search class="text-muted-foreground h-4 w-4" />
-						<span class="text-muted-foreground text-sm">yourgame.com</span>
+						<span class="text-muted-foreground text-sm">your-game.com</span>
 					</div>
 				</div>
 
@@ -343,7 +343,7 @@
 					class="bg-card hover:bg-muted/50 rounded bg-linear-[120deg,rgba(255,255,255,0.15),transparent_90%] p-4 transition-colors"
 				>
 					<h3 class="text-primary mb-1 text-lg font-semibold">Your Game - Play now</h3>
-					<div class="text-muted-foreground text-sm">yourgame.com</div>
+					<div class="text-muted-foreground text-sm">your-game.com</div>
 					<p class="text-muted-foreground mt-1 text-sm">Play your game online - Easily findable in search...</p>
 				</div>
 

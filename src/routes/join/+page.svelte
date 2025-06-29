@@ -55,7 +55,7 @@
 
 <main class="flex min-h-screen w-full items-center justify-center px-4 py-16">
 	<div in:blur={{ duration: 400 }} class="w-full max-w-xl">
-		<Card class="border-2">
+		<Card>
 			<CardHeader>
 				<CardTitle class="text-3xl font-bold uppercase">Join Playlight.</CardTitle>
 				<CardDescription>
@@ -67,12 +67,12 @@
 				<CardContent class="space-y-6">
 					<div class="grid gap-2">
 						<Label for="email">Email</Label>
-						<Input type="email" id="email" placeholder="you@yourstudio.com" bind:value={formData.email} required />
+						<Input type="email" id="email" placeholder="name@example.com" bind:value={formData.email} required />
 					</div>
 
 					<div class="grid gap-2">
 						<Label for="website">Website</Label>
-						<Input type="url" id="website" placeholder="https://yourgame.com" bind:value={formData.website} required />
+						<Input type="url" id="website" placeholder="https://your-game.com" bind:value={formData.website} required />
 					</div>
 
 					<div class="grid gap-2">
@@ -87,7 +87,7 @@
 					</div>
 				</CardContent>
 
-				<CardFooter>
+				<CardFooter class="mt-6">
 					<Button type="submit" class="w-full" disabled={!isValid || isSubmitting} style="cursor: pointer">
 						{#if isSubmitting}
 							<Loader2 class="mr-2 animate-spin" />
@@ -99,12 +99,9 @@
 				</CardFooter>
 			</form>
 		</Card>
-		<Card class="border-2">
-			<p class="text-muted-foreground bg-muted p-2 text-center text-sm">
-				Prefer sending an email directly? <a href="mailto:paulplaystudio@gmail.com" class="underline">Message us here</a
-				>.
-			</p>
-		</Card>
+		<p class="bg-card text-muted-foreground bg-muted p-2 text-center text-sm">
+			Prefer sending an email directly? <a href="mailto:paulplaystudio@gmail.com" class="underline">Message us here</a>.
+		</p>
 
 		<p class="text-muted-foreground mt-4 text-center text-sm opacity-50">
 			By submitting this form, you agree to our Terms and Privacy Policy.

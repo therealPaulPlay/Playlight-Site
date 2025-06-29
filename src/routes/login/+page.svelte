@@ -128,10 +128,15 @@
 		<form onsubmit={handleSubmit}>
 			<CardContent class="min-w-80 space-y-4">
 				{#if currentView === "signup"}
-					<div class="bg-muted p-4">
-						<p>
-							<TriangleAlert class="mb-2" /> This signup form is for developers already participating in Playlight. If you
-							haven't joined yet, please <a class="hover:underline" href="/join">apply first</a>.
+					<div class="border border-yellow-500/20 bg-yellow-500/10 p-4" transition:slide>
+						<h4 class="mb-1 inline-flex items-center gap-2 text-sm font-medium">
+							<TriangleAlert size={14} />Note
+						</h4>
+						<p class="text-muted-foreground text-sm">
+							This signup form is for developers already participating in Playlight. If you haven't joined yet, please <a
+								class="hover:underline"
+								href="/join">apply first</a
+							>.
 						</p>
 					</div>
 					<div class="space-y-2">
@@ -166,14 +171,14 @@
 					<div class="flex items-center space-x-2">
 						<Checkbox id="terms" bind:checked={acceptedTerms} disabled={loading} />
 						<Label for="terms" class="text-sm">
-							I agree to the <a href="/terms" class="text-primary hover:underline">Terms</a> and
+							I agree to the<a href="/terms" class="text-primary hover:underline">Terms</a>and
 							<a href="/privacy" class="text-primary hover:underline">Privacy Policy</a>
 						</Label>
 					</div>
 				{/if}
 			</CardContent>
 
-			<CardFooter class="flex flex-col space-y-4">
+			<CardFooter class="mt-6 flex flex-col space-y-4">
 				<Button type="submit" class="w-full cursor-pointer" disabled={loading}>
 					{#if loading}
 						Please wait...

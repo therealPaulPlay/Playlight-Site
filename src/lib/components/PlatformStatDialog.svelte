@@ -80,7 +80,7 @@
 		<ChartBar />
 	</Dialog.Trigger>
 
-	<Dialog.Content class="max-w-2xl">
+	<Dialog.Content class="w-2xl! max-w-full!">
 		<Dialog.Header>
 			<Dialog.Title>Monthly platform statistics</Dialog.Title>
 			<Dialog.Description>Monthly overview of total opens and game referrals.</Dialog.Description>
@@ -98,10 +98,9 @@
 			{:else}
 				<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
 					{#each statistics as stat, index}
-						<Card.Root class="bg-background overflow-hidden border">
-							<Card.Header class="bg-muted/50 border-b">
-								<Card.Title class="text-muted-foreground -mt-2 mb-4 text-lg font-semibold"
-									>{stat.monthName} {stat.year}</Card.Title
+						<Card.Root class="bg-background overflow-hidden border py-0">
+							<Card.Header class="bg-muted/50 border-b py-2! pt-3!">
+								<Card.Title class="text-muted-foreground text-lg font-semibold">{stat.monthName} {stat.year}</Card.Title
 								>
 							</Card.Header>
 							<Card.Content class="p-4">

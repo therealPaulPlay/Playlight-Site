@@ -334,7 +334,7 @@
 		</DialogHeader>
 		<div class="grid gap-2 py-4">
 			<Label for="password">Password</Label>
-			<Input type="password" placeholder="password" bind:value={passwordInput} />
+			<Input type="password" placeholder="your-password" bind:value={passwordInput} />
 		</div>
 		<DialogFooter>
 			<Button variant="destructive" onclick={handleDelete}>Remove</Button>

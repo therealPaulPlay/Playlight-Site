@@ -232,7 +232,7 @@
 		{/if}
 	</Dialog.Trigger>
 
-	<Dialog.Content class="max-h-[75dvh] w-2xl max-w-full overflow-y-auto">
+	<Dialog.Content class="max-h-[75dvh] w-2xl! max-w-full! overflow-y-auto">
 		<Dialog.Header>
 			<Dialog.Title>{updateOnly ? "Update game" : "Add game"}</Dialog.Title>
 			<Dialog.Description
@@ -264,7 +264,7 @@
 			<div class="grid gap-2" class:disabled={updateOnly}>
 				<Label for="category">Category</Label>
 				<Select type="single" bind:value={category} disabled={updateOnly}>
-					<SelectTrigger>
+					<SelectTrigger class="w-full">
 						<span>{category || "Select a category"}</span>
 					</SelectTrigger>
 					<SelectContent>

@@ -1,6 +1,5 @@
 <script>
 	import { cn } from "$lib/utils.js";
-
 	let {
 		ref = $bindable(null),
 		class: className,
@@ -9,11 +8,11 @@
 	} = $props();
 </script>
 
-<p
+<div
 	bind:this={ref}
-	data-slot="card-description"
-	class={cn("text-muted-foreground text-sm", className)}
+	data-slot="select-label"
+	class={cn("text-muted-foreground px-2 py-1.5 text-xs", className)}
 	{...restProps}
 >
 	{@render children?.()}
-</p>
+</div>
