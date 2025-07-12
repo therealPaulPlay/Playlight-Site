@@ -80,7 +80,7 @@
 						<Textarea
 							id="message"
 							placeholder="What makes your browser game special?"
-							class="min-h-[120px]"
+							class="min-h-[120px] bg-background"
 							bind:value={formData.message}
 							required
 						/>
