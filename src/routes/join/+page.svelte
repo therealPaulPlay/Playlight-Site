@@ -7,7 +7,7 @@
 	import { Input } from "$lib/components/ui/input";
 	import { Textarea } from "$lib/components/ui/textarea";
 	import { Label } from "$lib/components/ui/label";
-	import { Loader2, Rocket } from "lucide-svelte";
+	import { Loader2, Rocket, TriangleAlert } from "lucide-svelte";
 	import { enhance } from "$app/forms";
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
 	import { goto } from "$app/navigation";
@@ -55,6 +55,14 @@
 
 <main class="flex min-h-screen w-full items-center justify-center px-4 py-16">
 	<div in:blur={{ duration: 400 }} class="w-full max-w-xl">
+		<div
+			class="order mb-4 flex w-full items-center justify-center gap-2 border border-yellow-500/20 bg-yellow-500/10 p-4 text-sm"
+		>
+			<TriangleAlert class="mr-2" />
+			<p>
+				This form is only for game owners, developers, or their associates — not players. Please do not misuse it.
+			</p>
+		</div>
 		<Card>
 			<CardHeader>
 				<CardTitle class="text-3xl font-bold uppercase">Join Playlight.</CardTitle>
@@ -80,7 +88,7 @@
 						<Textarea
 							id="message"
 							placeholder="What makes your browser game special?"
-							class="min-h-[120px] bg-background"
+							class="bg-background min-h-[120px]"
 							bind:value={formData.message}
 							required
 						/>
