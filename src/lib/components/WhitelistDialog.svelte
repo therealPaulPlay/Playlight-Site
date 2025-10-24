@@ -3,7 +3,7 @@
 	import * as Dialog from "$lib/components/ui/dialog/index.js";
 	import { Input } from "$lib/components/ui/input/index.js";
 	import { Label } from "$lib/components/ui/label/index.js";
-	import { Plus, Trash2, UserCog } from "lucide-svelte";
+	import { ListCheck, Plus, Trash2 } from "lucide-svelte";
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
 	import { BASE_API_URL } from "$lib/stores/configStore";
 	import { onMount } from "svelte";
@@ -78,7 +78,7 @@
 </script>
 
 <Dialog.Root bind:open={dialogOpen}>
-	<Dialog.Trigger class={buttonVariants({ variant: "outline" })}>Whitelist <UserCog /></Dialog.Trigger>
+	<Dialog.Trigger class={buttonVariants({ variant: "outline" })}>Whitelist <ListCheck /></Dialog.Trigger>
 	<Dialog.Content>
 		<Dialog.Header>
 			<Dialog.Title>Manage whitelist</Dialog.Title>

@@ -3,7 +3,7 @@
 	import * as Dialog from "$lib/components/ui/dialog/index.js";
 	import { Input } from "$lib/components/ui/input/index.js";
 	import { Label } from "$lib/components/ui/label/index.js";
-	import { Trash2, Settings, LogOut } from "lucide-svelte";
+	import { Trash2, Settings, LogOut, UserCog } from "lucide-svelte";
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
 	import { BASE_API_URL } from "$lib/stores/configStore";
 	import { signOut } from "$lib/utils/checkAuthentication";
@@ -37,7 +37,7 @@
 </script>
 
 <Dialog.Root bind:open={dialogOpen}>
-	<Dialog.Trigger class={buttonVariants({ variant: "ghost" })}><Settings /></Dialog.Trigger>
+	<Dialog.Trigger class={buttonVariants({ variant: "ghost" })}><UserCog /></Dialog.Trigger>
 	<Dialog.Content>
 		<Dialog.Header>
 			<Dialog.Title>Account settings</Dialog.Title>
@@ -51,7 +51,7 @@
 					signOut();
 					toast.info("Signed out.");
 					goto("/");
-				}}>Sign out<LogOut /></Button
+				}}>Log out<LogOut /></Button
 			>
 			<Button
 				variant="destructive"

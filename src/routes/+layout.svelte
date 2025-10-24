@@ -8,6 +8,7 @@
 	import { isAuthenticated } from "$lib/stores/accountStore";
 	import { page } from "$app/state";
 	import { goto } from "$app/navigation";
+
 	let { children } = $props();
 
 	onMount(async () => {
@@ -58,7 +59,9 @@
 		</a>
 		<div class="mt-2 flex items-center justify-evenly gap-5 text-nowrap md:mr-5">
 			<a href="/docs" class="hover:underline max-md:hidden"> Docs </a>
-			<a href="/login" class="hover:underline"> Login </a>
+			<a href={$isAuthenticated ? "/dashboard" : "/login"} class="hover:underline">
+				{$isAuthenticated ? "Dashboard" : "Login"}
+			</a>
 			<Button href="/join">Join</Button>
 		</div>
 	</div>
