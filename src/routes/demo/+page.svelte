@@ -35,7 +35,7 @@
 				More Games <Joystick />
 			</Button>
 			<p class="mx-auto flex gap-2">
-				Custom button (optional) <CornerRightUp size={18} />
+				Custom button <CornerRightUp size={18} />
 			</p>
 		</div>
 		<p class="mt-40 mr-auto mb-4 ml-8 flex gap-2 max-md:hidden">
@@ -63,6 +63,3 @@
 		<CornerLeftUp size={18} /> Try leaving the page
 	</p>
 {/if}
-<p class="fixed right-10 bottom-20 z-10 flex gap-2">
-	Built-in button (optional) <CornerRightDown size={18} style="margin-top: 5px;" />
-</p>

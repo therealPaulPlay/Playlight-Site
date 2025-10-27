@@ -52,15 +52,15 @@
 	const configExampleLines = [
 		"<script>",
 		"  // ...After loading the SDK and CSS",
-		"  // Tip: Only include the keys with non-default values",
+		"  // Only include the keys with non-default values!",
 		"  await playlightSDK.init({",
-		"    button: {",
-		"      position: 'bottom-right',",
-		"      visible: true",
-		"    },",
 		"    exitIntent: {",
-		"      enabled: true,",
-		"      immediate: false",
+		"      enabled: true | false,",
+		"      immediate: true | false",
+		"    },",
+		"    sidebar: {",
+		"      enableBeta: true | false,",
+		"      forceVisible: true | false",
 		"    }",
 		"  });",
 		"<\/script>",
@@ -203,8 +203,8 @@
 			<Tabs value="configuration" class="mb-8">
 				<TabsList class="mb-6">
 					<TabsTrigger value="configuration">Object</TabsTrigger>
-					<TabsTrigger value="button">Button</TabsTrigger>
 					<TabsTrigger value="exitIntent">Exit intent</TabsTrigger>
+					<TabsTrigger value="sidebar">Sidebar (beta)</TabsTrigger>
 				</TabsList>
 
 				<TabsContent value="configuration">
@@ -236,36 +236,6 @@
 					</Card>
 				</TabsContent>
 
-				<TabsContent value="button">
-					<Card>
-						<CardHeader>
-							<CardTitle>Button</CardTitle>
-							<CardDescription>Configure the position and visibility of the Playlight button.</CardDescription>
-						</CardHeader>
-						<CardContent>
-							<div class="space-y-4">
-								<div class="grid gap-2">
-									<h4 class="text-sm font-medium">position</h4>
-									<p class="text-muted-foreground text-sm">
-										Controls the position of the Playlight button. Options are <code class="text-primary"
-											>bottom-right</code
-										>
-										(default) or
-										<code class="text-primary">bottom-left</code>.
-									</p>
-								</div>
-
-								<div class="grid gap-2">
-									<h4 class="text-sm font-medium">visible</h4>
-									<p class="text-muted-foreground text-sm">
-										Controls whether the button is visible. Default is <code class="text-primary">true</code>.
-									</p>
-								</div>
-							</div>
-						</CardContent>
-					</Card>
-				</TabsContent>
-
 				<TabsContent value="exitIntent">
 					<Card>
 						<CardHeader>
@@ -277,21 +247,21 @@
 						<CardContent>
 							<div class="space-y-4">
 								<div class="grid gap-2">
-									<h4 class="text-sm font-medium">enabled</h4>
+									<h4 class="text-sm font-medium">
+										enabled <code class="text-primary">boolean</code> <code class="text-primary">true</code>
+									</h4>
 									<p class="text-muted-foreground text-sm">
 										Whether to show a notification-like bar – which prompts the user to open the Discovery – when they
-										move their mouse towards the browser toolbar (indicating they might leave). Default is <code
-											class="text-primary">true</code
-										>.
+										move their mouse towards the browser toolbar (indicating they might leave).
 									</p>
 								</div>
 
 								<div class="grid gap-2">
-									<h4 class="text-sm font-medium">immediate</h4>
+									<h4 class="text-sm font-medium">
+										immediate <code class="text-primary">boolean</code> <code class="text-primary">false</code>
+									</h4>
 									<p class="text-muted-foreground text-sm">
-										Instead of showing a notification-like bar, immediately open the Discovery. Default is <code
-											class="text-primary">false</code
-										>.
+										Instead of showing a notification-like bar, immediately open the Discovery.
 									</p>
 								</div>
 
@@ -299,6 +269,47 @@
 									<h4 class="mb-1 text-sm font-medium">Note</h4>
 									<p class="text-muted-foreground text-sm">
 										You can give the user the option to configure this via your game's settings.
+									</p>
+								</div>
+							</div>
+						</CardContent>
+					</Card>
+				</TabsContent>
+
+				<TabsContent value="sidebar">
+					<Card>
+						<CardHeader>
+							<CardTitle>Sidebar</CardTitle>
+							<CardDescription>Configure how the sidebar should be displayed.</CardDescription>
+						</CardHeader>
+						<CardContent>
+							<div class="space-y-4">
+								<div class="grid gap-2">
+									<h4 class="text-sm font-medium">
+										enableBeta <code class="text-primary">boolean</code> <code class="text-primary">false</code>
+									</h4>
+									<p class="text-muted-foreground text-sm">
+										The sidebar is currently in beta. Set this to true to enable it.
+									</p>
+								</div>
+
+								<div class="grid gap-2">
+									<h4 class="text-sm font-medium">
+										forceVisible <code class="text-primary">boolean</code> <code class="text-primary">false</code>
+									</h4>
+									<p class="text-muted-foreground text-sm">
+										Set this to true to show the sidebar to everyone and not only visitors from Playlight (great for
+										testing).
+									</p>
+								</div>
+
+								<div class="mt-4 border border-yellow-500/20 bg-yellow-500/10 p-4">
+									<h4 class="mb-1 text-sm font-medium">Note</h4>
+									<p class="text-muted-foreground text-sm">
+										Please thoroughly test this with <code class="text-primary">forceVisible: true</code> in your local
+										environment to ensure all styles work correctly. Units like
+										<code class="text-primary">vw, dvw, svw, lvw</code> don't factor in the sidebar width. Rely on fixed
+										or absolute positioning instead.
 									</p>
 								</div>
 							</div>
@@ -366,8 +377,8 @@
 								<CardContent class="border p-4">
 									<p class="text-sm">
 										<span class="font-medium">Parameters:</span> <code class="text-primary">event</code> - Event name
-										(discoveryOpen, discoveryClose or exitIntent) | <code class="text-primary">callback</code> - Function to
-										call
+										(discoveryOpen, discoveryClose or exitIntent) | <code class="text-primary">callback</code> - Function
+										to call
 									</p>
 								</CardContent>
 							</Card>
