@@ -309,7 +309,8 @@
 										Please thoroughly test this with <code class="text-primary">forceVisible: true</code> in your local
 										environment to ensure all styles work correctly. Units like
 										<code class="text-primary">vw, dvw, svw, lvw</code> don't factor in the sidebar width. Rely on fixed
-										or absolute positioning instead.
+										or absolute positioning instead. Don't apply layout-affecting styles to the body element, apply them
+										to a wrapper instead.
 									</p>
 								</div>
 							</div>
