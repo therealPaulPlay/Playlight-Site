@@ -26,8 +26,7 @@
 		<h4 class="mb-1 inline-flex items-center gap-2 text-sm font-medium"><TriangleAlert size={14} />Important</h4>
 		<p class="text-muted-foreground text-sm">
 			This game currently gains significantly more players than it refers other games. To keep the platform fair and
-			effective, please ensure that Playlight is easily accessible in this application. It's recommended to enable the
-			exit intent, and to display a discovery button as well as a widget where suitable.
+			effective, please ensure that Playlight is easily accessible in this application.
 		</p>
 	</div>
 {/if}

@@ -21,9 +21,6 @@
 		exitIntent: {
 			enabled: false,
 		},
-		button: {
-			visible: false,
-		},
 	};
 
 	onMount(async () => {
@@ -38,7 +35,7 @@
 
 	$effect(() => {
 		if (page.url.pathname == "/demo") window.playlightSDK?.setConfig();
-		if (page.url.pathname != "/demo") window.playlightSDK?.setConfig(disabledConfig);
+		else window.playlightSDK?.setConfig(disabledConfig);
 	});
 </script>
 

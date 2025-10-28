@@ -241,7 +241,7 @@
 						<CardHeader>
 							<CardTitle>Exit intent</CardTitle>
 							<CardDescription>
-								Configure the exit intent feature, which shows the Discovery when users are about to leave.
+								Configure the Exit intent feature, which shows the Discovery when users are about to leave.
 							</CardDescription>
 						</CardHeader>
 						<CardContent>
@@ -268,7 +268,8 @@
 								<div class="mt-4 border border-yellow-500/20 bg-yellow-500/10 p-4">
 									<h4 class="mb-1 text-sm font-medium">Note</h4>
 									<p class="text-muted-foreground text-sm">
-										You can give the user the option to configure this via your game's settings.
+										You can give the user the option to configure this via your game's settings. The Exit intent is
+										always disabled when the sidebar is active.
 									</p>
 								</div>
 							</div>
@@ -450,8 +451,8 @@
 						<li class="flex items-center gap-3">
 							<CircleCheck class="h-4 w-4 flex-shrink-0 text-green-500" />
 							<p class="text-sm">
-								Use <code class="text-primary">.setConfig()</code> to dynamically adjust the exit intent and built-in button
-								depending on the game state
+								Use <code class="text-primary">.setConfig()</code> to dynamically adjust the configuration depending on the
+								game state
 							</p>
 						</li>
 						<li class="flex items-center gap-3">
