@@ -26,6 +26,7 @@
 		"<!-- ES Module Import (Modern) -->",
 		`<link rel="stylesheet" href="https://sdk.playlight.dev/playlight-sdk.css">`,
 		'<script type="module">',
+		"// If used with SSR, load Playlight after hydration (onMount/useEffect/mounted)",
 		"  try {",
 		'    const module = await import("https://sdk.playlight.dev/playlight-sdk.es.js");',
 		"    const playlightSDK = module.default;",
@@ -60,6 +61,7 @@
 		"    },",
 		"    sidebar: {",
 		"      enableBeta: true | false,",
+		"      hasFrameworkRoot: 'auto' | true | false,",
 		"      forceVisible: true | false",
 		"    }",
 		"  });",
@@ -304,14 +306,27 @@
 									</p>
 								</div>
 
+								<div class="grid gap-2">
+									<h4 class="text-sm font-medium">
+										hasFrameworkRoot <code class="text-primary">any</code> <code class="text-primary">"auto"</code>
+									</h4>
+									<p class="text-muted-foreground text-sm">
+										By default, this attempts to auto-detect whether or not there is a root element created by a
+										framework. For example, React, Vue or Svelte create a root node. If you use other frameworks (e.g.
+										Astro) or vanilla and experience issues, set this to false.
+									</p>
+								</div>
+
 								<div class="mt-4 border border-yellow-500/20 bg-yellow-500/10 p-4">
 									<h4 class="mb-1 text-sm font-medium">Note</h4>
 									<p class="text-muted-foreground text-sm">
-										Please thoroughly test this with <code class="text-primary">forceVisible: true</code> in your local
-										environment to ensure all styles work correctly. Units like
-										<code class="text-primary">vw, dvw, svw, lvw</code> don't factor in the sidebar width. Rely on fixed
-										or absolute positioning instead. Don't apply layout-affecting styles to the body element, apply them
-										to a wrapper instead.
+										Please thoroughly test this with <code class="text-primary">forceVisible: true</code> to ensure all
+										styles work correctly. Units like
+										<code class="text-primary">vw, dvw, svw, lvw</code>
+										and media queries such as
+										<code class="text-primary">@media (max-width: 300px)</code> are being overwritten to reflect the
+										width without the sidebar. <code class="text-primary">window.innerWidth</code> is being polyfilled to
+										do the same.
 									</p>
 								</div>
 							</div>
