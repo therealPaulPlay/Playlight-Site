@@ -30,7 +30,7 @@
 		"  try {",
 		'    const module = await import("https://sdk.playlight.dev/playlight-sdk.es.js");',
 		"    const playlightSDK = module.default;",
-		"    await playlightSDK.init();",
+		"    playlightSDK.init();",
 		"  } catch (error) {",
 		'    console.error("Error loading the Playlight SDK:", error);',
 		"  }",
@@ -54,7 +54,7 @@
 		"<script>",
 		"  // ...After loading the SDK and CSS",
 		"  // Only include the keys with non-default values!",
-		"  await playlightSDK.init({",
+		"  playlightSDK.init({",
 		"    exitIntent: {",
 		"      enabled: true | false,",
 		"      immediate: true | false",
@@ -228,9 +228,7 @@
 								<div class="border border-yellow-500/20 bg-yellow-500/10 p-4">
 									<h4 class="mb-1 text-sm font-medium">Note</h4>
 									<p class="text-muted-foreground text-sm">
-										Make sure to call <code class="text-primary">init()</code> after the script is loaded. When using
-										<code class="text-primary">async</code>, you may need to add an event listener to ensure the SDK is
-										ready.
+										Make sure to call <code class="text-primary">init()</code> after the script is loaded.
 									</p>
 								</div>
 							</div>

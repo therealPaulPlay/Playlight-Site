@@ -27,7 +27,7 @@
 		try {
 			const module = await import("https://sdk.playlight.dev/playlight-sdk.es.js");
 			window.playlightSDK = module.default;
-			await window.playlightSDK.init(page.url.pathname == "/demo" ? undefined : disabledConfig);
+			window.playlightSDK.init(page.url.pathname == "/demo" ? undefined : disabledConfig);
 		} catch (error) {
 			console.error("Error loading the Playlight SDK:", error);
 		}
