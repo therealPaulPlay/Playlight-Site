@@ -1,10 +1,19 @@
 <script>
 	import { onMount } from "svelte";
-	import { CornerLeftDown, CornerLeftUp, CornerRightDown, CornerRightUp, Joystick, Play } from "lucide-svelte";
+	import {
+		ArrowRight,
+		CornerLeftDown,
+		CornerLeftUp,
+		CornerRightDown,
+		CornerRightUp,
+		Joystick,
+		Play,
+	} from "lucide-svelte";
 	import Button from "$lib/components/ui/button/button.svelte";
 	import { blur } from "svelte/transition";
 
 	let scrollY = $state(0);
+	let sidebarShown = $state(false);
 </script>
 
 <svelte:head>
@@ -41,7 +50,27 @@
 		<p class="mt-40 mr-auto mb-4 ml-8 flex gap-2 max-md:hidden">
 			<CornerLeftDown size={18} style="margin-top: 5px;" />Responsive & adjustable widget (optional)
 		</p>
-		<div class="playlight-widget-carousel bg-background/50 h-[345px] p-2 max-md:hidden md:w-170"></div>
+		<div class="playlight-widget-carousel bg-background/50 h-[345px] p-4 max-md:hidden md:w-170"></div>
+		{#if scrollY < 100}
+			<div
+				class="bg-background/50 fixed right-8 bottom-8 max-w-[calc(100%-4rem)] space-y-4 p-4 backdrop-blur-xl"
+				transition:blur={{ duration: 150 }}
+			>
+				<p class="flex max-w-82 gap-2">
+					A sidebar is shown to visitors coming from a Playlight game. <ArrowRight
+						size={18}
+						style="min-width: 20px; margin-top: 3px;"
+					/>
+				</p>
+				<Button
+					onclick={() => {
+						if (!sidebarShown) window.playlightSDK?.setConfig({ sidebar: { forceVisible: true } });
+						else window.playlightSDK?.setConfig();
+						sidebarShown = !sidebarShown;
+					}}>{!sidebarShown ? "Try it" : "Hide"}</Button
+				>
+			</div>
+		{/if}
 	</div>
 	<video
 		width="1280"
@@ -59,7 +88,8 @@
 </main>
 
 {#if scrollY < 100}
-	<p class="fixed top-28 left-[50%] flex translate-x-[-50%] gap-2" transition:blur={{ duration: 150 }}>
-		<CornerLeftUp size={18} /> Try leaving the page
+	<p class="fixed top-28 left-[50%] flex translate-x-[-50%] gap-2 max-md:hidden" class:opacity-50={sidebarShown} transition:blur={{ duration: 150 }}>
+		<CornerLeftUp size={18} />
+		{!sidebarShown ? "Try leaving the page" : "Disabled when sidebar is active"}
 	</p>
 {/if}

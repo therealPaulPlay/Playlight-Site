@@ -50,7 +50,7 @@
 
 <!-- Nav bar -->
 <nav class="sticky top-0 z-90 w-full">
-	<div class="flex w-full items-center justify-between px-6 py-4">
+	<div class="flex w-full items-center justify-between px-6 py-4 gap-5">
 		<a href="/">
 			<img src="/images/logo_white_small.png" alt="logo" class="w-42 select-none md:w-56" />
 		</a>
