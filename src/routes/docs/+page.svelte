@@ -60,7 +60,6 @@
 		"      immediate: true | false",
 		"    },",
 		"    sidebar: {",
-		"      enableBeta: true | false,",
 		"      hasFrameworkRoot: 'auto' | true | false,",
 		"      forceVisible: true | false",
 		"    }",
@@ -206,7 +205,7 @@
 				<TabsList class="mb-6">
 					<TabsTrigger value="configuration">Object</TabsTrigger>
 					<TabsTrigger value="exitIntent">Exit intent</TabsTrigger>
-					<TabsTrigger value="sidebar">Sidebar (beta)</TabsTrigger>
+					<TabsTrigger value="sidebar">Sidebar</TabsTrigger>
 				</TabsList>
 
 				<TabsContent value="configuration">
@@ -285,15 +284,6 @@
 						</CardHeader>
 						<CardContent>
 							<div class="space-y-4">
-								<div class="grid gap-2">
-									<h4 class="text-sm font-medium">
-										enableBeta <code class="text-primary">boolean</code> <code class="text-primary">false</code>
-									</h4>
-									<p class="text-muted-foreground text-sm">
-										The sidebar is currently in beta. Set this to true to enable it.
-									</p>
-								</div>
-
 								<div class="grid gap-2">
 									<h4 class="text-sm font-medium">
 										forceVisible <code class="text-primary">boolean</code> <code class="text-primary">false</code>
