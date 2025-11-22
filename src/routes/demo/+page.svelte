@@ -57,7 +57,7 @@
 				transition:blur={{ duration: 150 }}
 			>
 				<p class="flex max-w-82 gap-2">
-					A sidebar is shown to visitors coming from a Playlight game. <ArrowRight
+					A sidebar is visible to users referred from another Playlight game. <ArrowRight
 						size={18}
 						style="min-width: 20px; margin-top: 3px;"
 					/>
@@ -88,7 +88,11 @@
 </main>
 
 {#if scrollY < 100}
-	<p class="fixed top-28 left-[50%] flex translate-x-[-50%] gap-2 max-md:hidden" class:opacity-50={sidebarShown} transition:blur={{ duration: 150 }}>
+	<p
+		class="fixed top-28 left-[50%] flex translate-x-[-50%] gap-2 max-md:hidden"
+		class:opacity-50={sidebarShown}
+		transition:blur={{ duration: 150 }}
+	>
 		<CornerLeftUp size={18} />
 		{!sidebarShown ? "Try leaving the page" : "Disabled when sidebar is active"}
 	</p>
