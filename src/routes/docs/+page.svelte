@@ -382,8 +382,8 @@
 								<CardContent class="border p-4">
 									<p class="text-sm">
 										<span class="font-medium">Parameters:</span> <code class="text-primary">event</code> - Event name
-										(discoveryOpen, discoveryClose or exitIntent) | <code class="text-primary">callback</code> - Function
-										to call
+										(discoveryOpen | discoveryClose | exitIntent | sidebarEnable | sidebarDisable ) |
+										<code class="text-primary">callback</code> - Function to call
 									</p>
 								</CardContent>
 							</Card>

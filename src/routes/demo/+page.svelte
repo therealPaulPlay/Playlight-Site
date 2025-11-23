@@ -88,12 +88,7 @@
 </main>
 
 {#if scrollY < 100}
-	<p
-		class="fixed top-28 left-[50%] flex translate-x-[-50%] gap-2 max-md:hidden"
-		class:opacity-50={sidebarShown}
-		transition:blur={{ duration: 150 }}
-	>
-		<CornerLeftUp size={18} />
-		{!sidebarShown ? "Try leaving the page" : "Disabled when sidebar is active"}
+	<p class="fixed top-28 left-[50%] flex translate-x-[-50%] gap-2 max-md:hidden" transition:blur={{ duration: 150 }}>
+		<CornerLeftUp size={18} /> Try leaving the page
 	</p>
 {/if}
