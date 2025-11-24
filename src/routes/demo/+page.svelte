@@ -27,9 +27,9 @@
 />
 
 <main class="mb-10 flex min-h-[calc(100vh-85px)] w-full flex-col items-center justify-center md:mt-30">
-	<div class="z-10 flex flex-col items-center justify-center">
-		<h1 class="text-5xl font-bold uppercase md:text-8xl">[Your Game]</h1>
-		<div class="relative mt-20 flex flex-col gap-4 text-center">
+	<div class="z-10 flex flex-col items-center justify-center max-md:mb-20">
+		<h1 class="text-5xl font-bold uppercase md:text-8xl text-center">[Your Game]</h1>
+		<div class="relative md:mt-20 mt-10 flex flex-col gap-4 text-center">
 			<Button
 				class="text-primary border-primary/75 pointer-events-none w-60 cursor-not-allowed border border-dashed bg-transparent"
 				><p class="flex items-center gap-2 font-medium">Play <Play strokeWidth={2} size={16} /></p></Button
