@@ -93,7 +93,7 @@
 	});
 </script>
 
-<div class="relative h-[300px] w-full">
+<div class="relative h-[200px] w-full">
 	<canvas bind:this={canvas} class={!hasData ? "hidden" : ""}></canvas>
 	{#if !hasData}
 		<div class="text-muted-foreground absolute inset-0 flex flex-col items-center justify-center">
