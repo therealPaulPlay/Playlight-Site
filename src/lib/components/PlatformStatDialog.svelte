@@ -4,9 +4,7 @@
 	import { ChartBar, TrendingDown, TrendingUp } from "lucide-svelte";
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
 	import { BASE_API_URL } from "$lib/stores/configStore";
-	import { onMount } from "svelte";
 	import { toast } from "svelte-sonner";
-	import * as Card from "$lib/components/ui/card/index.js";
 
 	let dialogOpen = $state(false);
 	let statistics = $state([]);
@@ -23,15 +21,9 @@
 				const prevMonth = data[index + 1];
 
 				// Calculate percentage changes if previous month exists
-				let playlightChange = 0;
 				let referralsChange = 0;
 
 				if (prevMonth) {
-					playlightChange =
-						prevMonth.totalPlaylightOpens > 0
-							? ((month.totalPlaylightOpens - prevMonth.totalPlaylightOpens) / prevMonth.totalPlaylightOpens) * 100
-							: 0;
-
 					referralsChange =
 						prevMonth.totalReferrals > 0
 							? ((month.totalReferrals - prevMonth.totalReferrals) / prevMonth.totalReferrals) * 100
@@ -47,7 +39,6 @@
 					...month,
 					monthName,
 					year,
-					playlightChange,
 					referralsChange,
 				};
 			});
@@ -83,74 +74,54 @@
 	<Dialog.Content class="w-2xl! max-w-full!">
 		<Dialog.Header>
 			<Dialog.Title>Monthly platform statistics</Dialog.Title>
-			<Dialog.Description>Monthly overview of total opens and game referrals.</Dialog.Description>
 		</Dialog.Header>
 
 		<div class="max-h-[50dvh] overflow-y-auto">
 			{#if loading}
-				<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-					{#each Array(6) as _}
-						<div class="bg-muted/50 h-38 w-full animate-pulse rounded-lg"></div>
-					{/each}
-				</div>
+				<div class="bg-muted/50 h-64 w-full animate-pulse rounded-lg"></div>
 			{:else if statistics.length === 0}
 				<p class="text-muted-foreground text-center text-sm">No statistics available.</p>
 			{:else}
-				<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-					{#each statistics as stat, index}
-						<Card.Root class="bg-background overflow-hidden border py-0">
-							<Card.Header class="bg-muted/50 border-b py-2! pt-3!">
-								<Card.Title class="text-muted-foreground text-lg font-semibold">{stat.monthName} {stat.year}</Card.Title
-								>
-							</Card.Header>
-							<Card.Content class="p-4">
-								<div class="grid grid-cols-2 gap-2">
-									<div>
-										<p class="text-muted-foreground text-sm">Opens</p>
-										<p class="text-xl font-semibold">{formatNumber(stat.totalPlaylightOpens)}</p>
-
-										{#if stat.playlightChange !== 0 && index}
-											<div class="mt-1 flex items-center gap-1">
-												{#if stat.playlightChange > 0}
-													<TrendingUp class="h-4 w-4 text-green-500" />
-													<span class="text-sm font-medium text-green-500">
-														+{formatPercentage(stat.playlightChange)}%
-													</span>
-												{:else}
-													<TrendingDown class="h-4 w-4 text-red-500" />
-													<span class="text-sm font-medium text-red-500">
-														{formatPercentage(stat.playlightChange)}%
-													</span>
-												{/if}
-											</div>
-										{/if}
-									</div>
-
-									<div>
-										<p class="text-muted-foreground text-sm">Referrals</p>
-										<p class="text-xl font-semibold">{formatNumber(stat.totalReferrals)}</p>
-
-										{#if stat.referralsChange !== 0 && index}
-											<div class="mt-1 flex items-center gap-1">
-												{#if stat.referralsChange > 0}
-													<TrendingUp class="h-4 w-4 text-green-500" />
-													<span class="text-sm font-medium text-green-500">
-														+{formatPercentage(stat.referralsChange)}%
-													</span>
-												{:else}
-													<TrendingDown class="h-4 w-4 text-red-500" />
-													<span class="text-sm font-medium text-red-500">
-														{formatPercentage(stat.referralsChange)}%
-													</span>
-												{/if}
-											</div>
-										{/if}
-									</div>
-								</div>
-							</Card.Content>
-						</Card.Root>
-					{/each}
-				</div>
+				<table class="w-full">
+					<thead>
+						<tr class="border-b">
+							<th class="text-muted-foreground pb-2 pr-2 text-left text-sm font-medium">Month</th>
+							<th class="text-muted-foreground px-2 pb-2 text-right text-sm font-medium">Referrals</th>
+							<th class="text-muted-foreground pb-2 pl-2 text-right text-sm font-medium">Change</th>
+						</tr>
+					</thead>
+					<tbody>
+						{#each statistics as stat, index}
+							<tr class="border-b">
+								<td class="py-3 pr-2 text-left">
+									{stat.monthName} {stat.year}
+								</td>
+								<td class="px-2 py-3 text-right font-semibold">
+									{formatNumber(stat.totalReferrals)}
+								</td>
+								<td class="py-3 pl-2 text-right">
+									{#if stat.referralsChange !== 0 && index}
+										<div class="flex items-center justify-end gap-1">
+											{#if stat.referralsChange > 0}
+												<TrendingUp class="h-4 w-4 text-green-500" />
+												<span class="text-sm font-medium text-green-500">
+													+{formatPercentage(stat.referralsChange)}%
+												</span>
+											{:else}
+												<TrendingDown class="h-4 w-4 text-red-500" />
+												<span class="text-sm font-medium text-red-500">
+													{formatPercentage(stat.referralsChange)}%
+												</span>
+											{/if}
+										</div>
+									{:else}
+										<span class="text-muted-foreground text-sm">-</span>
+									{/if}
+								</td>
+							</tr>
+						{/each}
+					</tbody>
+				</table>
 			{/if}
 		</div>
 	</Dialog.Content>

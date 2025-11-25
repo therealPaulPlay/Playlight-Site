@@ -18,8 +18,9 @@
 	import { isAdmin, isAuthenticated, username } from "$lib/stores/accountStore";
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
 	import { BASE_API_URL } from "$lib/stores/configStore";
-	import { AlertTriangle, LogOut, Settings, Menu, Plus, ArrowDown, Search } from "lucide-svelte";
-	import Chart from "$lib/components/Chart.svelte";
+	import { AlertTriangle, LogOut, Settings, Menu, Plus, ArrowDown, Search, HelpCircle } from "lucide-svelte";
+	import LineChart from "$lib/components/LineChart.svelte";
+	import BarChart from "$lib/components/BarChart.svelte";
 	import { goto } from "$app/navigation";
 	import WhitelistDialog from "$lib/components/WhitelistDialog.svelte";
 	import GameCreationDialog from "$lib/components/GameCreationDialog.svelte";
@@ -44,6 +45,26 @@
 	let page = $state(1);
 	let passwordInput = $state("");
 	let gameSearchTerm = $state();
+
+	// Event analytics state
+	let eventType = $state("click");
+	let eventData = $state([]);
+	let eventLoading = $state(false);
+
+	// Generate last 7 days for date selection
+	function generateLast7Days() {
+		const dates = [];
+		for (let i = 6; i >= 0; i--) {
+			const date = new Date();
+			date.setDate(date.getDate() - i);
+			dates.push(date.toISOString().split("T")[0]);
+		}
+		return dates;
+	}
+
+	let availableDates = generateLast7Days();
+	let eventStartDate = $state(availableDates[0]);
+	let eventEndDate = $state(availableDates[availableDates.length - 1]);
 
 	// Fetch sites and initial stats
 	onMount(async () => {
@@ -84,6 +105,29 @@
 		}
 	}
 
+	async function fetchEventData() {
+		if (!selectedGame) return;
+
+		eventLoading = true;
+		try {
+			const response = await fetchWithErrorHandling(`${$BASE_API_URL}/game/${selectedGame.id}/events`, {
+				method: "PUT",
+				headers: { "Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem("bearer")}` },
+				body: JSON.stringify({
+					id: localStorage.getItem("id"),
+					startDate: eventStartDate,
+					endDate: eventEndDate,
+					type: eventType,
+				}),
+			});
+			eventData = await response.json();
+		} catch (error) {
+			toast.error("Failed to load event data: " + error);
+		} finally {
+			eventLoading = false;
+		}
+	}
+
 	async function handleDelete() {
 		try {
 			await fetchWithErrorHandling(`${$BASE_API_URL}/game/${selectedGame.id}`, {
@@ -120,6 +164,12 @@
 
 	$effect(() => {
 		if (statTimeframe && selectedGame && games.length) fetchStats();
+	});
+
+	$effect(() => {
+		if (eventStartDate && eventEndDate && eventType && selectedGame && games.length) {
+			fetchEventData();
+		}
 	});
 
 	let showSidebar = $state(false);
@@ -276,22 +326,75 @@
 					{#if loading || typeof window === "undefined"}
 						<div class="flex h-[400px] items-center justify-center">Loading...</div>
 					{:else}
-						<Chart
+						<LineChart
 							chartOptions={{
 								xaxis: { categories: stats?.value?.map((item) => item.date) },
 							}}
 							series={[
 								{
-									name: "Players gained",
+									name: "players gained",
 									data: stats?.value?.map((item) => item.playersGained),
 								},
 								{
-									name: "Games referred",
+									name: "games referred",
 									data: stats?.value?.map((item) => item.gamesReferred),
 								},
 							]}
 							type="line"
 						/>
+					{/if}
+				</CardContent>
+			</Card>
+
+			<!-- Event Analytics -->
+			<Card class="mb-8">
+				<CardHeader>
+					<div class="flex flex-wrap items-start justify-between gap-4">
+						<CardTitle>Events</CardTitle>
+						<div class="flex flex-wrap items-center gap-8">
+							<div class="flex items-center gap-2">
+								<Label class="text-sm">Event type</Label>
+								<Tabs bind:value={eventType}>
+									<TabsList>
+										<TabsTrigger value="click">Click</TabsTrigger>
+										<TabsTrigger value="open">Open</TabsTrigger>
+									</TabsList>
+								</Tabs>
+								<div class="group relative">
+									<HelpCircle size={18} class="text-muted-foreground cursor-help" />
+									<div
+										class="bg-popover text-popover-foreground pointer-events-none absolute top-full left-1/2 z-50 mt-2 w-64 -translate-x-1/2 rounded-md border p-3 text-sm opacity-0 shadow-md transition-opacity group-hover:opacity-100"
+									>
+										<ul class="space-y-2">
+											<li>Click: User clicks on another game (which results in a referral)</li>
+											<li>Open: User opens the Discovery</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							{#each [{ label: "From", value: eventStartDate, bind: (v) => (eventStartDate = v) }, { label: "To", value: eventEndDate, bind: (v) => (eventEndDate = v) }] as dateSelect}
+								<div class="flex items-center gap-2">
+									<Label class="text-sm">{dateSelect.label}</Label>
+									<Select type="single" value={dateSelect.value} onValueChange={dateSelect.bind}>
+										<SelectTrigger class="w-32">
+											{dateSelect.value}
+										</SelectTrigger>
+										<SelectContent>
+											{#each availableDates as date}
+												<SelectItem value={date}>{date}</SelectItem>
+											{/each}
+										</SelectContent>
+									</Select>
+								</div>
+							{/each}
+						</div>
+					</div>
+				</CardHeader>
+				<CardContent>
+					{#if eventLoading || typeof window === "undefined"}
+						<div class="flex h-[300px] items-center justify-center">Loading...</div>
+					{:else}
+						<BarChart data={eventData} />
 					{/if}
 				</CardContent>
 			</Card>
@@ -321,7 +424,10 @@
 							<h3 class="font-medium">Pause game</h3>
 							<p class="text-muted-foreground text-sm">Hide this game on the platform.</p>
 						</div>
-						<Tabs value={selectedGame.paused ? "paused" : "active"} onValueChange={(value) => handlePauseChange(value === "paused")}>
+						<Tabs
+							value={selectedGame.paused ? "paused" : "active"}
+							onValueChange={(value) => handlePauseChange(value === "paused")}
+						>
 							<TabsList>
 								<TabsTrigger value="active">Active</TabsTrigger>
 								<TabsTrigger value="paused">Paused</TabsTrigger>
