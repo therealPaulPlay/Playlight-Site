@@ -30,7 +30,7 @@
 		const config = {
 			type: "bar",
 			data: {
-				labels: data.map((item) => item.format || "Unknown"),
+				labels: data.map((item) => item.format || "unknown"),
 				datasets: [
 					{
 						label: "Count",
