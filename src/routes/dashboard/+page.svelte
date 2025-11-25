@@ -319,7 +319,7 @@
 					<div class="flex items-center justify-between gap-2">
 						<div>
 							<h3 class="font-medium">Pause game</h3>
-							<p class="text-muted-foreground text-sm">Temporarily hide this game on the platform.</p>
+							<p class="text-muted-foreground text-sm">Hide this game on the platform.</p>
 						</div>
 						<Tabs value={selectedGame.paused ? "paused" : "active"} onValueChange={(value) => handlePauseChange(value === "paused")}>
 							<TabsList>

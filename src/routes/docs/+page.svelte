@@ -53,12 +53,11 @@
 	];
 
 	const npmExampleLines = [
-		"<!-- Add to head -->",
-		`<link rel="stylesheet" href="https://sdk.playlight.dev/playlight-sdk.css">`,
-		"",
 		'<script type="module">',
-		"  // If used with a framework, init after hydration (onMount/useEffect/mounted)",
+		'  import "playlight-sdk/dist/playlight-sdk.css"; // With Vite',
 		'  import playlightSDK from "playlight-sdk";',
+		"",
+		"  // If used with a framework, init after hydration (onMount/useEffect/mounted)",
 		"  try {",
 		"    playlightSDK.init();",
 		"  catch (error) {",
@@ -165,7 +164,7 @@
 				</CardHeader>
 				<CardContent>
 					<Tabs value="esmodule" class="mb-6">
-						<TabsList class="mb-6 overflow-auto max-w-full justify-center-safe!">
+						<TabsList class="mb-6 max-w-full justify-center-safe! overflow-auto">
 							<TabsTrigger value="esmodule">ESM via CDN (Recommended)</TabsTrigger>
 							<TabsTrigger value="iife">IIFE via CDN</TabsTrigger>
 							<TabsTrigger value="npm">NPM package</TabsTrigger>
