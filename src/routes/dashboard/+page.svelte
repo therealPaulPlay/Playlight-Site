@@ -13,6 +13,7 @@
 	} from "$lib/components/ui/dialog";
 	import { Input } from "$lib/components/ui/input";
 	import { Select, SelectContent, SelectItem, SelectTrigger } from "$lib/components/ui/select";
+	import { Tabs, TabsList, TabsTrigger } from "$lib/components/ui/tabs";
 	import { toast } from "svelte-sonner";
 	import { isAdmin, isAuthenticated, username } from "$lib/stores/accountStore";
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
@@ -97,6 +98,20 @@
 			toast.success("Site removed successfully!");
 		} catch (error) {
 			toast.error("Failed to remove site: " + error);
+		}
+	}
+
+	async function handlePauseChange(isPaused) {
+		try {
+			await fetchWithErrorHandling(`${$BASE_API_URL}/game/set-paused/${selectedGame.id}`, {
+				method: "PATCH",
+				headers: { "Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem("bearer")}` },
+				body: JSON.stringify({ id: localStorage.getItem("id"), isPaused }),
+			});
+			selectedGame.paused = isPaused ? 1 : 0;
+			toast.success(`Game ${isPaused ? "paused" : "activated"} successfully!`);
+		} catch (error) {
+			toast.error("Failed to update game status: " + error);
 		}
 	}
 
@@ -300,6 +315,18 @@
 							<p class="text-muted-foreground text-sm">Highlight a Playlight game on this site.</p>
 						</div>
 						<GameFeatureDialog bind:selectedGame />
+					</div>
+					<div class="flex items-center justify-between gap-2">
+						<div>
+							<h3 class="font-medium">Pause game</h3>
+							<p class="text-muted-foreground text-sm">Temporarily hide this game on the platform.</p>
+						</div>
+						<Tabs value={selectedGame.paused ? "paused" : "active"} onValueChange={(value) => handlePauseChange(value === "paused")}>
+							<TabsList>
+								<TabsTrigger value="active">Active</TabsTrigger>
+								<TabsTrigger value="paused">Paused</TabsTrigger>
+							</TabsList>
+						</Tabs>
 					</div>
 					<div class="flex items-center justify-between gap-2">
 						<div>

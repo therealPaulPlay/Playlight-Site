@@ -23,10 +23,11 @@
 
 	// Code examples stored as arrays of lines to avoid template parsing issues
 	const esModuleExampleLines = [
-		"<!-- ES Module Import (Modern) -->",
+		"<!-- Add to head -->",
 		`<link rel="stylesheet" href="https://sdk.playlight.dev/playlight-sdk.css">`,
+		"",
 		'<script type="module">',
-		"// If used with SSR, load Playlight after hydration (onMount/useEffect/mounted)",
+		"// If used with a framework, init after hydration (onMount/useEffect/mounted)",
 		"  try {",
 		'    const module = await import("https://sdk.playlight.dev/playlight-sdk.es.js");',
 		"    const playlightSDK = module.default;",
@@ -38,21 +39,37 @@
 	];
 
 	const iifeExampleLines = [
-		"<!-- IIFE Import (Legacy) -->",
+		"<!-- Add to head -->",
 		'<link rel="stylesheet" href="https://sdk.playlight.dev/playlight-sdk.css">',
-		'<script src="https://sdk.playlight.dev/playlight-sdk.iife.js"><\/script>',
+		'<script src="https://sdk.playlight.dev/playlight-sdk.iife.js" defer><\/script>',
+		"",
 		"<script>",
 		"  try {",
 		"    window.playlightSDK.init();",
 		"  } catch (error) {",
-		"    console.error('Error initializing the Playlight SDK:', error);",
+		'    console.error("Error initializing the Playlight SDK:", error);',
+		"  }",
+		"<\/script>",
+	];
+
+	const npmExampleLines = [
+		"<!-- Add to head -->",
+		`<link rel="stylesheet" href="https://sdk.playlight.dev/playlight-sdk.css">`,
+		"",
+		'<script type="module">',
+		"  // If used with a framework, init after hydration (onMount/useEffect/mounted)",
+		'  import playlightSDK from "playlight-sdk";',
+		"  try {",
+		"    playlightSDK.init();",
+		"  catch (error) {",
+		'    console.error("Error initializing the Playlight SDK:", error);',
 		"  }",
 		"<\/script>",
 	];
 
 	const configExampleLines = [
 		"<script>",
-		"  // ...After loading the SDK and CSS",
+		"  // ...After loading the Script and CSS",
 		"  // Only include the keys with non-default values!",
 		"  playlightSDK.init({",
 		"    exitIntent: {",
@@ -138,21 +155,20 @@
 				<Rocket class="text-primary h-6 w-6" />
 				<h2 class="text-2xl font-bold">Getting started</h2>
 			</div>
-			<p class="text-muted-foreground mb-6">
-				Integrating Playlight into your game is simple. Just include the script and initialize it with your config.
-			</p>
+			<p class="text-muted-foreground mb-6">Just include the script and initialize it.</p>
 
 			<!-- Quick Start Card -->
 			<Card>
 				<CardHeader>
 					<CardTitle>Quick start</CardTitle>
-					<CardDescription>Choose your preferred method to add Playlight to your project.</CardDescription>
+					<CardDescription>Choose your preferred method to add Playlight to your site.</CardDescription>
 				</CardHeader>
 				<CardContent>
 					<Tabs value="esmodule" class="mb-6">
-						<TabsList class="mb-6">
-							<TabsTrigger value="esmodule">ES Module (Modern)</TabsTrigger>
-							<TabsTrigger value="iife">IIFE (Legacy)</TabsTrigger>
+						<TabsList class="mb-6 overflow-auto max-w-full justify-center-safe!">
+							<TabsTrigger value="esmodule">ESM via CDN (Recommended)</TabsTrigger>
+							<TabsTrigger value="iife">IIFE via CDN</TabsTrigger>
+							<TabsTrigger value="npm">NPM package</TabsTrigger>
 						</TabsList>
 
 						<TabsContent value="esmodule">
@@ -162,12 +178,6 @@
 									<Check class="check-icon hidden h-4 w-4 text-green-500" />
 								</button>
 								<pre class="overflow-x-auto p-4 text-sm">{esModuleExampleLines.join("\n")}</pre>
-							</div>
-							<div class="mt-4">
-								<p class="text-muted-foreground text-sm">
-									The modern ES module approach is recommended for new projects and frameworks. This method supports
-									tree-shaking and more efficient bundling.
-								</p>
 							</div>
 						</TabsContent>
 
@@ -179,17 +189,29 @@
 								</button>
 								<pre class="overflow-x-auto p-4 text-sm">{iifeExampleLines.join("\n")}</pre>
 							</div>
-							<div class="mt-4">
-								<p class="text-muted-foreground text-sm">
-									The IIFE approach works well for legacy projects or when broader browser compatibility is needed.
-								</p>
+						</TabsContent>
+
+						<TabsContent value="npm" class="space-y-2">
+							<div class="code-block bg-muted relative overflow-hidden">
+								<button class="absolute top-2 right-2 cursor-pointer p-1" onclick={copyCode}>
+									<Copy class="copy-icon text-muted-foreground hover:text-foreground h-4 w-4" />
+									<Check class="check-icon hidden h-4 w-4 text-green-500" />
+								</button>
+								<pre class="overflow-x-auto p-4 text-sm">npm install playlight-sdk</pre>
+							</div>
+							<div class="code-block bg-muted relative overflow-hidden">
+								<button class="absolute top-2 right-2 cursor-pointer p-1" onclick={copyCode}>
+									<Copy class="copy-icon text-muted-foreground hover:text-foreground h-4 w-4" />
+									<Check class="check-icon hidden h-4 w-4 text-green-500" />
+								</button>
+								<pre class="overflow-x-auto p-4 text-sm">{npmExampleLines.join("\n")}</pre>
 							</div>
 						</TabsContent>
 					</Tabs>
 				</CardContent>
 			</Card>
 			<div class="bg-muted text-muted-foreground mb-8 p-4 text-sm">
-				<p>Congrats! This is all you need to integrate Playlight with its default settings.</p>
+				<p>Congrats! This is all you need to integrate Playlight.</p>
 			</div>
 		</section>
 
@@ -199,7 +221,7 @@
 				<Sliders class="text-primary h-6 w-6" />
 				<h2 class="text-2xl font-bold">Configuration</h2>
 			</div>
-			<p class="text-muted-foreground mb-6">Customize the behavior and appearance of the Playlight integration.</p>
+			<p class="text-muted-foreground mb-6">Customize the behavior and appearance.</p>
 
 			<Tabs value="configuration" class="mb-8">
 				<TabsList class="mb-6">
@@ -221,15 +243,6 @@
 									<Check class="check-icon hidden h-4 w-4 text-green-500" />
 								</button>
 								<pre class="overflow-x-auto p-4 text-sm">{configExampleLines.join("\n")}</pre>
-							</div>
-
-							<div class="mt-6 space-y-3">
-								<div class="border border-yellow-500/20 bg-yellow-500/10 p-4">
-									<h4 class="mb-1 text-sm font-medium">Note</h4>
-									<p class="text-muted-foreground text-sm">
-										Make sure to call <code class="text-primary">init()</code> after the script is loaded.
-									</p>
-								</div>
 							</div>
 						</CardContent>
 					</Card>
@@ -267,8 +280,7 @@
 								<div class="mt-4 border border-yellow-500/20 bg-yellow-500/10 p-4">
 									<h4 class="mb-1 text-sm font-medium">Note</h4>
 									<p class="text-muted-foreground text-sm">
-										You can give the user the option to configure this via your game's settings. The Exit intent is
-										always disabled when the sidebar is active.
+										You can give the user the option to configure this via your game's settings.
 									</p>
 								</div>
 							</div>
@@ -289,8 +301,7 @@
 										forceVisible <code class="text-primary">boolean</code> <code class="text-primary">false</code>
 									</h4>
 									<p class="text-muted-foreground text-sm">
-										Set this to true to show the sidebar to everyone and not only visitors from Playlight (great for
-										testing).
+										Set this to true to show the sidebar to everyone and not only visitors from Playlight.
 									</p>
 								</div>
 
@@ -308,13 +319,9 @@
 								<div class="mt-4 border border-yellow-500/20 bg-yellow-500/10 p-4">
 									<h4 class="mb-1 text-sm font-medium">Note</h4>
 									<p class="text-muted-foreground text-sm">
-										Please thoroughly test this with <code class="text-primary">forceVisible: true</code> to ensure all
-										styles work correctly. Units like
-										<code class="text-primary">vw, dvw, svw, lvw</code>
-										and media queries such as
-										<code class="text-primary">@media (max-width: 300px)</code> are being overwritten to reflect the
-										width without the sidebar. <code class="text-primary">window.innerWidth</code> is being polyfilled to
-										do the same.
+										Please thoroughly test this with <code class="text-primary">forceVisible: true</code> to ensure all styles
+										work correctly. Certain units and media queries will be overriden, and some window methods and properties
+										polyfilled.
 									</p>
 								</div>
 							</div>
@@ -330,13 +337,9 @@
 				<Code2 class="text-primary h-6 w-6" />
 				<h2 class="text-2xl font-bold">API reference</h2>
 			</div>
-			<p class="text-muted-foreground mb-6">Control the Playlight Discovery UI programmatically with these methods.</p>
+			<p class="text-muted-foreground mb-6">Control Playlight programmatically.</p>
 
 			<Card class="mb-8">
-				<CardHeader>
-					<CardTitle>Methods</CardTitle>
-					<CardDescription>Available methods to control Playlight.</CardDescription>
-				</CardHeader>
 				<CardContent>
 					<div class="space-y-6">
 						<div>
@@ -397,15 +400,11 @@
 		<section class="mb-12">
 			<div class="mb-2 flex items-center gap-2">
 				<LayoutGrid class="text-primary h-6 w-6" />
-				<h2 class="text-2xl font-bold">Widgets</h2>
+				<h2 class="text-2xl font-bold">Widget</h2>
 			</div>
-			<p class="text-muted-foreground mb-6">Add an interactive Playlight widget to your game UI.</p>
+			<p class="text-muted-foreground mb-6">Add an interactive Playlight widget.</p>
 
 			<Card>
-				<CardHeader>
-					<CardTitle>Carousel widget</CardTitle>
-					<CardDescription>Display a dynamic content carousel in your game.</CardDescription>
-				</CardHeader>
 				<CardContent>
 					<div class="space-y-4">
 						<div class="code-block bg-muted relative overflow-hidden">
@@ -468,10 +467,6 @@
 							<CircleCheck class="h-4 w-4 flex-shrink-0 text-green-500" />
 							<p class="text-sm">Ensure that it nicely integrates into your game UI and behaves predictably</p>
 						</li>
-						<li class="flex items-center gap-3">
-							<CircleCheck class="h-4 w-4 flex-shrink-0 text-green-500" />
-							<p class="text-sm">Use a widget in areas where players select game modes, maps or adjust settings</p>
-						</li>
 					</ul>
 				</CardContent>
 			</Card>
@@ -483,10 +478,6 @@
 				</CardHeader>
 				<CardContent class="pt-4">
 					<ul class="space-y-3">
-						<li class="flex items-center gap-3">
-							<CircleX class="h-4 w-4 flex-shrink-0 text-red-500" />
-							<p class="text-sm">Overwrite SDK styles with custom CSS</p>
-						</li>
 						<li class="flex items-center gap-3">
 							<CircleX class="h-4 w-4 flex-shrink-0 text-red-500" />
 							<p class="text-sm">Make it difficult for players to bring up the Discovery</p>
