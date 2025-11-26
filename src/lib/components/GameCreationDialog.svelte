@@ -322,7 +322,7 @@
 				</div>
 				{#if !logoUrl}
 					<!-- For logo -->
-					<UploadDropzone uploader={logoUploader}>
+					<UploadDropzone uploader={logoUploader} class="mt-0!">
 						<ImageIcon slot="upload-icon" class="mt-4 h-6 w-6" />
 						<span slot="label">Drop or click to upload logo</span>
 					</UploadDropzone>
@@ -350,7 +350,7 @@
 				</div>
 				{#if !coverImageUrl}
 					<!-- For cover image -->
-					<UploadDropzone uploader={coverImageUploader}>
+					<UploadDropzone uploader={coverImageUploader} class="mt-0!">
 						<ImageIcon slot="upload-icon" class="mt-4 h-6 w-6" />
 						<span slot="label">Drop or click to upload cover image</span>
 					</UploadDropzone>
@@ -378,7 +378,7 @@
 				</div>
 				{#if !coverVideoUrl}
 					<!-- For video -->
-					<UploadDropzone uploader={coverVideoUploader}>
+					<UploadDropzone uploader={coverVideoUploader} class="mt-0!">
 						<Video slot="upload-icon" class="mt-4 h-6 w-6" />
 						<span slot="label">Drop or click to upload cover video</span>
 					</UploadDropzone>

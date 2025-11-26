@@ -426,7 +426,7 @@
 
 					<!-- Player Flow Section -->
 					<div class="mt-12">
-						<h3 class="mb-4 leading-none font-semibold">Player flow</h3>
+						<h3 class="mb-4 text-sm font-medium">Player flow</h3>
 						{#if playerFlowLoading}
 							<div class="flex h-48 items-center justify-center">Loading...</div>
 						{:else}

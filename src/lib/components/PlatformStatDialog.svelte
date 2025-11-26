@@ -96,7 +96,7 @@
 								<td class="py-3 pr-2 text-left">
 									{stat.monthName} {stat.year}
 								</td>
-								<td class="px-2 py-3 text-right font-semibold">
+								<td class="px-2 py-3 text-right">
 									{formatNumber(stat.totalReferrals)}
 								</td>
 								<td class="py-3 pl-2 text-right">
@@ -104,12 +104,12 @@
 										<div class="flex items-center justify-end gap-1">
 											{#if stat.referralsChange > 0}
 												<TrendingUp class="h-4 w-4 text-green-500" />
-												<span class="text-sm font-medium text-green-500">
+												<span class="text-sm text-green-500 font-medium">
 													+{formatPercentage(stat.referralsChange)}%
 												</span>
 											{:else}
 												<TrendingDown class="h-4 w-4 text-red-500" />
-												<span class="text-sm font-medium text-red-500">
+												<span class="text-sm text-red-500 font-medium">
 													{formatPercentage(stat.referralsChange)}%
 												</span>
 											{/if}
