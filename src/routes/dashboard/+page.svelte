@@ -51,6 +51,10 @@
 	let eventData = $state([]);
 	let eventLoading = $state(false);
 
+	// Player flow state
+	let playerFlowData = $state({ gainedFrom: [], referredTo: [] });
+	let playerFlowLoading = $state(false);
+
 	// Generate last 7 days for date selection
 	function generateLast7Days() {
 		const dates = [];
@@ -128,6 +132,28 @@
 		}
 	}
 
+	async function fetchPlayerFlow() {
+		if (!selectedGame) return;
+
+		playerFlowLoading = true;
+		try {
+			const response = await fetchWithErrorHandling(`${$BASE_API_URL}/game/${selectedGame.id}/events/player-flow`, {
+				method: "PUT",
+				headers: { "Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem("bearer")}` },
+				body: JSON.stringify({
+					id: localStorage.getItem("id"),
+					startDate: eventStartDate,
+					endDate: eventEndDate,
+				}),
+			});
+			playerFlowData = await response.json();
+		} catch (error) {
+			toast.error("Failed to load player flow: " + error);
+		} finally {
+			playerFlowLoading = false;
+		}
+	}
+
 	async function handleDelete() {
 		try {
 			await fetchWithErrorHandling(`${$BASE_API_URL}/game/${selectedGame.id}`, {
@@ -172,10 +198,11 @@
 		}
 	});
 
+	$effect(() => {
+		if (eventStartDate && eventEndDate && selectedGame && games.length) fetchPlayerFlow();
+	});
+
 	let showSidebar = $state(false);
-	function toggleSidebar() {
-		showSidebar = !showSidebar;
-	}
 
 	function handleClickOutside(event) {
 		const sidebar = document.querySelector("[data-sidebar]");
@@ -195,7 +222,7 @@
 
 <main class="bg-background flex min-h-screen">
 	<!-- Mobile Menu Button -->
-	<Button data-menu-button class="fixed top-22 left-4 z-30 md:hidden" onclick={toggleSidebar}>
+	<Button data-menu-button class="fixed top-22 left-4 z-30 md:hidden" onclick={() => (showSidebar = !showSidebar)}>
 		<Menu size={20} />
 	</Button>
 
@@ -298,7 +325,7 @@
 		{#if selectedGame}
 			<div class="mb-8 flex flex-wrap items-center justify-between gap-4">
 				<div class="flex gap-4">
-					<img src={selectedGame?.logo_url} alt="game logo" class="h-10 w-10 rounded object-cover" />
+					<img src={selectedGame?.logo_url} alt="game logo" class="h-10 w-10 border object-cover" />
 					<h1 class="truncate text-3xl font-bold">{selectedGame.domain || "Example.com"}</h1>
 				</div>
 				<div class="flex items-center justify-center gap-4">
@@ -396,6 +423,39 @@
 					{:else}
 						<BarChart data={eventData} />
 					{/if}
+
+					<!-- Player Flow Section -->
+					<div class="mt-12">
+						<h3 class="mb-4 leading-none font-semibold">Player flow</h3>
+						{#if playerFlowLoading}
+							<div class="flex h-48 items-center justify-center">Loading...</div>
+						{:else}
+							<div class="flex flex-wrap gap-6">
+								{#each [{ title: "Gained from", data: playerFlowData.gainedFrom }, { title: "Referred to", data: playerFlowData.referredTo }] as section}
+									<div class="max-w-full flex-1 border p-4">
+										<h4 class="text-muted-foreground mb-4 text-sm font-medium">{section.title}</h4>
+										{#if section.data.length === 0}
+											<p class="text-muted-foreground text-sm">No data.</p>
+										{:else}
+											<div class="of-top of-bottom of-length-2 max-h-64 space-y-2 overflow-y-auto">
+												{#each section.data as game}
+													<div class="flex items-center gap-3 p-2">
+														<img src={game.logo_url} alt={game.name} class="h-8 w-8 object-cover" />
+														<a
+															class="mr-auto truncate text-sm hover:underline"
+															href={`https://${game.domain}`}
+															target="_blank">{game.name}</a
+														>
+														<span class="text-muted-foreground text-sm">{game.count}</span>
+													</div>
+												{/each}
+											</div>
+										{/if}
+									</div>
+								{/each}
+							</div>
+						{/if}
+					</div>
 				</CardContent>
 			</Card>
 

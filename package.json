@@ -37,6 +37,7 @@
 		"@uploadthing/svelte": "^7.3.0",
 		"chart.js": "^4.4.8",
 		"gsap": "^3.12.7",
+		"overfade": "^0.0.6",
 		"prism-themes": "^1.9.0",
 		"prismjs": "^1.30.0"
 	}
