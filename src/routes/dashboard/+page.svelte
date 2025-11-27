@@ -55,6 +55,9 @@
 	let playerFlowData = $state({ gainedFrom: [], referredTo: [] });
 	let playerFlowLoading = $state(false);
 
+	// Help tooltip state
+	let showHelpTooltip = $state(false);
+
 	// Generate last 7 days for date selection
 	function generateLast7Days() {
 		const dates = [];
@@ -222,7 +225,7 @@
 
 <main class="bg-background flex min-h-screen">
 	<!-- Mobile Menu Button -->
-	<Button data-menu-button class="fixed top-22 left-4 z-30 md:hidden" onclick={() => (showSidebar = !showSidebar)}>
+	<Button data-menu-button class="fixed top-22 left-4 z-30 p-4! py-6! md:hidden shadow-xl" onclick={() => (showSidebar = !showSidebar)}>
 		<Menu size={20} />
 	</Button>
 
@@ -409,10 +412,21 @@
 										<TabsTrigger value="open">Open</TabsTrigger>
 									</TabsList>
 								</Tabs>
-								<div class="group relative">
-									<HelpCircle size={18} class="text-muted-foreground cursor-help" />
+								<div class="relative">
+									<Button
+										variant="ghost"
+										size="icon"
+										class="px-0! w-auto! bg-transparent!"
+										onclick={() => (showHelpTooltip = !showHelpTooltip)}
+										onpointerenter={(e) => e.pointerType !== 'touch' && (showHelpTooltip = true)}
+										onpointerleave={(e) => e.pointerType !== 'touch' && (showHelpTooltip = false)}
+									>
+										<HelpCircle size={18} class="text-muted-foreground" />
+									</Button>
 									<div
-										class="bg-popover text-popover-foreground pointer-events-none absolute top-full left-1/2 z-50 mt-2 w-64 -translate-x-1/2 rounded-md border p-3 text-sm opacity-0 shadow-md transition-opacity group-hover:opacity-100"
+										class="bg-popover text-popover-foreground absolute top-full left-1/2 z-50 mt-2 w-64 -translate-x-1/2 rounded-md border p-3 text-sm shadow-md transition-opacity {showHelpTooltip
+											? 'opacity-100'
+											: 'pointer-events-none opacity-0'}"
 									>
 										<ul class="space-y-2">
 											<li>Click: User clicks on a game (which results in a referral)</li>

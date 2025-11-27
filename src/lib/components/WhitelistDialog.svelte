@@ -104,7 +104,7 @@
 				{#each whitelistEntries as entry}
 					<div class="flex w-full max-w-full items-center justify-between border">
 						<p class="max-w-2/3 truncate px-2 text-sm">{entry.email}</p>
-						<Button variant="outline" onclick={() => removeFromWhitelist(entry.email)}><Trash2 /></Button>
+						<Button variant="secondary" onclick={() => removeFromWhitelist(entry.email)}><Trash2 /></Button>
 					</div>
 				{/each}
 			{:else}
