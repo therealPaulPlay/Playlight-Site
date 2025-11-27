@@ -87,7 +87,7 @@
 			games = [...games, ...data?.games];
 			if (games.length > 0) selectedGame = games[0];
 		} catch (error) {
-			if ($isAuthenticated) toast.error("Failed to load games: " + error);
+			if ($isAuthenticated) toast.error("Failed to load games: " + error.message);
 		}
 	}
 
@@ -103,7 +103,7 @@
 			});
 			stats.value = await response.json();
 		} catch (error) {
-			toast.error("Failed to load statistics: " + error);
+			toast.error("Failed to load statistics: " + error.message);
 		} finally {
 			loading = false;
 		}
@@ -126,7 +126,7 @@
 			});
 			eventData = await response.json();
 		} catch (error) {
-			toast.error("Failed to load event data: " + error);
+			toast.error("Failed to load event data: " + error.message);
 		} finally {
 			eventLoading = false;
 		}
@@ -148,7 +148,7 @@
 			});
 			playerFlowData = await response.json();
 		} catch (error) {
-			toast.error("Failed to load player flow: " + error);
+			toast.error("Failed to load player flow: " + error.message);
 		} finally {
 			playerFlowLoading = false;
 		}
@@ -167,7 +167,7 @@
 			passwordInput = "";
 			toast.success("Site removed successfully!");
 		} catch (error) {
-			toast.error("Failed to remove site: " + error);
+			toast.error("Failed to remove site: " + error.message);
 		}
 	}
 
@@ -181,7 +181,7 @@
 			selectedGame.paused = isPaused ? 1 : 0;
 			toast.success(`Game ${isPaused ? "paused" : "activated"} successfully!`);
 		} catch (error) {
-			toast.error("Failed to update game status: " + error);
+			toast.error("Failed to update game status: " + error.message);
 		}
 	}
 
