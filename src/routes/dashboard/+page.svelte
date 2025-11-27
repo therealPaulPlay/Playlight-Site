@@ -378,27 +378,7 @@
 				<CardHeader>
 					<div class="flex flex-wrap items-start justify-between gap-4">
 						<CardTitle>Events</CardTitle>
-						<div class="flex flex-wrap items-center gap-8">
-							<div class="flex items-center gap-2">
-								<Label class="text-sm">Event type</Label>
-								<Tabs bind:value={eventType}>
-									<TabsList>
-										<TabsTrigger value="click">Click</TabsTrigger>
-										<TabsTrigger value="open">Open</TabsTrigger>
-									</TabsList>
-								</Tabs>
-								<div class="group relative">
-									<HelpCircle size={18} class="text-muted-foreground cursor-help" />
-									<div
-										class="bg-popover text-popover-foreground pointer-events-none absolute top-full left-1/2 z-50 mt-2 w-64 -translate-x-1/2 rounded-md border p-3 text-sm opacity-0 shadow-md transition-opacity group-hover:opacity-100"
-									>
-										<ul class="space-y-2">
-											<li>Click: User clicks on another game (which results in a referral)</li>
-											<li>Open: User opens the Discovery</li>
-										</ul>
-									</div>
-								</div>
-							</div>
+						<div class="flex flex-wrap items-center gap-4">
 							{#each [{ label: "From", value: eventStartDate, bind: (v) => (eventStartDate = v) }, { label: "To", value: eventEndDate, bind: (v) => (eventEndDate = v) }] as dateSelect}
 								<div class="flex items-center gap-2">
 									<Label class="text-sm">{dateSelect.label}</Label>
@@ -417,15 +397,40 @@
 						</div>
 					</div>
 				</CardHeader>
-				<CardContent>
-					{#if eventLoading || typeof window === "undefined"}
-						<div class="flex h-[300px] items-center justify-center">Loading...</div>
-					{:else}
-						<BarChart data={eventData} />
-					{/if}
+				<CardContent class="space-y-8">
+					<!-- Event Type Bar Chart -->
+					<div>
+						<h3 class="mb-4 text-sm font-medium">Format breakdown</h3>
+						<div class="border p-4">
+							<div class="mb-4 flex items-center gap-2">
+								<Tabs bind:value={eventType}>
+									<TabsList>
+										<TabsTrigger value="click">Click</TabsTrigger>
+										<TabsTrigger value="open">Open</TabsTrigger>
+									</TabsList>
+								</Tabs>
+								<div class="group relative">
+									<HelpCircle size={18} class="text-muted-foreground cursor-help" />
+									<div
+										class="bg-popover text-popover-foreground pointer-events-none absolute top-full left-1/2 z-50 mt-2 w-64 -translate-x-1/2 rounded-md border p-3 text-sm opacity-0 shadow-md transition-opacity group-hover:opacity-100"
+									>
+										<ul class="space-y-2">
+											<li>Click: User clicks on a game (which results in a referral)</li>
+											<li>Open: User opens the Discovery</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							{#if eventLoading || typeof window === "undefined"}
+								<div class="flex h-[200px] items-center justify-center">Loading...</div>
+							{:else}
+								<BarChart data={eventData} />
+							{/if}
+						</div>
+					</div>
 
 					<!-- Player Flow Section -->
-					<div class="mt-12">
+					<div>
 						<h3 class="mb-4 text-sm font-medium">Player flow</h3>
 						{#if playerFlowLoading}
 							<div class="flex h-48 items-center justify-center">Loading...</div>
@@ -462,26 +467,26 @@
 			<!-- Actions -->
 			<Card>
 				<CardHeader>
-					<CardTitle>Site actions</CardTitle>
+					<CardTitle>Actions</CardTitle>
 				</CardHeader>
 				<CardContent class="space-y-4">
 					<div class="flex items-center justify-between gap-2">
 						<div>
-							<h3 class="font-medium">Update info</h3>
+							<h3 class="font-medium text-sm">Update info</h3>
 							<p class="text-muted-foreground text-sm">Change information regarding this game.</p>
 						</div>
 						<GameCreationDialog updateOnly={true} bind:selectedGame />
 					</div>
 					<div class="flex items-center justify-between gap-2">
 						<div>
-							<h3 class="font-medium">Feature a game</h3>
+							<h3 class="font-medium text-sm">Feature a game</h3>
 							<p class="text-muted-foreground text-sm">Highlight a Playlight game on this site.</p>
 						</div>
 						<GameFeatureDialog bind:selectedGame />
 					</div>
 					<div class="flex items-center justify-between gap-2">
 						<div>
-							<h3 class="font-medium">Pause game</h3>
+							<h3 class="font-medium text-sm">Pause game</h3>
 							<p class="text-muted-foreground text-sm">Hide this game on the platform.</p>
 						</div>
 						<Tabs
@@ -496,7 +501,7 @@
 					</div>
 					<div class="flex items-center justify-between gap-2">
 						<div>
-							<h3 class="font-medium">Remove game</h3>
+							<h3 class="font-medium text-sm">Remove game</h3>
 							<p class="text-muted-foreground text-sm">Remove this game from the platform.</p>
 						</div>
 						<Button variant="destructive" class="cursor-pointer" onclick={() => (showDeleteDialog = true)}
