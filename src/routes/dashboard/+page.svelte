@@ -75,11 +75,15 @@
 
 	// Fetch sites and initial stats
 	onMount(async () => {
-		fetchGames();
+		fetchGames(true);
 	});
 
-	async function fetchGames() {
+	async function fetchGames(reset = false) {
 		try {
+			if (reset) {
+				games = [];
+				page = 1;
+			}
 			const response = await fetchWithErrorHandling(
 				`${$BASE_API_URL}/game/${localStorage.getItem("id")}?page=${page}${gameSearchTerm ? "&search=" + gameSearchTerm : ""}`,
 				{
@@ -88,7 +92,8 @@
 			);
 			const data = await response.json();
 			games = [...games, ...data?.games];
-			if (games.length > 0) selectedGame = games[0];
+			if (reset && games.length > 0) selectedGame = games[0];
+			if (!reset) page++;
 		} catch (error) {
 			if ($isAuthenticated) toast.error("Failed to load games: " + error.message);
 		}
@@ -246,7 +251,7 @@
 				<h3 class="text-muted-foreground mb-4 text-sm font-medium">Admin tools</h3>
 				{#if $isAdmin}
 					<div class="space-y-2">
-						<GameCreationDialog />
+						<GameCreationDialog refreshFunction={fetchGames} />
 						<WhitelistDialog />
 						<FileCleanupDialog />
 					</div>
@@ -268,18 +273,14 @@
 							onkeypress={(e) => {
 								if (e.key == "Enter") {
 									e.preventDefault();
-									page = 1;
-									games = [];
-									fetchGames();
+									fetchGames(true);
 								}
 							}}
 						/>
 						<Button
 							variant="outline"
 							onclick={() => {
-								page = 1;
-								games = [];
-								fetchGames();
+								fetchGames(true);
 							}}><Search /></Button
 						>
 					</search>
@@ -306,7 +307,6 @@
 							variant="ghost"
 							class="w-full"
 							onclick={() => {
-								page++;
 								fetchGames();
 							}}>Load more <ArrowDown /></Button
 						>

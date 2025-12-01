@@ -14,7 +14,7 @@
 	import { UploadDropzone } from "@uploadthing/svelte";
 	import { formatDomain } from "$lib/utils/formatDomain";
 
-	let { updateOnly = false, selectedGame = $bindable({}) } = $props();
+	let { updateOnly = false, selectedGame = $bindable({}), refreshFunction } = $props();
 
 	let dialogOpen = $state(false);
 	let updateConfirmDialogOpen = $state(false);
@@ -116,6 +116,7 @@
 			toast.success("Game created successfully!");
 			dialogOpen = false;
 			resetForm();
+			refreshFunction?.(true);
 		} catch (error) {
 			toast.error("Failed to create game: " + error);
 		} finally {
