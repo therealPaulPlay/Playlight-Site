@@ -247,7 +247,7 @@
 				<AccountSettings />
 			</div>
 			<!-- Sidebar scroll container -->
-			<div class="max-h-[calc(100dvh-200px)] overflow-y-auto">
+			<div class="max-h-[calc(100dvh-200px)] overflow-y-auto of-top of-bottom">
 				<h3 class="text-muted-foreground mb-4 text-sm font-medium">Admin tools</h3>
 				{#if $isAdmin}
 					<div class="space-y-2">
