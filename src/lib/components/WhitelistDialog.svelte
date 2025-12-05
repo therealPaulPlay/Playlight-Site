@@ -27,7 +27,7 @@
 			});
 			whitelistEntries = await response.json();
 		} catch (error) {
-			toast.error("Failed to load whitelist: " + error);
+			toast.error("Failed to load whitelist: " + error.message);
 		}
 	}
 
@@ -46,7 +46,7 @@
 			await response.json();
 			fetchWhitelist();
 		} catch (error) {
-			toast.error("Failed to remove entry from whitelist: " + error);
+			toast.error("Failed to remove entry from whitelist: " + error.message);
 		}
 	}
 
@@ -68,7 +68,7 @@
 			toast.success("Added entry successfully!");
 			addEmail = "";
 		} catch (error) {
-			toast.error("Failed to remove entry from whitelist: " + error);
+			toast.error("Failed to add entry to whitelist: " + error.message);
 		}
 	}
 
