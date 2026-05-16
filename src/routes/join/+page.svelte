@@ -7,12 +7,14 @@
 	import { Input } from "$lib/components/ui/input";
 	import { Textarea } from "$lib/components/ui/textarea";
 	import { Label } from "$lib/components/ui/label";
-	import { Loader2, Rocket, TriangleAlert } from "lucide-svelte";
+	import { Checkbox } from "$lib/components/ui/checkbox";
+	import { Loader2 } from "lucide-svelte";
 	import { enhance } from "$app/forms";
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
 	import { goto } from "$app/navigation";
 
 	let isSubmitting = $state(false);
+	let meetsMauRequirement = $state(false);
 	let formData = $state({
 		email: "",
 		website: "",
@@ -20,7 +22,7 @@
 	});
 
 	// Basic form validation
-	let isValid = $derived(formData.email && formData.website && formData.message);
+	let isValid = $derived(formData.email && formData.website && formData.message && meetsMauRequirement);
 
 	// Form submission handler
 	async function handleSubmit(event) {
@@ -55,17 +57,9 @@
 
 <main class="flex min-h-screen w-full items-center justify-center px-4 py-16">
 	<div in:blur={{ duration: 400 }} class="w-full max-w-xl">
-		<div
-			class="order mb-4 flex w-full items-center justify-center gap-2 border border-yellow-500/20 bg-yellow-500/10 p-4 text-sm"
-		>
-			<TriangleAlert class="mr-2" />
-			<p>
-				This form is only for game owners, developers, or their associates — not players. Please do not misuse it.
-			</p>
-		</div>
 		<Card>
 			<CardHeader>
-				<CardTitle class="text-3xl font-bold uppercase">Join Playlight.</CardTitle>
+				<CardTitle class="text-3xl font-bold uppercase">Join Playlight</CardTitle>
 				<CardDescription>
 					Take the first step towards better game discovery. Fill out the form below and we'll get back to you shortly.
 				</CardDescription>
@@ -93,6 +87,13 @@
 							required
 						/>
 					</div>
+
+					<div class="flex items-center gap-3">
+						<Checkbox id="mau-requirement" bind:checked={meetsMauRequirement} required />
+						<Label for="mau-requirement" class="text-sm leading-snug font-normal">
+							I am the rightful owner of the aforementioned game and it meets the minimum requirement of 50,000 monthly active users.
+						</Label>
+					</div>
 				</CardContent>
 
 				<CardFooter class="mt-6">
@@ -101,7 +102,7 @@
 							<Loader2 class="mr-2 animate-spin" />
 							Sending...
 						{:else}
-							Join<Rocket />
+							Join
 						{/if}
 					</Button>
 				</CardFooter>

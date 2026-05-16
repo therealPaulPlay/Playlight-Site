@@ -78,7 +78,7 @@
 
 		<div class="max-h-[50dvh] overflow-y-auto">
 			{#if loading}
-				<div class="bg-muted/50 h-64 w-full animate-pulse rounded-lg"></div>
+				<div class="bg-muted/50 h-42 w-full animate-pulse rounded-lg"></div>
 			{:else if statistics.length === 0}
 				<p class="text-muted-foreground text-center text-sm">No statistics available.</p>
 			{:else}

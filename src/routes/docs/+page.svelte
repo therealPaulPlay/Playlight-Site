@@ -27,7 +27,6 @@
 		`<link rel="stylesheet" href="https://sdk.playlight.dev/playlight-sdk.css">`,
 		"",
 		'<script type="module">',
-		"// If used with a framework, init after hydration (onMount/useEffect/mounted)",
 		"  try {",
 		'    const module = await import("https://sdk.playlight.dev/playlight-sdk.es.js");',
 		"    const playlightSDK = module.default;",
@@ -57,7 +56,6 @@
 		'  import "playlight-sdk/dist/playlight-sdk.css"; // With Vite',
 		'  import playlightSDK from "playlight-sdk";',
 		"",
-		"  // If used with a framework, init after hydration (onMount/useEffect/mounted)",
 		"  try {",
 		"    playlightSDK.init();",
 		"  catch (error) {",
@@ -69,15 +67,11 @@
 	const configExampleLines = [
 		"<script>",
 		"  // ...After loading the Script and CSS",
-		"  // Only include the keys with non-default values!",
+		"  // Only include the keys with non-default values",
 		"  playlightSDK.init({",
 		"    exitIntent: {",
 		"      enabled: true | false,",
 		"      immediate: true | false",
-		"    },",
-		"    sidebar: {",
-		"      hasFrameworkRoot: 'auto' | true | false,",
-		"      forceVisible: true | false",
 		"    }",
 		"  });",
 		"<\/script>",
@@ -86,7 +80,7 @@
 	const carouselExampleLines = [
 		"<!-- Carousel Widget, width of min. 500px is recommended -->",
 		'<div class="playlight-widget-carousel"',
-		'     style="height: 330px; width: 750px;">',
+		'     style="height: 355px; width: 750px;">',
 		"<\/div>",
 	];
 
@@ -150,11 +144,10 @@
 	<div class="container max-w-4xl px-4 py-8">
 		<!-- Getting Started -->
 		<section class="mb-12">
-			<div class="mb-2 flex items-center gap-2">
+			<div class="mb-6 flex items-center gap-2">
 				<Rocket class="text-primary h-6 w-6" />
 				<h2 class="text-2xl font-bold">Getting started</h2>
 			</div>
-			<p class="text-muted-foreground mb-6">Just include the script and initialize it.</p>
 
 			<!-- Quick Start Card -->
 			<Card>
@@ -216,17 +209,15 @@
 
 		<!-- Configuration Options -->
 		<section class="mb-12">
-			<div class="mb-2 flex items-center gap-2">
+			<div class="mb-6 flex items-center gap-2">
 				<Sliders class="text-primary h-6 w-6" />
 				<h2 class="text-2xl font-bold">Configuration</h2>
 			</div>
-			<p class="text-muted-foreground mb-6">Customize the behavior and appearance.</p>
 
 			<Tabs value="configuration" class="mb-8">
 				<TabsList class="mb-6">
 					<TabsTrigger value="configuration">Object</TabsTrigger>
 					<TabsTrigger value="exitIntent">Exit intent</TabsTrigger>
-					<TabsTrigger value="sidebar">Sidebar</TabsTrigger>
 				</TabsList>
 
 				<TabsContent value="configuration">
@@ -262,8 +253,8 @@
 										enabled <code class="text-primary">boolean</code> <code class="text-primary">true</code>
 									</h4>
 									<p class="text-muted-foreground text-sm">
-										Whether to show a notification-like bar – which prompts the user to open the Discovery – when they
-										move their mouse towards the browser toolbar (indicating they might leave).
+										Whether to show a notification-like bar. This prompts the user to open the Discovery when they move
+										their mouse towards the browser toolbar (indicating they might leave).
 									</p>
 								</div>
 
@@ -286,57 +277,15 @@
 						</CardContent>
 					</Card>
 				</TabsContent>
-
-				<TabsContent value="sidebar">
-					<Card>
-						<CardHeader>
-							<CardTitle>Sidebar</CardTitle>
-							<CardDescription>Configure how the sidebar should be displayed.</CardDescription>
-						</CardHeader>
-						<CardContent>
-							<div class="space-y-4">
-								<div class="grid gap-2">
-									<h4 class="text-sm font-medium">
-										forceVisible <code class="text-primary">boolean</code> <code class="text-primary">false</code>
-									</h4>
-									<p class="text-muted-foreground text-sm">
-										Set this to true to show the sidebar to everyone and not only visitors from Playlight.
-									</p>
-								</div>
-
-								<div class="grid gap-2">
-									<h4 class="text-sm font-medium">
-										hasFrameworkRoot <code class="text-primary">any</code> <code class="text-primary">"auto"</code>
-									</h4>
-									<p class="text-muted-foreground text-sm">
-										By default, this attempts to auto-detect whether or not there is a root element created by a
-										framework. For example, React, Vue or Svelte create a root node. If you use other frameworks (e.g.
-										Astro) or vanilla and experience issues, set this to false.
-									</p>
-								</div>
-
-								<div class="mt-4 border border-yellow-500/20 bg-yellow-500/10 p-4">
-									<h4 class="mb-1 text-sm font-medium">Note</h4>
-									<p class="text-muted-foreground text-sm">
-										Please thoroughly test this with <code class="text-primary">forceVisible: true</code> to ensure all styles
-										work correctly. Certain units and media queries will be overriden, and some window methods and properties
-										polyfilled.
-									</p>
-								</div>
-							</div>
-						</CardContent>
-					</Card>
-				</TabsContent>
 			</Tabs>
 		</section>
 
 		<!-- API Reference -->
 		<section class="mb-12">
-			<div class="mb-2 flex items-center gap-2">
+			<div class="mb-6 flex items-center gap-2">
 				<Code2 class="text-primary h-6 w-6" />
 				<h2 class="text-2xl font-bold">API reference</h2>
 			</div>
-			<p class="text-muted-foreground mb-6">Control Playlight programmatically.</p>
 
 			<Card class="mb-8">
 				<CardContent>
@@ -384,7 +333,7 @@
 								<CardContent class="border p-4">
 									<p class="text-sm">
 										<span class="font-medium">Parameters:</span> <code class="text-primary">event</code> - Event name
-										(discoveryOpen | discoveryClose | exitIntent | sidebarEnable | sidebarDisable ) |
+										(discoveryOpen | discoveryClose | exitIntent) |
 										<code class="text-primary">callback</code> - Function to call
 									</p>
 								</CardContent>
@@ -397,11 +346,10 @@
 
 		<!-- Widgets Section -->
 		<section class="mb-12">
-			<div class="mb-2 flex items-center gap-2">
+			<div class="mb-6 flex items-center gap-2">
 				<LayoutGrid class="text-primary h-6 w-6" />
 				<h2 class="text-2xl font-bold">Widget</h2>
 			</div>
-			<p class="text-muted-foreground mb-6">Add an interactive Playlight widget.</p>
 
 			<Card>
 				<CardContent>
@@ -419,9 +367,9 @@
 								Add a carousel widget by creating a container with the class as seen above.
 							</p>
 							<ul class="text-muted-foreground list-disc space-y-1 pl-5 text-sm">
-								<li>Recommended dimensions: 330px height, min. 500px width</li>
-								<li>Widget is transparent – add background, padding etc. as you wish</li>
-								<li>Loads dynamically – ideal for death screens and mode selection UIs</li>
+								<li>Recommended dimensions: 355px height, min. 500px width</li>
+								<li>Widget is transparent: Add background, padding etc. as you wish</li>
+								<li>Loads dynamically: Ideal for death screens and mode selection UIs</li>
 							</ul>
 						</div>
 					</div>
@@ -431,12 +379,10 @@
 
 		<!-- Dos and Don'ts Section -->
 		<section class="mb-12">
-			<div class="mb-2 flex items-center gap-2">
+			<div class="mb-6 flex items-center gap-2">
 				<Asterisk class="text-primary h-6 w-6" />
 				<h2 class="text-2xl font-bold">Dos and Don'ts</h2>
 			</div>
-
-			<p class="text-muted-foreground mb-6">What you should and shouldn't do when integrating Playlight.</p>
 
 			<!-- Dos Card -->
 			<Card class="mb-6 pt-0">
@@ -462,10 +408,6 @@
 								Create your own custom Discovery button using the <code class="text-primary">.setDiscovery()</code> method
 							</p>
 						</li>
-						<li class="flex items-center gap-3">
-							<CircleCheck class="h-4 w-4 flex-shrink-0 text-green-500" />
-							<p class="text-sm">Ensure that it nicely integrates into your game UI and behaves predictably</p>
-						</li>
 					</ul>
 				</CardContent>
 			</Card>
@@ -480,10 +422,6 @@
 						<li class="flex items-center gap-3">
 							<CircleX class="h-4 w-4 flex-shrink-0 text-red-500" />
 							<p class="text-sm">Make it difficult for players to bring up the Discovery</p>
-						</li>
-						<li class="flex items-center gap-3">
-							<CircleX class="h-4 w-4 flex-shrink-0 text-red-500" />
-							<p class="text-sm">Only load the SDK on some of the site's pages or after interactions</p>
 						</li>
 						<li class="flex items-center gap-3">
 							<CircleX class="h-4 w-4 flex-shrink-0 text-red-500" />

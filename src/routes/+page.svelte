@@ -108,9 +108,9 @@
 	<section class="relative flex min-h-120 w-full items-center overflow-hidden px-6 text-center">
 		<Spotlight />
 		<div class="pointer-events-none z-1 mx-auto max-w-2xl">
-			<h1 class="mb-3 text-4xl font-extrabold uppercase md:text-5xl" in:blur>Get your game seen.</h1>
+			<h1 class="mb-3 text-4xl font-extrabold uppercase md:text-5xl" in:blur>Get your game seen</h1>
 			<p class="text-muted-foreground mx-auto mb-9 text-lg max-md:max-w-72" in:blur>
-				A discovery platform, built into your own game.
+				A discovery platform, built into your own game
 			</p>
 			<div class="align-center mx-auto flex max-w-40 flex-col justify-center">
 				<Button class="pointer-events-auto mb-4 px-6 py-3" href="/join">Join Playlight</Button>
@@ -243,7 +243,7 @@
 
 		<!-- Right Box -->
 		<div class="bg-card min-w-70 flex-1 p-8">
-			<h2 class="mb-6 text-3xl font-bold">Indie Devs, unite.</h2>
+			<h2 class="mb-6 text-3xl font-bold">Indie Devs, unite</h2>
 			<p class="text-muted-foreground mb-4 text-lg">
 				Playlight is an open-source <span class="text-foreground">discovery platform</span> that you can
 				<span class="text-foreground">integrate into your own game</span>
@@ -310,7 +310,7 @@
 
 		<!-- Right Box: Text Content -->
 		<div class="bg-card min-w-[320px] flex-1 p-8">
-			<h2 class="mb-6 text-3xl font-bold">Smart recommendations.</h2>
+			<h2 class="mb-6 text-3xl font-bold">Smart recommendations</h2>
 			<p class="text-muted-foreground mb-4 text-lg leading-relaxed">
 				Keep players engaged with thoughtful game recommendations. The <span class="text-foreground">Discovery</span>
 				only activates at <span class="text-foreground">intentional moments</span> - when players are
@@ -342,7 +342,7 @@
 				<div
 					class="bg-card hover:bg-muted/50 rounded bg-linear-[120deg,rgba(255,255,255,0.15),transparent_90%] p-4 transition-colors"
 				>
-					<h3 class="text-primary mb-1 text-lg font-semibold">Your Game - Play now</h3>
+					<h3 class="text-primary mb-1 text-lg font-semibold">Your Game</h3>
 					<div class="text-muted-foreground text-sm">your-game.com</div>
 					<p class="text-muted-foreground mt-1 text-sm">Play your game online - Easily findable in search...</p>
 				</div>
@@ -358,7 +358,7 @@
 
 		<!-- Right Box: Text Content -->
 		<div class="bg-card min-w-[320px] flex-1 p-8">
-			<h2 class="mb-6 text-3xl font-bold">Boost your SEO, naturally.</h2>
+			<h2 class="mb-6 text-3xl font-bold">Boost your SEO, naturally</h2>
 			<p class="text-muted-foreground text-lg leading-relaxed">
 				Playlight creates a <span class="text-foreground">natural network of backlinks</span> through game suggestions.
 				As players discover new games through participating games, they build
@@ -425,7 +425,7 @@
 
 		<!-- Right Box: Text Content -->
 		<div class="bg-card min-w-[320px] flex-1 p-8">
-			<h2 class="mb-6 text-3xl font-bold">Start in seconds.</h2>
+			<h2 class="mb-6 text-3xl font-bold">Start in seconds</h2>
 			<p class="text-muted-foreground text-lg leading-relaxed">
 				No complicated setup, no lengthy contracts. There aren't any lock-in terms -
 				<span class="text-foreground">your success is what keeps us together</span>, not legal bindings.

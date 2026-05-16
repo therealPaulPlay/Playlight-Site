@@ -13,7 +13,6 @@
 	import { blur } from "svelte/transition";
 
 	let scrollY = $state(0);
-	let sidebarShown = $state(false);
 </script>
 
 <svelte:head>
@@ -28,8 +27,8 @@
 
 <main class="mb-10 flex min-h-[calc(100vh-85px)] w-full flex-col items-center justify-center md:mt-30">
 	<div class="z-10 flex flex-col items-center justify-center max-md:mb-20">
-		<h1 class="text-5xl font-bold uppercase md:text-8xl text-center">[Your Game]</h1>
-		<div class="relative md:mt-20 mt-10 flex flex-col gap-4 text-center">
+		<h1 class="text-center text-5xl font-bold uppercase md:text-8xl">[Your Game]</h1>
+		<div class="relative mt-10 flex flex-col gap-4 text-center md:mt-20">
 			<Button
 				class="text-primary border-primary/75 pointer-events-none w-60 cursor-not-allowed border border-dashed bg-transparent"
 				><p class="flex items-center gap-2 font-medium">Play <Play strokeWidth={2} size={16} /></p></Button
@@ -48,29 +47,9 @@
 			</p>
 		</div>
 		<p class="mt-40 mr-auto mb-4 ml-8 flex gap-2 max-md:hidden">
-			<CornerLeftDown size={18} style="margin-top: 5px;" />Responsive & adjustable widget (optional)
+			<CornerLeftDown size={18} style="margin-top: 5px;" />Responsive widget
 		</p>
-		<div class="playlight-widget-carousel bg-background/50 h-[345px] p-4 max-md:hidden md:w-170"></div>
-		{#if scrollY < 100}
-			<div
-				class="bg-background/50 fixed right-8 bottom-8 max-w-[calc(100%-4rem)] space-y-4 p-4 backdrop-blur-xl"
-				transition:blur={{ duration: 150 }}
-			>
-				<p class="flex max-w-82 gap-2">
-					A sidebar is visible to users referred from another Playlight game. <ArrowRight
-						size={18}
-						style="min-width: 20px; margin-top: 3px;"
-					/>
-				</p>
-				<Button
-					onclick={() => {
-						if (!sidebarShown) window.playlightSDK?.setConfig({ sidebar: { forceVisible: true } });
-						else window.playlightSDK?.setConfig();
-						sidebarShown = !sidebarShown;
-					}}>{!sidebarShown ? "Try it" : "Hide"}</Button
-				>
-			</div>
-		{/if}
+		<div class="playlight-widget-carousel bg-background/50 h-[355px] p-4 max-md:hidden md:w-170"></div>
 	</div>
 	<video
 		width="1280"
@@ -88,7 +67,7 @@
 </main>
 
 {#if scrollY < 100}
-	<p class="fixed top-28 left-[50%] flex translate-x-[-50%] gap-2 max-md:hidden" transition:blur={{ duration: 150 }}>
+	<p class="fixed top-30 left-[50%] flex translate-x-[-50%] gap-2 max-md:hidden" transition:blur={{ duration: 150 }}>
 		<CornerLeftUp size={18} /> Try leaving the page
 	</p>
 {/if}
