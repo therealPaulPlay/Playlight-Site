@@ -339,6 +339,19 @@
 								</CardContent>
 							</Card>
 						</div>
+						<div>
+							<h3 class="mb-2 text-lg font-semibold">offEvent(event, callback)</h3>
+							<p class="text-muted-foreground mb-2">Unregister an event callback.</p>
+							<Card class="border-0 py-0">
+								<CardContent class="border p-4">
+									<p class="text-sm">
+										<span class="font-medium">Parameters:</span> <code class="text-primary">event</code> - Event name
+										(discoveryOpen | discoveryClose | exitIntent) |
+										<code class="text-primary">callback</code> - Previously registered callback function
+									</p>
+								</CardContent>
+							</Card>
+						</div>
 					</div>
 				</CardContent>
 			</Card>
