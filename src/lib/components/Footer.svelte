@@ -3,7 +3,8 @@
 		<div class="flex flex-col items-center justify-between gap-4 md:flex-row">
 			<div class="flex items-center space-x-1">
 				<span class="text-muted-foreground text-sm">© {new Date().getFullYear()}</span>
-				<span class="text-muted-foreground text-sm"><a href="https://paulplay.studio" target="_blank">PaulPlay</a></span
+				<span class="text-muted-foreground hover:text-primary text-sm transition"
+					><a href="https://paulplay.studio" target="_blank">PaulPlay</a></span
 				>
 			</div>
 			<nav class="nowrap flex flex-wrap gap-6">
