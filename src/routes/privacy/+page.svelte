@@ -4,7 +4,7 @@
 
 <div class="mx-auto min-h-screen max-w-(--breakpoint-xl) p-4 py-8">
 	<div class="mx-auto max-w-3xl">
-		<h1 class="mb-8 text-4xl font-bold">Privacy Policy</h1>
+		<h1 class="mb-8 text-4xl font-bold">Privacy policy</h1>
 
 		<div class="prose prose-slate max-w-none">
 			<p class="text-muted-foreground mb-6">Last updated: Sept. 12th, 2026</p>
@@ -12,7 +12,7 @@
 			<h2 class="mt-8 mb-4 text-2xl font-semibold">1. Introduction</h2>
 			<p>
 				PaulPlay ("we," "us," or "our"), who builds and maintains Playlight, is committed to protecting user privacy.
-				This Privacy Policy explains how we collect, store, and use information through Playlight ("Service"). Our
+				This privacy policy explains how we collect, store, and use information through Playlight ("Service"). Our
 				Service uses an algorithm to analyze user interactions and recommend games while striving to keep all data
 				anonymous.
 			</p>
@@ -77,13 +77,13 @@
 
 			<h2 class="mt-8 mb-4 text-2xl font-semibold">8. Changes to this privacy policy</h2>
 			<p>
-				We may update this Privacy Policy from time to time. Material changes will be posted on this page, and the "Last
+				We may update this privacy policy from time to time. Material changes will be posted on this page, and the "Last
 				updated" date will be revised accordingly.
 			</p>
 
 			<h2 class="mt-8 mb-4 text-2xl font-semibold">9. Contact us</h2>
 			<p>
-				For any questions regarding this Privacy Policy, please reach out via this <a
+				For any questions regarding this privacy policy, please reach out via this <a
 					href="https://paulplay.studio/contact"
 					target="_blank"
 					class="underline">contact form</a
@@ -91,7 +91,7 @@
 			</p>
 
 			<div class="text-muted-foreground mt-12 mb-8 text-sm">
-				<p>By using the Service, you acknowledge that you have read and understood this Privacy Policy.</p>
+				<p>By using the Service, you acknowledge that you have read and understood this privacy policy.</p>
 			</div>
 		</div>
 	</div>

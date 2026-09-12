@@ -4,7 +4,7 @@
 
 <div class="mx-auto min-h-screen max-w-(--breakpoint-xl) p-4 py-8">
 	<div class="mx-auto max-w-3xl">
-		<h1 class="mb-8 text-4xl font-bold">Terms of Use</h1>
+		<h1 class="mb-8 text-4xl font-bold">Terms of use</h1>
 
 		<div class="max-w-none">
 			<p class="text-muted-foreground mb-6">Last updated: Sept. 12th, 2026</p>
@@ -12,7 +12,7 @@
 			<h2 class="mt-8 mb-4 text-2xl font-semibold">1. Acceptance of terms</h2>
 			<p>
 				By accessing or using the Playlight platform ("Service") provided by PaulPlay ("we," "us," or "our"), you agree
-				to be bound by these Terms of Use.
+				to be bound by these terms of use.
 			</p>
 
 			<h2 class="mt-8 mb-4 text-2xl font-semibold">2. Description of service</h2>
@@ -89,7 +89,7 @@
 
 			<h2 class="mt-8 mb-4 text-2xl font-semibold">10. Contact us</h2>
 			<p>
-				For questions about these Terms of Use, please reach out via this <a
+				For questions about these terms of use, please reach out via this <a
 					href="https://paulplay.studio/contact"
 					target="_blank"
 					class="underline">contact form</a
@@ -98,8 +98,8 @@
 
 			<div class="text-muted-foreground mt-12 mb-8 text-sm">
 				<p>
-					By using the Service, you acknowledge that you have read, understood, and agree to be bound by these Terms of
-					Use.
+					By using the Service, you acknowledge that you have read, understood, and agree to be bound by these terms of
+					use.
 				</p>
 			</div>
 		</div>

@@ -7,14 +7,14 @@
 				>
 			</div>
 			<nav class="nowrap flex flex-wrap gap-6">
-				<a href="/terms" class="text-muted-foreground hover:text-primary text-sm transition"> Terms of Use </a>
-				<a href="/privacy" class="text-muted-foreground hover:text-primary text-sm transition"> Privacy Policy </a>
+				<a href="/terms" class="text-muted-foreground hover:text-primary text-sm transition"> Terms of use </a>
+				<a href="/privacy" class="text-muted-foreground hover:text-primary text-sm transition"> Privacy policy </a>
 				<a
-					href="https://paulplay.studio/imprint"
+					href="https://paulplay.studio/company-information"
 					target="_blank"
 					class="text-muted-foreground hover:text-primary text-sm transition"
 				>
-					Imprint
+					Company
 				</a>
 				<a
 					href="https://github.com/therealPaulPlay/Playlight-Site"

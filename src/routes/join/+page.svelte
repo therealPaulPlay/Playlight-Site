@@ -113,7 +113,7 @@
 		</p>
 
 		<p class="text-muted-foreground mt-4 text-center text-sm opacity-50">
-			By submitting this form, you agree to our Terms and Privacy Policy.
+			By submitting this form, you agree to our terms and privacy policy.
 		</p>
 	</div>
 </main>

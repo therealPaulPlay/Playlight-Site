@@ -171,8 +171,8 @@
 					<div class="flex items-center space-x-2">
 						<Checkbox id="terms" bind:checked={acceptedTerms} disabled={loading} />
 						<Label for="terms" class="text-sm">
-							I agree to the<a href="/terms" class="text-primary hover:underline">Terms</a>and
-							<a href="/privacy" class="text-primary hover:underline">Privacy Policy</a>
+							I agree to the<a href="/terms" class="text-primary hover:underline">terms</a>and
+							<a href="/privacy" class="text-primary hover:underline">privacy policy</a>
 						</Label>
 					</div>
 				{/if}
