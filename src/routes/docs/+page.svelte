@@ -72,10 +72,16 @@
 		"    exitIntent: {",
 		"      enabled: true | false,",
 		"      immediate: true | false",
+		"    },",
+		"    widget: {",
+		"      externalGames: [...]",
 		"    }",
 		"  });",
 		"<\/script>",
 	];
+
+	const externalGamesShape =
+		"[{ name, description, domain, logo_url, cover_image_url, cover_video_url, square?, badge? }, ...]";
 
 	const carouselExampleLines = [
 		"<!-- Carousel Widget, width of min. 500px is recommended -->",
@@ -218,6 +224,7 @@
 				<TabsList class="mb-6">
 					<TabsTrigger value="configuration">Object</TabsTrigger>
 					<TabsTrigger value="exitIntent">Exit intent</TabsTrigger>
+					<TabsTrigger value="widget">Widget</TabsTrigger>
 				</TabsList>
 
 				<TabsContent value="configuration">
@@ -271,6 +278,28 @@
 									<h4 class="mb-1 text-sm font-medium">Note</h4>
 									<p class="text-muted-foreground text-sm">
 										You can give the user the option to configure this via your game's settings.
+									</p>
+								</div>
+							</div>
+						</CardContent>
+					</Card>
+				</TabsContent>
+
+				<TabsContent value="widget">
+					<Card>
+						<CardHeader>
+							<CardTitle>Widget</CardTitle>
+							<CardDescription>Configure the carousel widget.</CardDescription>
+						</CardHeader>
+						<CardContent>
+							<div class="space-y-4">
+								<div class="grid gap-2">
+									<h4 class="text-sm font-medium">
+										externalGames <code class="text-primary">array</code>
+										<code class="text-primary">{externalGamesShape}</code>
+									</h4>
+									<p class="text-muted-foreground text-sm">
+										Games not on Playlight to highlight in a separate section of the widget.
 									</p>
 								</div>
 							</div>
