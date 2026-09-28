@@ -81,7 +81,7 @@
 	];
 
 	const externalGamesShape =
-		"[{ name, description, domain, logo_url, cover_image_url, cover_video_url, square?, badge? }, ...]";
+		"[{ name, description, domain, cover_image_url, cover_video_url, square?, badge? }, ...]";
 
 	const carouselExampleLines = [
 		"<!-- Carousel Widget, width of min. 500px is recommended -->",
